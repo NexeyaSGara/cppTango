@@ -65,5 +65,5 @@ set(CPACK_DEBIAN_PACKAGE_VERSION ${LIBRARY_VERSION})
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libcos4-dev, libzmq5-dev | libzmq3-dev")
 set(CPACK_DEBIAN_PACKAGE_CONFLICTS "libtango7-dev, libtango8-dev, libtango9-dev")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "TANGO team <tango@esrf.fr>") #required
-END()
+ENDIF()
 include(CPack)
