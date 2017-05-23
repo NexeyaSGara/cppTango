@@ -49,7 +49,7 @@ install:
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
   - cmd: cd %clone_folder%
-  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% Project.vcxproj
+  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% %project%
 
 clone_folder: C:\projects\cppTango
 
@@ -58,7 +58,7 @@ before_build:
 
 build:
   parallel: true
-  project: C:\projects\cppTango\cppTango.sln
+  project: C:\projects\cppTango\tango.sln
   verbosity: minimal
 
 after_build:
