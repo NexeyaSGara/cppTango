@@ -15,7 +15,7 @@ environment:
 # scripts to run before build
 before_build:
   - echo installing ZeroMq from NuGet
-  - nuget restore ZeroMQ
+  - nuget Install-Package ZeroMQ
   - echo getting omniorb
   - echo getting log4tango
   - cd c:\projects\
