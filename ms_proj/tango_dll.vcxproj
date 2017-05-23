@@ -100,7 +100,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src\server;src\client;src\server\jpeg;..\..\resources;$(OMNI_BASE)\win32_dll\include;$(ZMQ_BASE)\win32\include\vc9;$(LOG4TANGO_BASE)\win32_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\server;..\src\client;..\src\server\jpeg;..\..\resources;$(OMNI_BASE)\win32_dll\include;$(ZMQ_BASE)\win32\include\vc9;$(LOG4TANGO_BASE)\win32_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LOG4TANGO_HAS_DLL;_TANGO_LIB;_CRT_SECURE_NO_DEPRECATE;JPG_USE_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -148,7 +148,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>src\server;src\client;src\server\jpeg;src\win32\resources;$(OMNI_BASE)\win64_dll\include;$(ZMQ_BASE)\win64\include\vc14;$(LOG4TANGO_BASE)\win64_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\server;..\src\client;..\src\server\jpeg;..\src\win32\resources;$(OMNI_BASE)\win64_dll\include;$(ZMQ_BASE)\win64\include\vc14;$(LOG4TANGO_BASE)\win64_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LOG4TANGO_HAS_DLL;_TANGO_LIB;_CRT_SECURE_NO_DEPRECATE;_64BITS;_WIN64%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -168,7 +168,7 @@
     </ResourceCompile>
     <PreLinkEvent>
       <Message>Build def file...</Message>
-      <Command>C:\perl64\perl\bin\perl src\win32\makedef.pl tango.def tango805 release\*.obj</Command>
+      <Command>C:\perl64\perl\bin\perl ..\src\win32\makedef.pl tango.def tango805 release\*.obj</Command>
     </PreLinkEvent>
     <Link>
       <AdditionalDependencies>log4tango.lib;omniorb421_rt.lib;omnidynamic421_rt.lib;omnithread40_rt.lib;COS421_rt.lib;zmq.lib;ws2_32.lib;mswsock.lib;comctl32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,7 +197,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..;src\server;src\client;src\server\jpeg;..\..\resources;$(OMNI_BASE)\win32_dll\include;$(ZMQ_BASE)\win32\include\vc9;$(LOG4TANGO_BASE)\win32_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\src\server;..\src\client;..\src\server\jpeg;..\..\resources;$(OMNI_BASE)\win32_dll\include;$(ZMQ_BASE)\win32\include\vc9;$(LOG4TANGO_BASE)\win32_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_TANGO_LIB;LOG4TANGO_HAS_DLL;JPG_USE_ASM;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -248,7 +248,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..;src\server;src\client;src\server\jpeg;src\win32\resources;$(OMNI_BASE)\win64_dll\include;$(ZMQ_BASE)\win64\include\vc14;$(LOG4TANGO_BASE)\win64_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\src\server;..\src\client;..\src\server\jpeg;..\src\win32\resources;$(OMNI_BASE)\win64_dll\include;$(ZMQ_BASE)\win64\include\vc14;$(LOG4TANGO_BASE)\win64_dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_TANGO_LIB;LOG4TANGO_HAS_DLL;_64BITS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -289,8 +289,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\client\accessproxy.cpp" />
-    <ClCompile Include="src\client\api_util.cpp">
+    <ClCompile Include="..\src\client\accessproxy.cpp" />
+    <ClCompile Include="..\src\client\api_util.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -304,7 +304,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\apiexcept.cpp">
+    <ClCompile Include="..\src\client\apiexcept.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -318,7 +318,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\asynreq.cpp">
+    <ClCompile Include="..\src\client\asynreq.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -332,7 +332,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\attr_proxy.cpp">
+    <ClCompile Include="..\src\client\attr_proxy.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -346,10 +346,10 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_serverdata.cpp" />
-    <ClCompile Include="src\client\devapi_pipe.cpp" />
-    <ClCompile Include="src\client\eventqueue.cpp" />
-    <ClCompile Include="src\server\attrdesc.cpp">
+    <ClCompile Include="..\src\client\dbapi_serverdata.cpp" />
+    <ClCompile Include="..\src\client\devapi_pipe.cpp" />
+    <ClCompile Include="..\src\client\eventqueue.cpp" />
+    <ClCompile Include="..\src\server\attrdesc.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -363,8 +363,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\attrgetsetprop.cpp" />
-    <ClCompile Include="src\server\attribute.cpp">
+    <ClCompile Include="..\src\server\attrgetsetprop.cpp" />
+    <ClCompile Include="..\src\server\attribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -378,7 +378,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\attrmanip.cpp">
+    <ClCompile Include="..\src\server\attrmanip.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -392,8 +392,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\attrsetval.cpp" />
-    <ClCompile Include="src\server\basiccommand.cpp">
+    <ClCompile Include="..\src\server\attrsetval.cpp" />
+    <ClCompile Include="..\src\server\basiccommand.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -407,7 +407,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\blackbox.cpp">
+    <ClCompile Include="..\src\server\blackbox.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -421,7 +421,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\cbthread.cpp">
+    <ClCompile Include="..\src\client\cbthread.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -435,8 +435,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\classpipe.cpp" />
-    <ClCompile Include="src\server\class_factory.cpp">
+    <ClCompile Include="..\src\server\classpipe.cpp" />
+    <ClCompile Include="..\src\server\class_factory.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -450,7 +450,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\classattribute.cpp">
+    <ClCompile Include="..\src\server\classattribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -464,7 +464,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\command.cpp">
+    <ClCompile Include="..\src\server\command.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -478,7 +478,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\coutappender.cpp">
+    <ClCompile Include="..\src\server\coutappender.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -492,7 +492,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\coutbuf.cpp">
+    <ClCompile Include="..\src\server\coutbuf.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -506,7 +506,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_attribute.cpp">
+    <ClCompile Include="..\src\client\dbapi_attribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -520,7 +520,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_base.cpp">
+    <ClCompile Include="..\src\client\dbapi_base.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -534,8 +534,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_cache.cpp" />
-    <ClCompile Include="src\client\dbapi_class.cpp">
+    <ClCompile Include="..\src\client\dbapi_cache.cpp" />
+    <ClCompile Include="..\src\client\dbapi_class.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -549,7 +549,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_datum.cpp">
+    <ClCompile Include="..\src\client\dbapi_datum.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -563,7 +563,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_device.cpp">
+    <ClCompile Include="..\src\client\dbapi_device.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -577,8 +577,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\dbapi_history.cpp" />
-    <ClCompile Include="src\client\dbapi_server.cpp">
+    <ClCompile Include="..\src\client\dbapi_history.cpp" />
+    <ClCompile Include="..\src\client\dbapi_server.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -592,11 +592,11 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\device_5.cpp" />
-    <ClCompile Include="src\server\devintr.cpp" />
-    <ClCompile Include="src\server\dev_event.cpp" />
-    <ClCompile Include="src\server\dev_poll.cpp" />
-    <ClCompile Include="src\client\devapi_attr.cpp">
+    <ClCompile Include="..\src\server\device_5.cpp" />
+    <ClCompile Include="..\src\server\devintr.cpp" />
+    <ClCompile Include="..\src\server\dev_event.cpp" />
+    <ClCompile Include="..\src\server\dev_poll.cpp" />
+    <ClCompile Include="..\src\client\devapi_attr.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -610,7 +610,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\devapi_base.cpp">
+    <ClCompile Include="..\src\client\devapi_base.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -624,7 +624,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\devapi_data.cpp">
+    <ClCompile Include="..\src\client\devapi_data.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -638,7 +638,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\devapi_datahist.cpp">
+    <ClCompile Include="..\src\client\devapi_datahist.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -652,8 +652,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\devapi_utils.cpp" />
-    <ClCompile Include="src\server\device.cpp">
+    <ClCompile Include="..\src\client\devapi_utils.cpp" />
+    <ClCompile Include="..\src\server\device.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -667,7 +667,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\device_2.cpp">
+    <ClCompile Include="..\src\server\device_2.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -681,7 +681,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\device_3.cpp">
+    <ClCompile Include="..\src\server\device_3.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -695,8 +695,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\device_4.cpp" />
-    <ClCompile Include="src\server\deviceclass.cpp">
+    <ClCompile Include="..\src\server\device_4.cpp" />
+    <ClCompile Include="..\src\server\deviceclass.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -710,7 +710,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\devicelog.cpp">
+    <ClCompile Include="..\src\server\devicelog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -724,8 +724,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\dintrthread.cpp" />
-    <ClCompile Include="src\server\dserver.cpp">
+    <ClCompile Include="..\src\server\dintrthread.cpp" />
+    <ClCompile Include="..\src\server\dserver.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -739,7 +739,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\dserverclass.cpp">
+    <ClCompile Include="..\src\server\dserverclass.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -753,8 +753,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\dserverlock.cpp" />
-    <ClCompile Include="src\server\dserverlog.cpp">
+    <ClCompile Include="..\src\server\dserverlock.cpp" />
+    <ClCompile Include="..\src\server\dserverlog.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -768,7 +768,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\dserverpoll.cpp">
+    <ClCompile Include="..\src\server\dserverpoll.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -782,7 +782,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\dserversignal.cpp">
+    <ClCompile Include="..\src\server\dserversignal.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -796,7 +796,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\encoded_attribute.cpp">
+    <ClCompile Include="..\src\server\encoded_attribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -810,8 +810,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\event.cpp" />
-    <ClCompile Include="src\server\eventcmds.cpp">
+    <ClCompile Include="..\src\client\event.cpp" />
+    <ClCompile Include="..\src\server\eventcmds.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -825,8 +825,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\eventkeepalive.cpp" />
-    <ClCompile Include="src\server\eventsupplier.cpp">
+    <ClCompile Include="..\src\client\eventkeepalive.cpp" />
+    <ClCompile Include="..\src\server\eventsupplier.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -840,7 +840,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\except.cpp">
+    <ClCompile Include="..\src\server\except.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -854,7 +854,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\filedatabase.cpp">
+    <ClCompile Include="..\src\client\filedatabase.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -868,7 +868,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\group.cpp">
+    <ClCompile Include="..\src\client\group.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -882,18 +882,18 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\fwdattrdesc.cpp" />
-    <ClCompile Include="src\server\fwdattribute.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_bitstream.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_color.cpp" />
-    <ClCompile Include="src\server\jpeg_mmx\jpeg_color_mmx.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_dct.cpp" />
-    <ClCompile Include="src\server\jpeg_mmx\jpeg_dct_mmx.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_decoder.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_encoder.cpp" />
-    <ClCompile Include="src\server\jpeg\jpeg_memory.cpp" />
-    <ClCompile Include="src\client\lockthread.cpp" />
-    <ClCompile Include="src\server\logcmds.cpp">
+    <ClCompile Include="..\src\server\fwdattrdesc.cpp" />
+    <ClCompile Include="..\src\server\fwdattribute.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_bitstream.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_color.cpp" />
+    <ClCompile Include="..\src\server\jpeg_mmx\jpeg_color_mmx.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_dct.cpp" />
+    <ClCompile Include="..\src\server\jpeg_mmx\jpeg_dct_mmx.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_decoder.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_encoder.cpp" />
+    <ClCompile Include="..\src\server\jpeg\jpeg_memory.cpp" />
+    <ClCompile Include="..\src\client\lockthread.cpp" />
+    <ClCompile Include="..\src\server\logcmds.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -907,7 +907,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\logging.cpp">
+    <ClCompile Include="..\src\server\logging.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -921,7 +921,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\logstream.cpp">
+    <ClCompile Include="..\src\server\logstream.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -935,7 +935,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\multiattribute.cpp">
+    <ClCompile Include="..\src\server\multiattribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -949,9 +949,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\notifdeventconsumer.cpp" />
-    <ClCompile Include="src\server\notifdeventsupplier.cpp" />
-    <ClCompile Include="src\server\ntservice.cpp">
+    <ClCompile Include="..\src\client\notifdeventconsumer.cpp" />
+    <ClCompile Include="..\src\server\notifdeventsupplier.cpp" />
+    <ClCompile Include="..\src\server\ntservice.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -965,8 +965,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\pipe.cpp" />
-    <ClCompile Include="src\server\pollcmds.cpp">
+    <ClCompile Include="..\src\server\pipe.cpp" />
+    <ClCompile Include="..\src\server\pollcmds.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -980,7 +980,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\pollobj.cpp">
+    <ClCompile Include="..\src\server\pollobj.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -994,7 +994,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\pollring.cpp">
+    <ClCompile Include="..\src\server\pollring.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1008,7 +1008,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\pollthread.cpp">
+    <ClCompile Include="..\src\server\pollthread.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1022,7 +1022,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\proxy_asyn.cpp">
+    <ClCompile Include="..\src\client\proxy_asyn.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1036,7 +1036,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\proxy_asyn_cb.cpp">
+    <ClCompile Include="..\src\client\proxy_asyn_cb.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1050,8 +1050,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\rootattreg.cpp" />
-    <ClCompile Include="src\server\seqvec.cpp">
+    <ClCompile Include="..\src\server\rootattreg.cpp" />
+    <ClCompile Include="..\src\server\seqvec.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1065,8 +1065,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\subdev_diag.cpp" />
-    <ClCompile Include="src\server\tangoappender.cpp">
+    <ClCompile Include="..\src\server\subdev_diag.cpp" />
+    <ClCompile Include="..\src\server\tangoappender.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1080,7 +1080,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\idl\tangoDynSK.cpp">
+    <ClCompile Include="..\src\server\idl\tangoDynSK.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1094,7 +1094,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_OMNIORB_STUB_DLL;__x86__;__NT__;__OSVERSION__=4;__WIN32__;_WIN32_WINNT=0x0400;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_OMNIORB_STUB_DLL;__x86__;__NT__;__OSVERSION__=4;__WIN32__;_WIN32_WINNT=0x0400;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\tangorollingfileappender.cpp">
+    <ClCompile Include="..\src\server\tangorollingfileappender.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1108,7 +1108,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\idl\tangoSK.cpp">
+    <ClCompile Include="..\src\server\idl\tangoSK.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1122,8 +1122,8 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_OMNIORB_STUB_DLL;__x86__;__NT__;__OSVERSION__=4;__WIN32__;_WIN32_WINNT=0x0400;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_OMNIORB_STUB_DLL;__x86__;__NT__;__OSVERSION__=4;__WIN32__;_WIN32_WINNT=0x0400;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\templ_inst.cpp" />
-    <ClCompile Include="src\server\thsig.cpp">
+    <ClCompile Include="..\src\server\templ_inst.cpp" />
+    <ClCompile Include="..\src\server\thsig.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1137,7 +1137,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\utils.cpp">
+    <ClCompile Include="..\src\server\utils.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1151,9 +1151,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\utils_polling.cpp" />
-    <ClCompile Include="src\server\utils_shut.cpp" />
-    <ClCompile Include="src\server\w32win.cpp">
+    <ClCompile Include="..\src\server\utils_polling.cpp" />
+    <ClCompile Include="..\src\server\utils_shut.cpp" />
+    <ClCompile Include="..\src\server\w32win.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1167,7 +1167,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\server\w_attribute.cpp">
+    <ClCompile Include="..\src\server\w_attribute.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Disabled</Optimization>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -1181,127 +1181,127 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="src\client\zmqeventconsumer.cpp" />
-    <ClCompile Include="src\server\w_pipe.cpp" />
-    <ClCompile Include="src\server\zmqeventsupplier.cpp" />
+    <ClCompile Include="..\src\client\zmqeventconsumer.cpp" />
+    <ClCompile Include="..\src\server\w_pipe.cpp" />
+    <ClCompile Include="..\src\server\zmqeventsupplier.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\client\accessproxy.h" />
-    <ClInclude Include="src\client\apiexcept.h" />
-    <ClInclude Include="src\client\ApiUtil.h" />
-    <ClInclude Include="src\client\AttributeProxy.h" />
-    <ClInclude Include="src\client\Connection.h" />
-    <ClInclude Include="src\client\Database.h" />
-    <ClInclude Include="src\client\DbDevice.h" />
-    <ClInclude Include="src\client\DeviceAttribute.h" />
-    <ClInclude Include="src\client\DeviceData.h" />
-    <ClInclude Include="src\client\DevicePipe.h" />
-    <ClInclude Include="src\client\DeviceProxy.h" />
-    <ClInclude Include="src\client\doc.h" />
-    <ClInclude Include="src\client\event.h" />
-    <ClInclude Include="src\client\zmq.hpp" />
-    <ClInclude Include="src\server\attrdesc.h" />
-    <ClInclude Include="src\server\attribute.h" />
-    <ClInclude Include="src\server\attrmanip.h" />
-    <ClInclude Include="src\server\attrprop.h" />
-    <ClInclude Include="src\server\auto_tango_monitor.h" />
-    <ClInclude Include="src\server\basiccommand.h" />
-    <ClInclude Include="src\server\blackbox.h" />
-    <ClInclude Include="src\client\cbthread.h" />
-    <ClInclude Include="src\server\classattribute.h" />
-    <ClInclude Include="src\server\classpipe.h" />
-    <ClInclude Include="src\server\command.h" />
-    <ClInclude Include="src\server\coutappender.h" />
-    <ClInclude Include="src\server\coutbuf.h" />
-    <ClInclude Include="src\client\dbapi.h" />
-    <ClInclude Include="src\client\devapi.h" />
-    <ClInclude Include="src\client\devasyn.h" />
-    <ClInclude Include="src\server\device.h" />
-    <ClInclude Include="src\server\device_2.h" />
-    <ClInclude Include="src\server\device_3.h" />
-    <ClInclude Include="src\server\device_4.h" />
-    <ClInclude Include="src\server\deviceclass.h" />
-    <ClInclude Include="src\server\device_5.h" />
-    <ClInclude Include="src\server\devintr.h" />
-    <ClInclude Include="src\server\dintrthread.h" />
-    <ClInclude Include="src\server\dserver.h" />
-    <ClInclude Include="src\server\dserverclass.h" />
-    <ClInclude Include="src\server\dserversignal.h" />
-    <ClInclude Include="src\server\encoded_attribute.h" />
-    <ClInclude Include="src\server\encoded_format.h" />
-    <ClInclude Include="src\server\event.h" />
-    <ClInclude Include="src\server\eventcmds.h" />
-    <ClInclude Include="src\client\eventconsumer.h" />
-    <ClInclude Include="src\server\eventsupplier.h" />
-    <ClInclude Include="src\server\except.h" />
-    <ClInclude Include="src\client\filedatabase.h" />
-    <ClInclude Include="src\client\group.h" />
-    <ClInclude Include="src\server\fwdattrdesc.h" />
-    <ClInclude Include="src\server\fwdattribute.h" />
-    <ClInclude Include="src\server\jpeg\jpeg_bitstream.h" />
-    <ClInclude Include="src\server\jpeg\jpeg_const.h" />
-    <ClInclude Include="src\server\jpeg\jpeg_lib.h" />
-    <ClInclude Include="src\server\jpeg\jpeg_memory.h" />
-    <ClInclude Include="src\client\lockthread.h" />
-    <ClInclude Include="src\server\locked_att_value.h" />
-    <ClInclude Include="src\server\log4tango.h" />
-    <ClInclude Include="src\server\logcmds.h" />
-    <ClInclude Include="src\server\logging.h" />
-    <ClInclude Include="src\server\logstream.h" />
-    <ClInclude Include="src\server\multiattribute.h" />
-    <ClInclude Include="src\server\ntservice.h" />
-    <ClInclude Include="src\server\pipe.h" />
-    <ClInclude Include="src\server\pipedesc.h" />
-    <ClInclude Include="src\server\pollcmds.h" />
-    <ClInclude Include="src\server\pollext.h" />
-    <ClInclude Include="src\server\pollobj.h" />
-    <ClInclude Include="src\server\pollring.h" />
-    <ClInclude Include="src\server\pollthread.h" />
-    <ClInclude Include="src\server\readers_writers_lock.h" />
-    <ClInclude Include="src\server\rootattreg.h" />
-    <ClInclude Include="src\server\seqvec.h" />
-    <ClInclude Include="src\server\subdev_diag.h" />
-    <ClInclude Include="src\server\idl\tango.h" />
-    <ClInclude Include="src\server\tango.h" />
-    <ClInclude Include="src\server\tango_config.h" />
-    <ClInclude Include="src\server\tango_const.h" />
-    <ClInclude Include="src\server\tango_monitor.h" />
-    <ClInclude Include="src\server\tangoappender.h" />
-    <ClInclude Include="src\server\tangorollingfileappender.h" />
-    <ClInclude Include="src\server\utils.h" />
-    <ClInclude Include="src\server\w32win.h" />
-    <ClInclude Include="src\server\w_attribute.h" />
-    <ClInclude Include="src\server\w_pipe.h" />
+    <ClInclude Include="..\src\client\accessproxy.h" />
+    <ClInclude Include="..\src\client\apiexcept.h" />
+    <ClInclude Include="..\src\client\ApiUtil.h" />
+    <ClInclude Include="..\src\client\AttributeProxy.h" />
+    <ClInclude Include="..\src\client\Connection.h" />
+    <ClInclude Include="..\src\client\Database.h" />
+    <ClInclude Include="..\src\client\DbDevice.h" />
+    <ClInclude Include="..\src\client\DeviceAttribute.h" />
+    <ClInclude Include="..\src\client\DeviceData.h" />
+    <ClInclude Include="..\src\client\DevicePipe.h" />
+    <ClInclude Include="..\src\client\DeviceProxy.h" />
+    <ClInclude Include="..\src\client\doc.h" />
+    <ClInclude Include="..\src\client\event.h" />
+    <ClInclude Include="..\src\client\zmq.hpp" />
+    <ClInclude Include="..\src\server\attrdesc.h" />
+    <ClInclude Include="..\src\server\attribute.h" />
+    <ClInclude Include="..\src\server\attrmanip.h" />
+    <ClInclude Include="..\src\server\attrprop.h" />
+    <ClInclude Include="..\src\server\auto_tango_monitor.h" />
+    <ClInclude Include="..\src\server\basiccommand.h" />
+    <ClInclude Include="..\src\server\blackbox.h" />
+    <ClInclude Include="..\src\client\cbthread.h" />
+    <ClInclude Include="..\src\server\classattribute.h" />
+    <ClInclude Include="..\src\server\classpipe.h" />
+    <ClInclude Include="..\src\server\command.h" />
+    <ClInclude Include="..\src\server\coutappender.h" />
+    <ClInclude Include="..\src\server\coutbuf.h" />
+    <ClInclude Include="..\src\client\dbapi.h" />
+    <ClInclude Include="..\src\client\devapi.h" />
+    <ClInclude Include="..\src\client\devasyn.h" />
+    <ClInclude Include="..\src\server\device.h" />
+    <ClInclude Include="..\src\server\device_2.h" />
+    <ClInclude Include="..\src\server\device_3.h" />
+    <ClInclude Include="..\src\server\device_4.h" />
+    <ClInclude Include="..\src\server\deviceclass.h" />
+    <ClInclude Include="..\src\server\device_5.h" />
+    <ClInclude Include="..\src\server\devintr.h" />
+    <ClInclude Include="..\src\server\dintrthread.h" />
+    <ClInclude Include="..\src\server\dserver.h" />
+    <ClInclude Include="..\src\server\dserverclass.h" />
+    <ClInclude Include="..\src\server\dserversignal.h" />
+    <ClInclude Include="..\src\server\encoded_attribute.h" />
+    <ClInclude Include="..\src\server\encoded_format.h" />
+    <ClInclude Include="..\src\server\event.h" />
+    <ClInclude Include="..\src\server\eventcmds.h" />
+    <ClInclude Include="..\src\client\eventconsumer.h" />
+    <ClInclude Include="..\src\server\eventsupplier.h" />
+    <ClInclude Include="..\src\server\except.h" />
+    <ClInclude Include="..\src\client\filedatabase.h" />
+    <ClInclude Include="..\src\client\group.h" />
+    <ClInclude Include="..\src\server\fwdattrdesc.h" />
+    <ClInclude Include="..\src\server\fwdattribute.h" />
+    <ClInclude Include="..\src\server\jpeg\jpeg_bitstream.h" />
+    <ClInclude Include="..\src\server\jpeg\jpeg_const.h" />
+    <ClInclude Include="..\src\server\jpeg\jpeg_lib.h" />
+    <ClInclude Include="..\src\server\jpeg\jpeg_memory.h" />
+    <ClInclude Include="..\src\client\lockthread.h" />
+    <ClInclude Include="..\src\server\locked_att_value.h" />
+    <ClInclude Include="..\src\server\log4tango.h" />
+    <ClInclude Include="..\src\server\logcmds.h" />
+    <ClInclude Include="..\src\server\logging.h" />
+    <ClInclude Include="..\src\server\logstream.h" />
+    <ClInclude Include="..\src\server\multiattribute.h" />
+    <ClInclude Include="..\src\server\ntservice.h" />
+    <ClInclude Include="..\src\server\pipe.h" />
+    <ClInclude Include="..\src\server\pipedesc.h" />
+    <ClInclude Include="..\src\server\pollcmds.h" />
+    <ClInclude Include="..\src\server\pollext.h" />
+    <ClInclude Include="..\src\server\pollobj.h" />
+    <ClInclude Include="..\src\server\pollring.h" />
+    <ClInclude Include="..\src\server\pollthread.h" />
+    <ClInclude Include="..\src\server\readers_writers_lock.h" />
+    <ClInclude Include="..\src\server\rootattreg.h" />
+    <ClInclude Include="..\src\server\seqvec.h" />
+    <ClInclude Include="..\src\server\subdev_diag.h" />
+    <ClInclude Include="..\src\server\idl\tango.h" />
+    <ClInclude Include="..\src\server\tango.h" />
+    <ClInclude Include="..\src\server\tango_config.h" />
+    <ClInclude Include="..\src\server\tango_const.h" />
+    <ClInclude Include="..\src\server\tango_monitor.h" />
+    <ClInclude Include="..\src\server\tangoappender.h" />
+    <ClInclude Include="..\src\server\tangorollingfileappender.h" />
+    <ClInclude Include="..\src\server\utils.h" />
+    <ClInclude Include="..\src\server\w32win.h" />
+    <ClInclude Include="..\src\server\w_attribute.h" />
+    <ClInclude Include="..\src\server\w_pipe.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\client\api_util.tpp" />
-    <None Include="src\client\devapi_attr.tpp" />
-    <None Include="src\client\devapi_pipe.tpp" />
-    <None Include="src\client\devapi_utils.tpp" />
-    <None Include="src\client\event.tpp" />
-    <None Include="src\client\Makefile.am" />
-    <None Include="src\client\Makefile.in" />
-    <None Include="src\client\README" />
-    <None Include="src\server\attribute.tpp" />
-    <None Include="src\server\attribute_spec.tpp" />
-    <None Include="src\server\attrprop.tpp" />
-    <None Include="src\server\attrsetval.tpp" />
-    <None Include="src\server\device_3.tpp" />
-    <None Include="src\server\fwdattribute.tpp" />
-    <None Include="src\server\fwdattribute_spec.tpp" />
-    <None Include="src\server\Makefile.am" />
-    <None Include="src\server\Makefile.in" />
-    <None Include="src\server\pipe.tpp" />
-    <None Include="src\server\pollext.tpp" />
-    <None Include="src\server\pollring.tpp" />
-    <None Include="src\server\pollthread.tpp" />
-    <None Include="src\server\README" />
-    <None Include="src\server\utils.tpp" />
-    <None Include="src\server\utils_spec.tpp" />
-    <None Include="src\server\w_attribute.tpp" />
-    <None Include="src\server\w_attribute_spec.tpp" />
-    <None Include="src\server\w_attrsetval.tpp" />
-    <None Include="src\server\w_pipe.tpp" />
+    <None Include="..\src\client\api_util.tpp" />
+    <None Include="..\src\client\devapi_attr.tpp" />
+    <None Include="..\src\client\devapi_pipe.tpp" />
+    <None Include="..\src\client\devapi_utils.tpp" />
+    <None Include="..\src\client\event.tpp" />
+    <None Include="..\src\client\Makefile.am" />
+    <None Include="..\src\client\Makefile.in" />
+    <None Include="..\src\client\README" />
+    <None Include="..\src\server\attribute.tpp" />
+    <None Include="..\src\server\attribute_spec.tpp" />
+    <None Include="..\src\server\attrprop.tpp" />
+    <None Include="..\src\server\attrsetval.tpp" />
+    <None Include="..\src\server\device_3.tpp" />
+    <None Include="..\src\server\fwdattribute.tpp" />
+    <None Include="..\src\server\fwdattribute_spec.tpp" />
+    <None Include="..\src\server\Makefile.am" />
+    <None Include="..\src\server\Makefile.in" />
+    <None Include="..\src\server\pipe.tpp" />
+    <None Include="..\src\server\pollext.tpp" />
+    <None Include="..\src\server\pollring.tpp" />
+    <None Include="..\src\server\pollthread.tpp" />
+    <None Include="..\src\server\README" />
+    <None Include="..\src\server\utils.tpp" />
+    <None Include="..\src\server\utils_spec.tpp" />
+    <None Include="..\src\server\w_attribute.tpp" />
+    <None Include="..\src\server\w_attribute_spec.tpp" />
+    <None Include="..\src\server\w_attrsetval.tpp" />
+    <None Include="..\src\server\w_pipe.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
