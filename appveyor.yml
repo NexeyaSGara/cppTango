@@ -5,7 +5,13 @@ branches:
 
 image: Visual Studio 2015
 
-platform: x64
+platform:
+  - x86
+  - Any CPU
+
+configuration:
+  - Debug
+  - Release
 
 configuration: Release
   
