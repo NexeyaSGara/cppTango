@@ -55,12 +55,15 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
         DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig")
 
 #TODO windows
-SET(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_amd64) #TODO platform
+IF(WIN32)
+SET(CPACK_GENERATOR "NSIS")
+ELSE()
+SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
 set(CPACK_DEBIAN_PACKAGE_VERSION ${LIBRARY_VERSION})
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libcos4-dev, libzmq5-dev | libzmq3-dev")
 set(CPACK_DEBIAN_PACKAGE_CONFLICTS "libtango7-dev, libtango8-dev, libtango9-dev")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "TANGO team <tango@esrf.fr>") #required
-
+END()
 include(CPack)
