@@ -12,8 +12,6 @@ platform:
 configuration:
   - Debug
   - Release
-
-configuration: Release
   
 environment:
   BOOST_ROOT: "C:\Libraries\boost_1_63_0"
