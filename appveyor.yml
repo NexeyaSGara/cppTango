@@ -56,6 +56,7 @@ install:
   - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
+  - cmd: mkdir "C:\projects\omniorb"
   - cmd: cd "C:\projects\omniorb"
   - appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fomniorb%2Ffiles%2FomniORB%2FomniORB-4.2.1%2F&ts=1495553318&use_mirror=kent
   - cmd: 7z x omniORB-4.2.1-2.tar.bz2
