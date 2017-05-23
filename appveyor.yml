@@ -1,0 +1,30 @@
+version: 1.0.{build}
+branches:
+  only:
+    - master
+
+image: Visual Studio 2015
+
+platform: x64
+
+configuration: Release
+  
+environment:
+OMNI_BASE:
+LOG4TANGO_BASE:
+ZMQ_BASE:
+BOOST_ROOT: C:\Libraries\boost_1_63_0
+
+build:
+  project: INSTALL.vcxproj      # path to Visual Studio solution or project
+
+# scripts to run before build
+before_build:
+  - echo installing ZeroMq from NuGet
+  - nuget restore ZeroMQ
+  - echo getting omniorb
+  - echo getting log4tango
+  - cd c:\projects\
+  - cmake -G "Visual Studio 14 2015 Win64"
+
+
