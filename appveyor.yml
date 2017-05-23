@@ -10,10 +10,10 @@ platform: x64
 configuration: Release
   
 environment:
-OMNI_BASE:
-LOG4TANGO_BASE:
-ZMQ_BASE:
-BOOST_ROOT: C:\Libraries\boost_1_63_0
+  OMNI_BASE: c:
+  LOG4TANGO_BASE: c:
+  ZMQ_BASE: c:
+  BOOST_ROOT: C:\Libraries\boost_1_63_0
 
 # scripts to run before build
 before_build:
