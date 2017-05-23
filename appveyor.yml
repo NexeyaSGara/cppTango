@@ -6,7 +6,7 @@ branches:
 image: Visual Studio 2015
 
 platform:
-  - x86
+  - x64
 
 configuration:
   - Release
@@ -49,17 +49,14 @@ install:
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
 
-clone_folder: C:\projects\czmq
+clone_folder: C:\projects\cppTango
 
 before_build:
-  - cmd: set CZMQ_BUILDDIR=C:\projects\build_czmq
-  - cmd: md "%CZMQ_BUILDDIR%"
-  - cmd: cd "%CZMQ_BUILDDIR%"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_INCLUDE_PATH="%ZEROMQ_INCLUDE_DIR%;%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%ZEROMQ_LIBRARY_DIR%;%SODIUM_LIBRARY_DIR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
 
 build:
   parallel: true
-  project: C:\projects\build_czmq\czmq.sln
+  project: C:\projects\cppTango\cppTango.sln
   verbosity: minimal
 
 after_build:
