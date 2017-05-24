@@ -62,8 +62,9 @@ install:
   - cmd: 7z x omniORB-4.2.1-2.tar.bz2
   - cmd: 7z x omniORB-4.2.1-2.tar
   - cmd: cd "C:\projects\omniORB-4.2.1"
-  - cmd: rm config\config.mk
-  - cmd: echo "platform = x86_win32_vs_14" > config\config.mk
+  #- cmd: rm config\config.mk
+  #- cmd: echo "platform = x86_win32_vs_14" > config\config.mk
+  - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_14", "platform = x86_win32_vs_14"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: set path=%path%;c:\cygwin64\bin
