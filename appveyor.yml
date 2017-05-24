@@ -15,9 +15,9 @@ environment:
   WITH_SODIUM: ON
   WITH_TWEETNACL: ON
   matrix:
-    - platform: x86
+    - platform: win32
       configuration: Debug
-    - platform: x86
+    - platform: win32
       configuration: Release
   BOOST_ROOT: C:\Libraries\boost_1_63_0
   ZMQ_BASE: C:\projects\libzmq
