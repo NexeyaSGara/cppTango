@@ -29,7 +29,7 @@ environment:
   BOOST_ROOT: C:\Libraries\boost_1_63_0
   ZMQ_BASE: C:\projects\libzmq
   IDL_BASE: C:\projects\tangoidl
-  OMNI_BASE: C:\projects\omniorb
+  OMNI_BASE: C:\projects\omniORB-4.2.1
 
 install:
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
@@ -57,10 +57,15 @@ install:
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
   - cmd: mkdir "C:\projects\omniorb"
-  - cmd: cd "C:\projects\omniorb"
+  - cmd: cd "C:\projects\"
   - appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2
   - cmd: 7z x omniORB-4.2.1-2.tar.bz2
   - cmd: 7z x omniORB-4.2.1-2.tar
+  - cmd: cd "C:\projects\omniORB-4.2.1"
+  - cmd: rm config\config.mk
+  - cmd: echo "platform = x86_win32_vs_14" > config\config.mk
+  - cmd: cd "src"
+  - cmd: make export
   - cmd: cd "C:\projects\cppTango"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
