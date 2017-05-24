@@ -68,7 +68,7 @@ install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: set path=%path%;c:\cygwin64\bin
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk) | foreach-object {$_ -replace "PYTHON = \#/cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python26/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk
-  - cmd: make dir.mk export
+  - cmd: make -f dir.mk export
   - cmd: cd "C:\projects\cppTango"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
   - cmd: set BOOST_ROOT="C:\Libraries\boost_1_63_0"
