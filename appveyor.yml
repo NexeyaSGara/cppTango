@@ -69,6 +69,10 @@ install:
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
+  - cmd: set BOOST_ROOT: C:\Libraries\boost_1_63_0
+  - cmd: set ZMQ_BASE: C:\projects\libzmq
+  - cmd: set IDL_BASE: C:\projects\tangoidl
+  - cmd: set OMNI_BASE: C:\projects\omniORB-4.2.1
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
 
 clone_folder: C:\projects\cppTango
