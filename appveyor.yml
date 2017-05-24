@@ -6,7 +6,7 @@ branches:
 image: Visual Studio 2015
 
 platform:
-  - x64
+  - x32
 
 configuration:
   - Release
