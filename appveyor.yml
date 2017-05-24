@@ -5,9 +5,6 @@ branches:
 
 image: Visual Studio 2015
 
-platform:
-  - x32
-
 configuration:
   - Release
   
@@ -18,13 +15,9 @@ environment:
   WITH_SODIUM: ON
   WITH_TWEETNACL: ON
   matrix:
-    - platform: Win32
+    - platform: x86
       configuration: Debug
-    - platform: Win32
-      configuration: Release
-    - platform: x64
-      configuration: Debug
-    - platform: x64
+    - platform: x86
       configuration: Release
   BOOST_ROOT: C:\Libraries\boost_1_63_0
   ZMQ_BASE: C:\projects\libzmq
@@ -66,14 +59,14 @@ install:
   #- cmd: echo "platform = x86_win32_vs_14" > config\config.mk
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_14", "platform = x86_win32_vs_14"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
   - cmd: set path=%path%;c:\cygwin64\bin
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python26/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk
-  - cmd: dir
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
+  - cmd: dir
   - cmd: set BOOST_ROOT="C:\Libraries\boost_1_63_0"
   - cmd: set ZMQ_BASE="C:\projects\libzmq"
   - cmd: set IDL_BASE="C:\projects\tangoidl"
