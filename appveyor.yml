@@ -23,7 +23,6 @@ environment:
   ZMQ_BASE: C:\projects\libzmq
   IDL_BASE: C:\projects\tangoidl
   OMNI_BASE: C:\projects\omniORB-4.2.1
-  APPVEYOR_RDP_PASSWORD: LaCouronne16
 
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
