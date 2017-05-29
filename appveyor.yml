@@ -16,8 +16,6 @@ environment:
   WITH_TWEETNACL: ON
   matrix:
     - platform: win32
-      configuration: Debug
-    - platform: win32
       configuration: Release
   BOOST_ROOT: C:\Libraries\boost_1_63_0
   ZMQ_BASE: C:\projects\libzmq
@@ -74,14 +72,14 @@ install:
   - cmd: set ZMQ_BASE="C:\projects\libzmq"
   - cmd: set IDL_BASE="C:\projects\tangoidl"
   - cmd: set OMNI_BASE="C:\projects\omniORB-4.2.1"
-  - cmd: cmake -G "%CMAKE_GENERATOR%"
+  - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT /DLOG4TANGO_USE_MSTHREADS"
   - cmd: dir
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
 
 clone_folder: C:\projects\cppTango
 
 before_build:
-  - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
+  - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT " -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
 
 build:
   parallel: true
