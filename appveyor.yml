@@ -72,7 +72,7 @@ install:
   - cmd: set ZMQ_BASE="C:\projects\libzmq"
   - cmd: set IDL_BASE="C:\projects\tangoidl"
   - cmd: set OMNI_BASE="C:\projects\omniORB-4.2.1"
-  - cmd: cmake -G "%CMAKE_GENERATOR%" -DLOG4TANGO_USE_MSTHREADS
+  - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
 
