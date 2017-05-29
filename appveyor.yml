@@ -25,6 +25,14 @@ environment:
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 install:
+
+  - cmd: cd "C:\projects\cppTango"
+  - cmd: set BOOST_ROOT="C:\Libraries\boost_1_63_0"
+  - cmd: set ZMQ_BASE="C:\projects\libzmq"
+  - cmd: set IDL_BASE="C:\projects\tangoidl"
+  - cmd: set OMNI_BASE="C:\projects\omniORB-4.2.1"
+  - cmd: cmake -G "%CMAKE_GENERATOR%"
+  
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
