@@ -48,6 +48,7 @@ set_target_properties(tango PROPERTIES
 
 #install code
 IF (WIN32)
+add_definitions(-DLOG4TANGO_USE_MSTHREADS)
 install(TARGETS tango
         ARCHIVE DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
         LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
