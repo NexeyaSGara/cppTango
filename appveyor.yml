@@ -48,7 +48,8 @@ install:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
+  - cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
+  #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
@@ -68,10 +69,10 @@ install:
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
-  - cmd: set BOOST_ROOT="C:\Libraries\boost_1_63_0"
-  - cmd: set ZMQ_BASE="C:\projects\libzmq"
-  - cmd: set IDL_BASE="C:\projects\tangoidl"
-  - cmd: set OMNI_BASE="C:\projects\omniORB-4.2.1"
+  - cmd: set BOOST_ROOT=C:\Libraries\boost_1_63_0
+  - cmd: set ZMQ_BASE=C:\projects\libzmq
+  - cmd: set IDL_BASE=C:\Program Files (x86)\tangoidl
+  - cmd: set OMNI_BASE=C:\projects\omniORB-4.2.1
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
