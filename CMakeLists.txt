@@ -9,9 +9,8 @@ set(MINOR_VERSION "2")
 set(PATCH_VERSION "5")
 
 IF (WIN32)
+add_definitions(-D_WIN32)
 add_definitions(-DLOG4TANGO_USE_MSTHREADS)
-add_definitions(-D_TG_WINDOWS_)
-add_definitions(-D_WIN32_WINNT=0x0400)
 ENDIF()
 
 #convenient versions
@@ -79,4 +78,4 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS "libcos4-dev, libzmq5-dev | libzmq3-dev")
 set(CPACK_DEBIAN_PACKAGE_CONFLICTS "libtango7-dev, libtango8-dev, libtango9-dev")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "TANGO team <tango@esrf.fr>") #required
 ENDIF()
-include(CPack)
+#include(CPack)
