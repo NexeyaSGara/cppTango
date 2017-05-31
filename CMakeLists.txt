@@ -8,6 +8,11 @@ set(MAJOR_VERSION "9")
 set(MINOR_VERSION "2")
 set(PATCH_VERSION "5")
 
+IF (WIN32)
+add_definitions(-DLOG4TANGO_USE_MSTHREADS)
+add_definitions(-D_TG_WINDOWS)
+ENDIF()
+
 #convenient versions
 set(LIBRARY_VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
 set(SO_VERSION "${MAJOR_VERSION}")
