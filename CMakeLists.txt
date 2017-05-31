@@ -10,7 +10,8 @@ set(PATCH_VERSION "5")
 
 IF (WIN32)
 add_definitions(-DLOG4TANGO_USE_MSTHREADS)
-add_definitions(-D_TG_WINDOWS)
+add_definitions(-D_TG_WINDOWS_)
+add_definitions(-D_WIN32_WINNT=0x0400)
 ENDIF()
 
 #convenient versions
