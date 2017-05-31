@@ -57,6 +57,7 @@ install:
   - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  - cmd: cd C:\projects\zmq
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
   - cmd: cd "C:\projects\"
