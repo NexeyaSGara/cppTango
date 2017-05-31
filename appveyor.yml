@@ -68,10 +68,10 @@ install:
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_14.mk
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
-  - cmd: set BOOST_ROOT=C:\Libraries\boost_1_63_0
-  - cmd: set ZMQ_BASE=C:\projects\build_libzmq
-  - cmd: set IDL_BASE="C:\Program Files (x86)\tangoidl"
-  - cmd: set OMNI_BASE=C:\projects\omniORB-4.2.1
+  - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
+  - cmd: set ZMQ_BASE=C:/projects/build_libzmq
+  - cmd: set IDL_BASE=C:/Program Files\ (x86)/tangoidl
+  - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
