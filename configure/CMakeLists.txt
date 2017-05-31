@@ -59,7 +59,7 @@ else()
 endif()
 
 message("Verifying ${OMNIIDL_PATH}omniidl")
-if(win32)
+if(WIN32)
     execute_process(COMMAND ${OMNIIDL_PATH}omniidl.exe -V RESULT_VARIABLE FAILED)
 else()
     execute_process(COMMAND ${OMNIIDL_PATH}omniidl -V RESULT_VARIABLE FAILED)
