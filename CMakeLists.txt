@@ -47,29 +47,18 @@ target_compile_options(tango PUBLIC ${ZMQ_PKG_CFLAGS_OTHER} ${OMNIORB_PKG_CFLAGS
 target_compile_options(tango PRIVATE -fPIC)
 target_compile_definitions(tango PRIVATE OMNI_UNLOADABLE_STUBS _TANGO_LIB)
 
+set_target_properties(tango PROPERTIES
+        VERSION ${LIBRARY_VERSION}
+        SOVERSION ${SO_VERSION})
 
 #install code
 IF (WIN32)
-
-set_target_properties(tango PROPERTIES
-        VERSION ${LIBRARY_VERSION}
-        SOVERSION ${SO_VERSION}
-        PROPERTIES LINKER_LANGUAGE CXX)
-        
 install(TARGETS tango
         ARCHIVE DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
         LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
         RUNTIME DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}")
 ELSE()
-
-set_target_properties(tango PROPERTIES
-        VERSION ${LIBRARY_VERSION}
-        SOVERSION ${SO_VERSION})
-
-install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")set_target_properties(tango PROPERTIES
-        VERSION ${LIBRARY_VERSION}
-        SOVERSION ${SO_VERSION})
-
+install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 ENDIF()
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
