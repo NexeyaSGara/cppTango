@@ -9,11 +9,11 @@ set(MINOR_VERSION "2")
 set(PATCH_VERSION "5")
 
 IF (WIN32)
+add_definitions(-DHAVE_STRUCT_TIMESPEC)
 add_definitions(-D_WIN32)
 add_definitions(-D__OSVERSION__=4)
 add_definitions(-D__POSIX_NT__)
 add_definitions(-D__x86__)
-add_definitions(-DHAVE_STRUCT_TIMESPEC)
 add_definitions(-DLOG4TANGO_USE_MSTHREADS)
 ENDIF()
 
