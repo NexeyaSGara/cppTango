@@ -69,7 +69,7 @@ install:
   #- cmd: echo "platform = x86_win32_vs_14" > config\config.mk
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_12", "platform = x86_win32_vs_12"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: set path=%path%;c:\cygwin64\bin
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python26/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
@@ -81,8 +81,8 @@ install:
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
-  - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
-  #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
+  #- cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
+  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% tango.sln
 
 clone_folder: C:\projects\cppTango
 
