@@ -71,7 +71,7 @@ install:
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: set path=%path%;c:\cygwin64\bin
-  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python26/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
+  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
