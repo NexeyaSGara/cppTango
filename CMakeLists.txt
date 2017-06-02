@@ -35,6 +35,9 @@ include_directories(include)
 include_directories(${PROJECT_BINARY_DIR}/include)
 
 add_subdirectory(include)
+IF (WIN32)
+include_directories(${CMAKE_INSTALL_FULL_INCLUDEDIR}/tango/server)
+ENDIF()
 add_subdirectory(doxygen)
 #source code
 add_subdirectory(generated/idl)
