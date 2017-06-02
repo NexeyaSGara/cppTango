@@ -5,6 +5,10 @@ using namespace std;
 using namespace CmpTst;
 
 #define TMP_SUFFIX ".tmp"
+#ifdef _WIN32
+#include <algorithm> 
+using namespace std;
+#endif
 
 //+-------------------------------------------------------------------------
 //
