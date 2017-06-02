@@ -81,8 +81,8 @@ install:
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
-  #- cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
-  - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
+  - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
+  #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% 
 
 clone_folder: C:\projects\cppTango
 
