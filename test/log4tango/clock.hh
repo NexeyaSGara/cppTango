@@ -30,6 +30,10 @@
 #include <stdint.h>
 #endif // LOG4TANGO_HAVE_STDINT_H
 
+#ifdef WIN32
+typedef uint64_t usec_t;
+#endif
+
 #ifdef __osf__
     typedef long usec_t;    /* number of microseconds since 1970/01/01 */
 #   define INT64_CONSTANT(val)  (val##L)
