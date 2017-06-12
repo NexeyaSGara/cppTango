@@ -30,7 +30,7 @@
 #include <stdint.h>
 #endif // LOG4TANGO_HAVE_STDINT_H
 
-#ifdef WIN32
+#ifdef _TG_WINDOWS_
 typedef uint64_t usec_t;
 #endif
 
