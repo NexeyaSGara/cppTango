@@ -31,14 +31,18 @@
 #endif // LOG4TANGO_HAVE_STDINT_H
 
 #ifdef _TG_WINDOWS_
-typedef uint64_t usec_t;
+    typedef uint64_t usec_t;
 #endif
 
 #ifdef __osf__
     typedef long usec_t;    /* number of microseconds since 1970/01/01 */
 #   define INT64_CONSTANT(val)  (val##L)
 #else
-    typedef int64_t usec_t;
+    #ifdef _TG_WINDOWS_
+        typedef uint64_t usec_t;
+    #else
+        typedef int64_t usec_t;
+    #endif
 #   define INT64_CONSTANT(val)  (val##LL)
 #endif
 
