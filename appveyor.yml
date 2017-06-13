@@ -73,7 +73,8 @@ install:
   - cmd: set path=%path%;c:\cygwin64\bin
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
-  - cmd: make export
+  - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
+  #make export
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
