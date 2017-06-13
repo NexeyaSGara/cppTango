@@ -79,6 +79,7 @@ install:
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
