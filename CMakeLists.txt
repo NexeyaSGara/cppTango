@@ -18,8 +18,6 @@ add_definitions(-D__OSVERSION__=4)
 add_definitions(-D__POSIX_NT__)
 add_definitions(-D__x86__)
 add_definitions(-DLOG4TANGO_USE_MSTHREADS)
-include_directories(${PROJECT_SOURCE_DIR}/include/tango/server)
-include_directories(${PROJECT_SOURCE_DIR}/include/tango/client)
 ENDIF()
 
 #convenient versions
