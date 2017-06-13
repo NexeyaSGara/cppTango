@@ -41,7 +41,7 @@
     #ifdef _TG_WINDOWS_
         typedef uint64_t usec_t;
     #else
-        typedef int64_t usec_t;
+        typedef __int64 usec_t;
     #endif
 #   define INT64_CONSTANT(val)  (val##LL)
 #endif
