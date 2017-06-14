@@ -52,7 +52,7 @@
 #else
 #include <sys/timeb.h>
 #include <process.h>
-#include "coutbuf.h"
+#include "tango/server/coutbuf.h"
 #include <ntservice.h>
 #include <ws2tcpip.h>
 #endif /* _TG_WINDOWS_ */
