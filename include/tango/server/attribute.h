@@ -35,6 +35,7 @@
 
 #include <tango.h>
 #include <tango/server/attrdesc.h>
+#include <tango/server/attrprop.h>
 #include <tango/server/fwdattrdesc.h>
 #include <tango/server/encoded_attribute.h>
 
