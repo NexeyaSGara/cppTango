@@ -98,6 +98,7 @@ private:
 #endif
 };
 
+class WAttribute;
 class MultiAttribute;
 
 /**
