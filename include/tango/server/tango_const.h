@@ -31,7 +31,8 @@
 
 #ifndef _TANGO_CONST_H
 #define _TANGO_CONST_H
-
+#include <string>
+#include <vector>
 namespace Tango
 {
 
@@ -312,10 +313,6 @@ const char* const NotANumber               = "NaN";
 const char* const MemNotUsed               = "Not used yet";
 const char* const MemAttrPropName          = "__value";
 const char* const RootAttrPropName		   = "__root_att";
-
-// For DevEnum data type
-
-typedef DevShort	DevEnum;
 
 /*
  * List of strings used by the API as the DevError reason field.
@@ -888,6 +885,10 @@ typedef DevState *(DeviceImpl::*Sta_CmdMethPtr_LSA)(const DevVarLongStringArray 
 typedef DevState *(DeviceImpl::*Sta_CmdMethPtr_DSA)(const DevVarDoubleStringArray *);
 typedef DevState *(DeviceImpl::*Sta_CmdMethPtr_Sta)(DevState);
 
+// For DevEnum data type
+
+typedef DevShort	DevEnum;
+
 
 //
 // Some enum and structures
@@ -981,8 +982,8 @@ enum LockCmdCode {
 
 typedef struct _PollDevice
 {
-	string			dev_name;
-	vector<long>	ind_list;
+	std::string		dev_name;
+	std::vector<long>	ind_list;
 }PollDevice;
 
 #ifdef TANGO_HAS_LOG4TANGO
@@ -1218,13 +1219,13 @@ template <typename T>
 struct ranges_type2const
 {
 	static CmdArgType enu;
-	static TANGO_CXX11_ABI string str;
+	static TANGO_CXX11_ABI std::string str;
 };
 
 template <CmdArgType>
 struct ranges_const2type
 {
-	static TANGO_CXX11_ABI string str;
+	static TANGO_CXX11_ABI std::string str;
 };
 
 #define RANGES_TYPE2CONST(type,constant) \
@@ -1232,7 +1233,7 @@ struct ranges_const2type
 	struct ranges_type2const<type> \
 	{ \
 		static CmdArgType enu; \
-		TANGO_CXX11_ABI static string str; \
+		TANGO_CXX11_ABI static std::string str; \
 	}; \
 	CmdArgType ranges_type2const<type>::enu = constant; \
 	TANGO_CXX11_ABI string ranges_type2const<type>::str = #type; \
@@ -1240,7 +1241,7 @@ struct ranges_const2type
 	struct ranges_const2type<Tango::constant> \
 	{ \
 		typedef type Type; \
-		TANGO_CXX11_ABI static string str; \
+		TANGO_CXX11_ABI static std::string str; \
 	}; \
 	TANGO_CXX11_ABI string ranges_const2type<Tango::constant>::str = #type;
 
