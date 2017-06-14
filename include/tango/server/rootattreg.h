@@ -38,7 +38,7 @@
 
 namespace Tango
 {
-
+class FwdAttr;
 struct NameFwdAttr
 {
 	string			local_name;			// Local device name
