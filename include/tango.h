@@ -115,7 +115,6 @@ namespace Tango {
 //
 
 #ifndef TANGO_CLIENT
-	#include <tango/server/attribute.h>
 	#include <tango/server/attrprop.h>
 	#include <tango/server/tango_monitor.h>
 	#include <tango/server/device.h>
@@ -126,6 +125,7 @@ namespace Tango {
 	#include <tango/server/device_4.h>
 	#include <tango/server/device_5.h>
 	#include <tango/server/command.h>
+	#include <tango/server/attribute.h>
 	#include <tango/server/pipedesc.h>
 	#include <tango/server/pipe.h>
 	#include <tango/server/w_pipe.h>
