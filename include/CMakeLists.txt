@@ -63,7 +63,6 @@ set(CLIENT_TEMPLATES
         tango/client/devapi_pipe.tpp)
 
 set(SERVER_HEADERS tango/server/attrdesc.h
-        tango/server/attribute.h
         tango/server/attrmanip.h
         tango/server/attrprop.h
         tango/server/auto_tango_monitor.h
