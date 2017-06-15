@@ -35,7 +35,6 @@
 #ifndef _COUTBUF_H
 #define _COUTBUF_H
 
-#include "../../tango.h"
 #ifndef TANGO_HAS_LOG4TANGO
 # include <streambuf>
 #endif
