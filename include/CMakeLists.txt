@@ -64,9 +64,9 @@ set(CLIENT_TEMPLATES
 
 set(SERVER_HEADERS 
         tango/server/attrdesc.h
+        tango/server/attribute.h
         tango/server/attrmanip.h
         tango/server/attrprop.h
-        tango/server/attribute.h
         tango/server/auto_tango_monitor.h
         tango/server/basiccommand.h
         tango/server/blackbox.h
