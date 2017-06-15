@@ -34,6 +34,8 @@
 #ifndef _DINTRTHREAD_H
 #define _DINTRTHREAD_H
 
+#include <tango/server/devintr.h>
+
 namespace Tango
 {
 
