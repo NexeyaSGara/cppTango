@@ -36,7 +36,7 @@
 #ifdef _TG_WINDOWS_
 #include <algorithm>
 #endif
-
+using namespace std;
 namespace Tango
 {
 
