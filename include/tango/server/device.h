@@ -58,6 +58,7 @@ class EventSupplier;
 class EventSubscriptionChangeCmd;
 class Util;
 class FwdWrongConf;
+class BlackBox;
 
 /** @defgroup Server Server classes */
 
