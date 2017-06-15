@@ -35,7 +35,7 @@
 
 #ifndef _DEVICECLASS_H
 #define _DEVICECLASS_H
-
+using namespace std;
 namespace Tango
 {
 
