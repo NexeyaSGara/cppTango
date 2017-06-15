@@ -33,6 +33,7 @@
 #ifndef _TANGO_MONITOR_H
 #define _TANGO_MONITOR_H
 
+using namespace std;
 
 namespace Tango
 {
