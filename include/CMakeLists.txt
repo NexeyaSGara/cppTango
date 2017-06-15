@@ -143,7 +143,6 @@ set_source_files_properties(${SERVER_HEADERS} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${SERVER_TEMPLATES} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${CLIENT_TEMPLATES} PROPERTIES LANGUAGE CXX)
 
-target_include_directories(include_objects PRIVATE .)
 add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
 
 install(FILES tango.h DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
