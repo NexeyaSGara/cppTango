@@ -82,8 +82,6 @@ struct WantedAttr : public binary_function<A1,A2,R>
 	}
 };
 
-
-class AttrProperty;
 class DeviceClass;
 
 typedef union _Attr_CheckVal
