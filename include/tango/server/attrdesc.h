@@ -41,7 +41,6 @@
 namespace Tango
 {
 
-class AttrProperty;
 class WAttribute;
 
 
