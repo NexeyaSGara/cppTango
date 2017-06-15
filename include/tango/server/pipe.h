@@ -36,7 +36,7 @@
 #include <tango.h>
 
 #include <stdarg.h>
-
+using namespace std;
 namespace Tango
 {
 
