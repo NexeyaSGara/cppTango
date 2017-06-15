@@ -46,7 +46,7 @@
 #include <tango/server/deviceclass.h>
 #include <tango/server/devintr.h>
 #include <tango/server/dintrthread.h>
-
+using namespace std;
 namespace Tango
 {
 
