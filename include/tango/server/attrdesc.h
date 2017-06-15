@@ -37,7 +37,7 @@
 #define _ATTRDESC_H
 
 #include <tango.h>
-
+#include <tango/server/classattribute.h>
 namespace Tango
 {
 
