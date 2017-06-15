@@ -56,7 +56,6 @@ class AutoTangoMonitor;
 class NoSyncModelTangoMonitor;
 class EventSupplier;
 class EventSubscriptionChangeCmd;
-class Util;
 class FwdWrongConf;
 class BlackBox;
 
