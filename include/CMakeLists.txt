@@ -73,7 +73,6 @@ set(SERVER_HEADERS
         tango/server/classattribute.h
         tango/server/classpipe.h
         tango/server/command.h
-        tango/server/pipe.h
         tango/server/coutappender.h
         tango/server/coutbuf.h
         tango/server/device.h
@@ -97,6 +96,7 @@ set(SERVER_HEADERS
         tango/server/logstream.h
         tango/server/multiattribute.h
         tango/server/ntservice.h
+        tango/server/pipe.h
         tango/server/pipedesc.h
         tango/server/pollcmds.h
         tango/server/pollext.h
