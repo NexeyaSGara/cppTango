@@ -36,6 +36,8 @@
 #define _UTILS_H
 
 #include <tango.h>
+#include <tango/server/deviceclass.h>
+#include <tango/server/subdev_diag.h>
 #include <tango/server/pollext.h>
 #include <tango/server/subdev_diag.h>
 #include <new>
