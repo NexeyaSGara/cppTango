@@ -9,9 +9,9 @@ configuration:
   - Release
   
 environment:
-  CMAKE_GENERATOR: "Visual Studio 10 2008"
+  CMAKE_GENERATOR: "Visual Studio 10 2010"
   MSVCVERSION: "v100"
-  MSVCYEAR: "vs2008"
+  MSVCYEAR: "vs2010"
   WITH_SODIUM: ON
   WITH_TWEETNACL: ON
   matrix:
