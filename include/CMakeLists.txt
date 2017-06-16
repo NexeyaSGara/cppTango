@@ -86,6 +86,8 @@ set(SERVER_HEADERS
         tango/server/dserver.h
         tango/server/dserverclass.h
         tango/server/dserversignal.h
+        tango/server/encoded_attribute.h
+        tango/server/encoded_format.h
         tango/server/eventsupplier.h
         tango/server/except.h
         tango/server/fwdattrdesc.h
@@ -115,9 +117,7 @@ set(SERVER_HEADERS
         tango/server/w32win.h
         tango/server/w_attribute.h
         tango/server/w_pipe.h
-        tango/server/subdev_diag.h
-        tango/server/encoded_attribute.h
-        tango/server/encoded_format.h)
+        tango/server/subdev_diag.h)
 
 
 set(SERVER_TEMPLATES
