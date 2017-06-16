@@ -117,7 +117,8 @@ set(SERVER_HEADERS
         tango/server/w32win.h
         tango/server/w_attribute.h
         tango/server/w_pipe.h
-        tango/server/subdev_diag.h)
+        tango/server/subdev_diag.h
+        tango/server/dummy.cpp)
 
 
 set(SERVER_TEMPLATES
@@ -142,7 +143,7 @@ set(SERVER_TEMPLATES
 set_source_files_properties(${SERVER_HEADERS} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${SERVER_TEMPLATES} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${CLIENT_TEMPLATES} PROPERTIES LANGUAGE CXX)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
 add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
 
 install(FILES tango.h DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
