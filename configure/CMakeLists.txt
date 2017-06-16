@@ -85,6 +85,8 @@ if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
     set(PLATFORM 64)
 endif()
 
+add_compile_options(-std=c++11)
+
 #setup for GNU CXX compiler
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     message("found GNU compiler ...")
