@@ -8,6 +8,7 @@ set(SOURCES attrdesc.cpp
         class_factory.cpp
         classattribute.cpp
         command.cpp
+        coutbuff.cpp
         coutappender.cpp
         classpipe.cpp
         dev_event.cpp
@@ -53,6 +54,7 @@ set(SOURCES attrdesc.cpp
         utils.cpp
         utils_polling.cpp
         utils_shut.cpp
+        w32win.cpp
         w_attribute.cpp
         w_pipe.cpp
         zmqeventsupplier.cpp)
