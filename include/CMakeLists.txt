@@ -148,11 +148,11 @@ add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} $
 
 IF(WIN32)
 foreach(FILE ${SERVER_HEADERS}) 
-  get_filename_component(PARENT_DIR "${FILE}" PATH)
+  # get_filename_component(PARENT_DIR "${FILE}" PATH)
 
   # skip src or include and changes /'s to \\'s
-  string(REGEX REPLACE "(\\./)?(src|include)/?" "" GROUP "${PARENT_DIR}")
-  string(REPLACE "/" "\\" GROUP "${GROUP}")
+  # string(REGEX REPLACE "(\\./)?(src|include)/?" "" GROUP "${PARENT_DIR}")
+  # string(REPLACE "/" "\\" GROUP "${GROUP}")
 
   # group into "Source Files" and "Header Files"
   if ("${FILE}" MATCHES ".*\\.cpp")
@@ -165,13 +165,7 @@ foreach(FILE ${SERVER_HEADERS})
 endforeach()
 
 foreach(FILE ${CLIENT_HEADERS}) 
-  get_filename_component(PARENT_DIR "${FILE}" PATH)
-
-  # skip src or include and changes /'s to \\'s
-  string(REGEX REPLACE "(\\./)?(src|include)/?" "" GROUP "${PARENT_DIR}")
-  string(REPLACE "/" "\\" GROUP "${GROUP}")
-
-  # group into "Source Files" and "Header Files"
+   # group into "Source Files" and "Header Files"
   if ("${FILE}" MATCHES ".*\\.cpp")
     set(GROUP "Source Files\\${GROUP}")
   elseif("${FILE}" MATCHES ".*\\.h")
