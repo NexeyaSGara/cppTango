@@ -146,36 +146,6 @@ set_source_files_properties(${CLIENT_TEMPLATES} PROPERTIES LANGUAGE CXX)
 
 add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
 
-IF(WIN32)
-foreach(FILE ${SERVER_HEADERS}) 
-  # get_filename_component(PARENT_DIR "${FILE}" PATH)
-
-  # skip src or include and changes /'s to \\'s
-  # string(REGEX REPLACE "(\\./)?(src|include)/?" "" GROUP "${PARENT_DIR}")
-  # string(REPLACE "/" "\\" GROUP "${GROUP}")
-
-  # group into "Source Files" and "Header Files"
-  if ("${FILE}" MATCHES ".*\\.cpp")
-    set(GROUP "Source Files\\${GROUP}")
-  elseif("${FILE}" MATCHES ".*\\.h")
-    set(GROUP "Header Files\\${GROUP}")
-  endif()
-
-  source_group("${GROUP}" FILES "${FILE}")
-endforeach()
-
-foreach(FILE ${CLIENT_HEADERS}) 
-   # group into "Source Files" and "Header Files"
-  if ("${FILE}" MATCHES ".*\\.cpp")
-    set(GROUP "Source Files\\${GROUP}")
-  elseif("${FILE}" MATCHES ".*\\.h")
-    set(GROUP "Header Files\\${GROUP}")
-  endif()
-
-  source_group("${GROUP}" FILES "${FILE}")
-endforeach()
-ENDIF()
-
 install(FILES tango.h DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
 install(FILES ${SERVER_HEADERS} ${SERVER_TEMPLATES} DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}/tango/server")
 install(FILES ${CLIENT_HEADERS} ${CLIENT_TEMPLATES} ${CLIENT_HELPERS} DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}/tango/client")
