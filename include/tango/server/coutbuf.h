@@ -36,9 +36,9 @@
 #define _COUTBUF_H
 
 #ifndef TANGO_HAS_LOG4TANGO
-# include <streambuf>
+#include <streambuf>
 #endif
-
+#include <tango.h>
 namespace Tango
 {
 
