@@ -43,12 +43,14 @@ add_subdirectory(src)
 add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
+set(WIN32_LIBS "ws2_32.lib")
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:client_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:jpeg_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>)
+target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${ZMQ_PKG_LIBRARIES} ${OMNIORB_PKG_LIBRARIES} ${OMNICOS_PKG_LIBRARIES} ${OMNIDYN_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
 ELSE()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:client_objects>
@@ -57,9 +59,10 @@ add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>
                             $<TARGET_OBJECTS:include_objects>)
+target_link_libraries(tango PUBLIC ${ZMQ_PKG_LIBRARIES} ${OMNIORB_PKG_LIBRARIES} ${OMNICOS_PKG_LIBRARIES} ${OMNIDYN_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
 ENDIF()
 target_include_directories(tango PUBLIC ${ZMQ_PKG_INCLUDE_DIRS} ${OMNIORB_PKG_INCLUDE_DIRS} ${OMNIDYN_PKG_INCLUDE_DIRS})
-target_link_libraries(tango PUBLIC ${ZMQ_PKG_LIBRARIES} ${OMNIORB_PKG_LIBRARIES} ${OMNICOS_PKG_LIBRARIES} ${OMNIDYN_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
+
 target_compile_options(tango PUBLIC ${ZMQ_PKG_CFLAGS_OTHER} ${OMNIORB_PKG_CFLAGS_OTHER} ${OMNICOS_PKG_CFLAGS_OTHER} ${OMNIDYN_PKG_CFLAGS_OTHER})
 target_compile_options(tango PRIVATE -fPIC)
 target_compile_definitions(tango PRIVATE OMNI_UNLOADABLE_STUBS _TANGO_LIB)
