@@ -8,7 +8,7 @@ set(SOURCES attrdesc.cpp
         class_factory.cpp
         classattribute.cpp
         command.cpp
-        coutbuff.cpp
+        coutbuf.cpp
         coutappender.cpp
         classpipe.cpp
         dev_event.cpp
