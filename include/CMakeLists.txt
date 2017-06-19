@@ -64,9 +64,9 @@ set(CLIENT_TEMPLATES
 
 set(SERVER_HEADERS 
         tango/server/attrdesc.h
-        tango/server/attribute.h
-        tango/server/attrmanip.h
         tango/server/attrprop.h
+        tango/server/attrmanip.h
+        tango/server/attribute.h
         tango/server/auto_tango_monitor.h
         tango/server/basiccommand.h
         tango/server/blackbox.h
@@ -144,6 +144,8 @@ set_source_files_properties(${SERVER_HEADERS} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${SERVER_TEMPLATES} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${CLIENT_TEMPLATES} PROPERTIES LANGUAGE CXX)
 
+add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
+
 install(FILES tango.h DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
 install(FILES ${SERVER_HEADERS} ${SERVER_TEMPLATES} DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}/tango/server")
 install(FILES ${CLIENT_HEADERS} ${CLIENT_TEMPLATES} ${CLIENT_HELPERS} DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}/tango/client")
@@ -153,5 +155,3 @@ install(FILES ${LOG4TANGO_HEADERS}
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/log4tango/config.h DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/log4tango)
 install(FILES ${LOG4TANGO_THREADING}
         DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/log4tango/threading)
-
-add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
