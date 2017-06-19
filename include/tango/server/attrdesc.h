@@ -371,7 +371,7 @@ private:
  * @headerfile tango.h
  * @ingroup Server
  */
-
+class WAttribute;
 class Attr
 {
 public:
