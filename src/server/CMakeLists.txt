@@ -39,6 +39,7 @@ set(SOURCES attrdesc.cpp
         logstream.cpp
         multiattribute.cpp
         notifdeventsupplier.cpp
+        ntservice.cpp
         pipe.cpp
         pollcmds.cpp
         pollobj.cpp
