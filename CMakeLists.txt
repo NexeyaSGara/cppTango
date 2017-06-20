@@ -47,13 +47,16 @@ add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
+set(PTHREAD_WIN32_LIBS "pthreadVC2.lib;")
+set(PTHREAD_WIN32_PATH $ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
+link_directories(PTHREAD_WIN32_PATH)
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:client_objects>
                             $<TARGET_OBJECTS:jpeg_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>)
-target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
+target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} /MD /FORCE:multiple")
 ELSE()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
