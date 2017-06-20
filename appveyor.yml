@@ -80,15 +80,11 @@ install:
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
-  - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_CXX_FLAGS ="/FORCE:MULTIPLE "
-  - cmd: dir
+  - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% tango.sln
 
 clone_folder: C:\projects\cppTango
-
-before_build:
-  - cmd: cmake -G "%CMAKE_GENERATOR%" -D CMAKE_C_FLAGS_RELEASE="/MT " -D CMAKE_C_FLAGS_DEBUG="/MTd" "%APPVEYOR_BUILD_FOLDER%"
 
 build:
   parallel: true
