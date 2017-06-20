@@ -45,7 +45,7 @@ add_subdirectory(src)
 add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
-set(WIN32_LIBS "ws2_32.lib;comctl32.lib;mswsock.lib;odbc32.lib;odbcpp32.lib")
+set(WIN32_LIBS "ws2_32.lib;comctl32.lib;mswsock.lib;odbc32.lib;")
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:client_objects>
