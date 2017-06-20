@@ -6,6 +6,7 @@ branches:
 image: Visual Studio 2015
 
 environment:
+  _LINK_: /FORCE:MULTIPLE
   matrix:
     - platform: win32
       configuration: Release
