@@ -19,6 +19,8 @@ add_definitions(-D__POSIX_NT__)
 add_definitions(-D__x86__)
 #add_definitions(-DLOG4TANGO_USE_MSTHREADS)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+add_definitions(-D_TANGO_LIB)
+add_definitions(-DJPG_USE_ASM)
 ENDIF()
 
 #convenient versions
@@ -43,14 +45,14 @@ add_subdirectory(src)
 add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
-set(WIN32_LIBS "ws2_32.lib;comctl32.lib")
+set(WIN32_LIBS "ws2_32.lib;comctl32.lib;mswsock.lib;odbc32.lib;odbcpp32.lib")
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
-                            $<TARGET_OBJECTS:client_objects>
                             $<TARGET_OBJECTS:idl_objects>
+                            $<TARGET_OBJECTS:client_objects>
                             $<TARGET_OBJECTS:jpeg_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>)
-target_link_libraries(tango PUBLIC ${OMNIORB_PKG_LIBRARIES} ${WIN32_LIBS} ${ZMQ_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
+target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${CMAKE_DL_LIBS})
 set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} /FORCE:multiple")
 ELSE()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
