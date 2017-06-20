@@ -45,7 +45,4 @@ set(SOURCES tangoSK.cpp
 
 add_library(idl_objects OBJECT ${SOURCES} tango.h)
 target_compile_options(idl_objects PRIVATE -fPIC)
-IF(WIN32)
-target_link_libraries(idl_objects PUBLIC ${OMNIORB_PKG_LIBRARIES})
-ENDIF()
 install(FILES tango.h DESTINATION "${CMAKE_INSTALL_FULL_INCLUDEDIR}/idl")
