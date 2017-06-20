@@ -30,9 +30,6 @@ install:
   - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
-  - cmd: dir
-  - cmd: cd "win32"
-  - cmd: dir
   - cmd: set LIBSODIUMDIR=C:\projects\libsodium
   - cmd: git clone --branch stable --depth 1 --quiet "https://github.com/jedisct1/libsodium.git" %LIBSODIUMDIR%
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
@@ -71,11 +68,17 @@ install:
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: make export
+  - cmd: cd "C:\projects\"
+  - cmd: md pthreads-win32
+  - cmd: cd "C:\projects\"
+  - appveyor DownloadFile "ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
+  - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
+  - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
