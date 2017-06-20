@@ -86,6 +86,7 @@ if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
     set(PLATFORM 64)
 endif()
 
+IF (NOT (WIN32))
 add_compile_options(-std=c++11)
 
 #setup for GNU CXX compiler
@@ -101,5 +102,5 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-std=c++11)
     add_definitions(-DGNU_CXX)
 endif()
-
+ENDIF()
 include(configure/config.cmake)
