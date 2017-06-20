@@ -9,9 +9,9 @@ environment:
   matrix:
     - platform: win32
       configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
+      CMAKE_GENERATOR: "Visual Studio 12 2013"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
       BOOST_ROOT: C:\Libraries\boost_1_63_0
@@ -64,19 +64,19 @@ install:
   - cmd: cd "C:\projects\omniORB-4.2.1"
   #- cmd: rm config\config.mk
   #- cmd: echo "platform = x86_win32_vs_14" > config\config.mk
-  - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_10", "platform = x86_win32_vs_10"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
+  - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_12", "platform = x86_win32_vs_12"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: set path=%path%;c:\cygwin64\bin
-  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_10.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_10.mk
-  - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_10.mk
+  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
+  - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
   - cmd: make export
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: dir
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release
