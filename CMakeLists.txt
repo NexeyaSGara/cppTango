@@ -85,9 +85,9 @@ set_target_properties(tango PROPERTIES
 #install code
 IF (WIN32)
 install(TARGETS tango
-        ARCHIVE DESTINATION lib 
+        ARCHIVE DESTINATION lib COMPONENT static
         LIBRARY DESTINATION lib 
-        RUNTIME DESTINATION bin )
+        RUNTIME DESTINATION bin COMPONENT dynamic)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
@@ -103,7 +103,7 @@ ENDIF()
 IF (WIN32)
 IF(CMAKE_CL_64)
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_vs${CMAKE_VS_PLATFORM_NAME}_x86) #TODO platform
-ELSE
+ELSE()
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_vs${CMAKE_VS_PLATFORM_NAME}_x64) #TODO platform
 ENDIF()
 #
@@ -118,6 +118,29 @@ set (CPACK_PACKAGE_VERSION_MINOR ${MINOR_VERSION})
 set (CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
 # Define NSIS installation types
 set(CPACK_ALL_INSTALL_TYPES Full Runtime Server)
+
+# Define components and their display names
+set (CPACK_COMPONENTS_ALL static dynamic)
+set (CPACK_COMPONENT_STATIC_DISPLAY_NAME "Static")
+set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Dynamic")
+
+# Human readable component descriptions
+set (CPACK_COMPONENT_STATIC_DISPLAY_NAME
+  "Tango.lib")
+set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME
+  "Tango.dll")
+
+# Define groups
+set(CPACK_COMPONENT_STATIC_DISPLAY_NAME "Development")
+set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Runtime")
+
+set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
+   "All of the tools you'll ever need to develop software")
+
+# Define NSIS installation types
+set(CPACK_ALL_INSTALL_TYPES Full Developer Runtime)
+set(CPACK_COMPONENT_STATIC_DISPLAY_NAME Developer Full)
+set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME Developer Full Runtime)
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
