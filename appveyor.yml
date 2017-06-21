@@ -65,6 +65,7 @@ init:
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
+  - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   # Tango IDL
@@ -93,7 +94,10 @@ install:
   # Editing OmniOrb config
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_%MSVCABR%", "platform = x86_win32_vs_%MSVCABR%"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: call "%ProgramFiles(x86)%\Microsoft Visual Studio %VC_VER%\VC\vcvarsall.bat" %MSVCPLAT%
+  - IF %ARCH%==win32-msvc9 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc10 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc12 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc14 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat")
   - cmd: set path=%path%;c:\cygwin64\bin
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk
   - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk
@@ -105,7 +109,10 @@ install:
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
-  - cmd: call "%ProgramFiles(x86)%\Microsoft Visual Studio %VC_VER%\VC\vcvarsall.bat" %MSVCPLAT%
+  - IF %ARCH%==win32-msvc9 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc10 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc12 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat")
+  - IF %ARCH%==win32-msvc14 (CALL C:\"Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat")
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   # Generating installer
