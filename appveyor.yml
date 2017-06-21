@@ -12,8 +12,25 @@ environment:
       CMAKE_GENERATOR: "Visual Studio 12 2013"
       MSVCVERSION: "v120"
       MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      MSVCPLAT: "x86"
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: /cygdrive/c/Python27/python
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      MSVCPLAT: "x86"
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: /cygdrive/c/Python27/python
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
@@ -21,23 +38,42 @@ environment:
 
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # Tango IDL
+  - cmd: set TANGOIDLDIR=C:\projects\tangoidl
+  - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
+  # LibSodium
+  - cmd: set LIBSODIUMDIR=C:\projects\libsodium
+  - cmd: git clone --branch stable --depth 1 --quiet "https://github.com/jedisct1/libsodium.git" %LIBSODIUMDIR%
+  # ZMQ
+  - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
+  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
+  - cmd: set ZMQHPPDIR=C:\projects\zmq
+  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
+  # OmniOrb
+  - cmd: cd "C:\projects\"
+  - appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2
+  - cmd: 7z x omniORB-4.2.1-2.tar.bz2
+  - cmd: 7z x omniORB-4.2.1-2.tar
+  #Pthread-Win32
+  - cmd: cd "C:\projects\"
+  - cmd: md pthreads-win32
+  - cmd: cd "C:\projects\"
+  - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
+  - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
 install: 
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
-  - cmd: set TANGOIDLDIR=C:\projects\tangoidl
-  - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
+  # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
-  - cmd: set LIBSODIUMDIR=C:\projects\libsodium
-  - cmd: git clone --branch stable --depth 1 --quiet "https://github.com/jedisct1/libsodium.git" %LIBSODIUMDIR%
+  # LibSodium
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
   - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
   - cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
-  - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
+  # Zmq
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd "%LIBZMQ_BUILDDIR%"
@@ -47,43 +83,30 @@ install:
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
-  - cmd: set ZMQHPPDIR=C:\projects\zmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
-  #- cmd: cd C:\projects\zmq
-  # cmd: cmake -G "%CMAKE_GENERATOR%"
-  #- cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
-  - cmd: cd "C:\projects\"
-  - appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2
-  - cmd: 7z x omniORB-4.2.1-2.tar.bz2
-  - cmd: 7z x omniORB-4.2.1-2.tar
+  # OmniOrb
   - cmd: cd "C:\projects\omniORB-4.2.1"
-  #- cmd: rm config\config.mk
-  #- cmd: echo "platform = x86_win32_vs_14" > config\config.mk
-  - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_12", "platform = x86_win32_vs_12"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
+  # Editing OmniOrb config
+  - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_%MSVCABR%", "platform = x86_win32_vs_%MSVCABR%"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio %MSVCABR%.0\VC\vcvarsall.bat" %MSVCPLAT%
   - cmd: set path=%path%;c:\cygwin64\bin
-  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
-  - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_12.mk
+  - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = /cygdrive/c/Python27/python"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk
+  - cmd: type c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk
   - cmd: make export
-  - cmd: cd "C:\projects\"
-  - cmd: md pthreads-win32
-  - cmd: cd "C:\projects\"
-  - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
-  - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
+  # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
-  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio %MSVCABR%.0\VC\vcvarsall.bat" %MSVCPLAT%
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
+  # Generating installer
   - cmd: cpack 
-  #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% tango.sln
 
 clone_folder: C:\projects\cppTango
 
