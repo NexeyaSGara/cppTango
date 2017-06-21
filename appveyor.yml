@@ -7,6 +7,21 @@ image: Visual Studio 2015
 
 environment:
   matrix:
+    - platform: x64
+      ARCH: x64-msvc12
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      VC_VER: 13.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
       ARCH: win32-msvc12
       configuration: Release
@@ -14,7 +29,6 @@ environment:
       MSVCVERSION: "v120"
       MSVCYEAR: "vs2013"
       MSVCABR: "13"
-      MSVCPLAT: "x86"
       VC_VER: 13.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
@@ -30,7 +44,6 @@ environment:
       MSVCVERSION: "v100"
       MSVCYEAR: "vs2010"
       MSVCABR: "10"
-      MSVCPLAT: "x86"
       VC_VER: 10.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
@@ -66,7 +79,6 @@ init:
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\cppTango"
 install: 
-  - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
   - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
@@ -95,10 +107,14 @@ install:
   - cmd: cd "C:\projects\omniORB-4.2.1"
   # Editing OmniOrb config
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - IF %ARCH%==win32-msvc9 call C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc10 call C:\"Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc12 call C:\"Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc14 call C:\"Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
+  - IF %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+  - IF %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat Win64"
   - cmd: set MSVCABR  = %MSVCABR%
   - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_${env:MSVCABR}", "platform = x86_win32_vs_${env:MSVCABR}"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
@@ -113,10 +129,14 @@ install:
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
-  - IF %ARCH%==win32-msvc9 call C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc10 call C:\"Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc12 call C:\"Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
-  - IF %ARCH%==win32-msvc14 call C:\"Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
+  - IF %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+  - IF %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat Win64"
+  - IF %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat Win64"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   # Generating installer
