@@ -8,6 +8,7 @@ image: Visual Studio 2015
 environment:
   matrix:
     - platform: win32
+      ARCH: win32-msvc12
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 12 2013"
       MSVCVERSION: "v120"
@@ -23,6 +24,7 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
+      ARCH: win32-msvc10
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 10 2010"
       MSVCVERSION: "v100"
