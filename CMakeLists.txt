@@ -85,7 +85,7 @@ set_target_properties(tango PROPERTIES
 #install code
 IF (WIN32)
 install(TARGETS tango
-        ARCHIVE DESTINATION include 
+        ARCHIVE DESTINATION lib 
         LIBRARY DESTINATION lib 
         RUNTIME DESTINATION bin )
 configure_file(tango.pc.cmake tango.pc @ONLY)
