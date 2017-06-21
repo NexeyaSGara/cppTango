@@ -96,8 +96,50 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
 #TODO windows
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_amd64) #TODO platform
 IF (WIN32)
-SET(CPACK_GENERATOR "WIX")
+SET(CPACK_GENERATOR "NSIS")
 set(CPACK_SOURCE_GENERATOR "ZIP")
+#
+# CPACK macros below here
+#
+set (CPACK_PACKAGE_NAME "Tango")
+set (CPACK_PACKAGE_VENDOR "www.tango-controls.org")
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Tango - Connecting Things Together")
+set (CPACK_PACKAGE_VERSION "1.0.0")
+set (CPACK_PACKAGE_VERSION_MAJOR "1")
+set (CPACK_PACKAGE_VERSION_MINOR "0")
+set (CPACK_PACKAGE_VERSION_PATCH "0")
+set (CPACK_PACKAGE_INSTALL_DIRECTORY "tango")
+
+# Define components and their display names
+set (CPACK_COMPONENTS_ALL tango libraries headers)
+set (CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Tango Applications")
+set (CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Libraries")
+set (CPACK_COMPONENT_HEADERS_DISPLAY_NAME "C++ Headers")
+
+# Human readable component descriptions
+set (CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
+  "Applications using tango")
+set (CPACK_COMPONENT_LIBRARIES_DESCRIPTION
+  "Static libraries used to build programs with Tango")
+set (CPACK_COMPONENT_HEADERS_DESCRIPTION
+  "C/C++ header files for use with Tango")
+
+# Define dependencies between components
+set (CPACK_COMPONENT_HEADERS_DEPENDS tango)
+
+# Define groups
+set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
+set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
+set(CPACK_COMPONENT_HEADERS_GROUP "Development")
+
+set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
+   "All of the tools you'll ever need to develop software")
+
+# Define NSIS installation types
+set(CPACK_ALL_INSTALL_TYPES Full Developer)
+set(CPACK_COMPONENT_LIBRARIES_INSTALL_TYPES Developer Full)
+set(CPACK_COMPONENT_HEADERS_INSTALL_TYPES Developer Full)
+set(CPACK_COMPONENT_APPLICATIONS_INSTALL_TYPES Full)
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
