@@ -140,7 +140,8 @@ install:
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   # Generating installer
-  - cmd: cpack 
+  - cmd: cpack -G NSIS
+  - cmd: cpack -G ZIP
 
 clone_folder: C:\projects\cppTango
 
@@ -156,3 +157,4 @@ on_finish:
 
 artifacts:
   - path: ./*.exe
+  - path: ./*.zip
