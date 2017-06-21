@@ -82,7 +82,7 @@ install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
-  - cmd: make package
+  - cmd: cpack -G -WIX 
   #- cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% tango.sln
 
 clone_folder: C:\projects\cppTango
