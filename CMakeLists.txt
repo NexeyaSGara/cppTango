@@ -82,14 +82,9 @@ set_target_properties(tango PROPERTIES
 #install code
 IF (WIN32)
 install(TARGETS tango
-        ARCHIVE DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
-        COMPONENT headers)
-install(TARGETS tango
-        LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
-        COMPONENT libraries)
-install(TARGETS tango
-        RUNTIME DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}"
-        COMPONENT rtlibraries)
+        ARCHIVE DESTINATION include       COMPONENT headers
+        LIBRARY DESTINATION lib           COMPONENT libraries
+        RUNTIME DESTINATION bin           COMPONENT rtlibraries)
 ELSE()
 install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 ENDIF()
