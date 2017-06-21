@@ -83,8 +83,13 @@ set_target_properties(tango PROPERTIES
 IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
+        COMPONENT headers)
+install(TARGETS tango
         LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}"
-        RUNTIME DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}")
+        COMPONENT libraries)
+install(TARGETS tango
+        RUNTIME DESTINATION "${CMAKE_INSTALL_FULL_BINDIR}"
+        COMPONENT rtlibraries)
 ELSE()
 install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 ENDIF()
@@ -111,14 +116,14 @@ set (CPACK_PACKAGE_VERSION_PATCH "0")
 set (CPACK_PACKAGE_INSTALL_DIRECTORY "tango")
 
 # Define components and their display names
-set (CPACK_COMPONENTS_ALL tango libraries headers)
+set (CPACK_COMPONENTS_ALL rtlibraries libraries headers)
 set (CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Tango Applications")
 set (CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME "Libraries")
 set (CPACK_COMPONENT_HEADERS_DISPLAY_NAME "C++ Headers")
 
 # Human readable component descriptions
 set (CPACK_COMPONENT_APPLICATIONS_DESCRIPTION
-  "Applications using tango")
+  "Applications using Tango")
 set (CPACK_COMPONENT_LIBRARIES_DESCRIPTION
   "Static libraries used to build programs with Tango")
 set (CPACK_COMPONENT_HEADERS_DESCRIPTION
