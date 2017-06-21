@@ -82,9 +82,9 @@ set_target_properties(tango PROPERTIES
 #install code
 IF (WIN32)
 install(TARGETS tango
-        ARCHIVE DESTINATION include       COMPONENT headers
-        LIBRARY DESTINATION lib           COMPONENT libraries
-        RUNTIME DESTINATION bin           COMPONENT rtlibraries)
+        ARCHIVE DESTINATION include COMPONENT headers
+        LIBRARY DESTINATION lib COMPONENT libraries
+        RUNTIME DESTINATION bin COMPONENT rtlibraries)
 ELSE()
 install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 ENDIF()
@@ -93,11 +93,11 @@ configure_file(tango.pc.cmake tango.pc @ONLY)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
         DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig")
 
-#TODO windows
-set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_amd64) #TODO platform
 IF (WIN32)
 SET(CPACK_GENERATOR "NSIS")
+set(CPACK_SOURCE_ZIP "c:/Program Files (x86)/tango")
 set(CPACK_SOURCE_GENERATOR "ZIP")
+set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_amd64) #TODO platform
 #
 # CPACK macros below here
 #
@@ -123,9 +123,6 @@ set (CPACK_COMPONENT_LIBRARIES_DESCRIPTION
   "Static libraries used to build programs with Tango")
 set (CPACK_COMPONENT_HEADERS_DESCRIPTION
   "C/C++ header files for use with Tango")
-
-# Define dependencies between components
-set (CPACK_COMPONENT_HEADERS_DEPENDS tango)
 
 # Define groups
 set(CPACK_COMPONENT_APPLICATIONS_GROUP "Runtime")
