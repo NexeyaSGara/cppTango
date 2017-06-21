@@ -79,7 +79,7 @@ init:
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\cppTango"
 install: 
-  - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  #- cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   # Tango IDL
@@ -127,6 +127,7 @@ install:
   - cmd: set BOOST_ROOT=C:/Libraries/boost_1_63_0
   - cmd: set ZMQ_BASE=C:/projects/build_libzmq
   - cmd: set IDL_BASE=%PROGRAMFILES(X86)%/tangoidl
+  - cmd: if "%PLATFORM%"=="x64" set IDL_BASE=%PROGRAMFILES%/tangoidl
   - cmd: set OMNI_BASE=C:/projects/omniORB-4.2.1
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - IF %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
