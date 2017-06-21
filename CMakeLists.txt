@@ -43,7 +43,7 @@ add_subdirectory(doxygen)
 add_subdirectory(generated/idl)
 include_directories(include)
 add_subdirectory(src)
-add_subdirectory(test)
+#add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
@@ -57,7 +57,8 @@ add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:server_objects>)
 target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set_property(TARGET tango PROPERTY LINK_FLAGS "/force:multiple")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Release)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Release)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Release)
 ELSE()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:client_objects>
