@@ -89,10 +89,11 @@ set_target_properties(tango PROPERTIES
 
 #install code
 IF (WIN32)
+set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
-        RUNTIME DESTINATION bin COMPONENT dynamic
-        PUBLIC_HEADER DESTINATION include COMPONENT headers)
+        RUNTIME DESTINATION bin COMPONENT dynamic)
+install(FILES  ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
