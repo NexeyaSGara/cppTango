@@ -192,10 +192,10 @@ install:
   - cmd: cd "%LIBZMQ_BUILDDIR%"
   - cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %ARCH%==win32-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcproj
-  - cmd: if %ARCH%==x64-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcproj
-  - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcproj
-  - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcproj
+  - cmd: if %ARCH%==win32-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==x64-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
   - cmd: if %ARCH%==x64-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: if %ARCH%==win32-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: if %ARCH%==x64-msvc12 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
