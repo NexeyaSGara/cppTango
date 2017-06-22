@@ -89,11 +89,10 @@ set_target_properties(tango PROPERTIES
 
 #install code
 IF (WIN32)
-set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
-        RUNTIME DESTINATION bin COMPONENT dynamic)
-install(FILES  ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
+        RUNTIME DESTINATION bin COMPONENT dynamic
+        FILES  ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
@@ -125,9 +124,6 @@ set (CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
 
 # Define components and their display names
 set (CPACK_COMPONENTS_ALL static dynamic headers)
-set (CPACK_COMPONENT_STATIC_DISPLAY_NAME "Static")
-set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Dynamic")
-set (CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Headers")
 
 # Human readable component descriptions
 set (CPACK_COMPONENT_STATIC_DISPLAY_NAME
@@ -139,8 +135,8 @@ set (CPACK_COMPONENT_HEADERS_DISPLAY_NAME
 
 # Define NSIS installation types
 set(CPACK_ALL_INSTALL_TYPES Development Runtime)
-set(CPACK_COMPONENT_STATIC_GROUP "Runtime" )
-set(CPACK_COMPONENT_DYNAMIC_GROUP "Development")
+set(CPACK_COMPONENT_STATIC_GROUP "Development" )
+set(CPACK_COMPONENT_DYNAMIC_GROUP "Runtime")
 set(CPACK_COMPONENT_HEADERS_GROUP "Development")
 
 set(CPACK_COMPONENT_STATIC_INSTALL_TYPES Development)
@@ -152,7 +148,7 @@ set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
 set(CPACK_COMPONENT_GROUP_RUNTIME_DESCRIPTION
    "All of the required libraries to launch Tango software")
 
-#set(CPACK_RESOURCE_FILE_LICENSE ./LICENSE)
+set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_BINARY_DIR}/LICENSE)
 set(CPACK_NSIS_HELP_LINK "http://www.tango-controls.org.org")
 set(CPACK_NSIS_URL_INFO_ABOUT "http://www.tango-controls.org.org")
 set(CPACK_NSIS_MODIFY_PATH ON)
