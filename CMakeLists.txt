@@ -92,7 +92,8 @@ IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         LIBRARY DESTINATION lib 
-        RUNTIME DESTINATION bin COMPONENT dynamic)
+        RUNTIME DESTINATION bin COMPONENT dynamic
+        PUBLIC_HEADER DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
@@ -107,9 +108,9 @@ ENDIF()
 
 IF (WIN32)
 IF(CMAKE_CL_64)
-set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_vs${CMAKE_VS_PLATFORM_TOOLSET}_x64) #TODO platform
+set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_${CMAKE_VS_PLATFORM_TOOLSET}_x64) #TODO platform
 ELSE()
-set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_vs${CMAKE_VS_PLATFORM_TOOLSET}_x86) #TODO platform
+set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_${CMAKE_VS_PLATFORM_TOOLSET}_x86) #TODO platform
 ENDIF()
 #
 # CPACK macros below here
@@ -125,27 +126,32 @@ set (CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
 set(CPACK_ALL_INSTALL_TYPES Full Runtime Server)
 
 # Define components and their display names
-set (CPACK_COMPONENTS_ALL static dynamic)
+set (CPACK_COMPONENTS_ALL static dynamic headers)
 set (CPACK_COMPONENT_STATIC_DISPLAY_NAME "Static")
 set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Dynamic")
+set (CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Headers")
 
 # Human readable component descriptions
 set (CPACK_COMPONENT_STATIC_DISPLAY_NAME
   "Tango.lib")
 set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME
   "Tango.dll")
+set (CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME
+  "Headers")
 
 # Define groups
 set(CPACK_COMPONENT_STATIC_DISPLAY_NAME "Development")
 set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Runtime")
+set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Headers")
 
 set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
    "All of the tools you'll ever need to develop software")
 
 # Define NSIS installation types
-set(CPACK_ALL_INSTALL_TYPES Full Developer Runtime)
-set(CPACK_COMPONENT_STATIC_DISPLAY_NAME Developer Full)
-set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME Developer Full Runtime)
+set(CPACK_ALL_INSTALL_TYPES Developer Runtime)
+set(CPACK_COMPONENT_STATIC_DISPLAY_NAME Developer)
+set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME Developer Runtime)
+set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME Developer )
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
