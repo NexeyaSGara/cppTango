@@ -52,7 +52,11 @@ IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
 set(PTHREAD_WIN32_LIBS "pthreadVC2.lib;")
+IF(CMAKE_CL_64)
+link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/)
+ELSE()
 link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
+ENDIF()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:client_objects>
