@@ -152,6 +152,7 @@ install:
   - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
+  - cmd: set PYTHONPATH=%PYTHONPATH%
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
