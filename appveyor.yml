@@ -212,10 +212,10 @@ install:
   - IF %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==win32-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
-  - cmd: if %ARCH%==x64-msvc8 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
-  - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
-  - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==win32-msvc8 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==x64-msvc8 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
+  - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
   - cmd: if %ARCH%==x64-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: if %ARCH%==win32-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: if %ARCH%==x64-msvc12 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
