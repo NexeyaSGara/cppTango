@@ -173,18 +173,25 @@ install:
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
-  - cmd: cmake --build ./ --target install -- /p:Configuration=Release /verbosity:quiet
+  - cmd: if %ARCH%==win32-msvc8 cmake --build ./ --target install -- %configuration% /verbosity:quiet
+  - cmd: if %ARCH%==x64-msvc8 cmake --build ./ --target install -- %configuration% /verbosity:quiet
+  - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install -- %configuration% /verbosity:quiet
+  - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install -- %configuration% /verbosity:quiet
+  - cmd: if %ARCH%==x64-msvc10 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
+  - cmd: if %ARCH%==win32-msvc10 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
+  - cmd: if %ARCH%==x64-msvc12 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
+  - cmd: if %ARCH%==win32-msvc12 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
   # LibSodium
-  - cmd: if %WITH_SODIUM%=="ON" msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
-  - cmd: if %WITH_SODIUM%=="ON" set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
-  - cmd: if %WITH_SODIUM%=="ON" set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
-  - cmd: if %WITH_SODIUM%=="ON" move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
+  - cmd: if %WITH_SODIUM%==ON msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
+  - cmd: if %WITH_SODIUM%==ON set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
+  - cmd: if %WITH_SODIUM%==ON set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
+  - cmd: if %WITH_SODIUM%==ON move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
   # Zmq
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd "%LIBZMQ_BUILDDIR%"
-  - cmd: if %WITH_SODIUM%=="ON" cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %WITH_SODIUM%=="OFF" cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
