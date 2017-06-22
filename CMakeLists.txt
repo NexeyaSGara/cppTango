@@ -156,7 +156,9 @@ set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
 set(CPACK_COMPONENT_GROUP_RUNTIME_DESCRIPTION
    "All of the required libraries to launch Tango software")
 
-set(CPACK_RESOURCE_FILE_LICENSE ./LICENSE)
+#set(CPACK_RESOURCE_FILE_LICENSE ./LICENSE)
+set(CPACK_NSIS_HELP_LINK "http://www.tango-controls.org.org")
+set(CPACK_NSIS_URL_INFO_ABOUT "http://www.tango-controls.org.org")
 
 ELSE()
 SET(CPACK_GENERATOR "DEB")
