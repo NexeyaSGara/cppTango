@@ -8,22 +8,6 @@ image: Visual Studio 2015
 environment:
   matrix:
     - platform: x64
-      ARCH: x64-msvc12
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
-      MSVCVERSION: "v120"
-      MSVCYEAR: "vs2013"
-      MSVCABR: "13"
-      VC_VER: 13.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
       ARCH: x64-msvc10
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
@@ -38,38 +22,6 @@ environment:
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: win32
-      ARCH: win32-msvc12
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 12 2013"
-      MSVCVERSION: "v120"
-      MSVCYEAR: "vs2013"
-      MSVCABR: "13"
-      VC_VER: 13.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: win32
-      ARCH: win32-msvc10
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
       ARCH: win32-msvc9
@@ -135,6 +87,54 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: x64
+      ARCH: x64-msvc12
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      VC_VER: 13.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      ARCH: win32-msvc12
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 12 2013"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      VC_VER: 13.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      ARCH: win32-msvc10
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
 
 init:
   #RDP from start
@@ -163,7 +163,7 @@ init:
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\cppTango"
 install: 
-  #- cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   # Tango IDL
@@ -243,7 +243,7 @@ after_build:
 
 on_finish:
   #RDP for finish
-  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
