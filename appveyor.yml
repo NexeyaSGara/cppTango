@@ -23,17 +23,17 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: win32
-      ARCH: win32-msvc10
+    - platform: x64
+      ARCH: x64-msvc8
       configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
+      CMAKE_GENERATOR: "Visual Studio 8 2005"
+      MSVCVERSION: "v80"
+      MSVCYEAR: "vs2005"
+      MSVCABR: "8"
+      VC_VER: 8.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
+      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
@@ -160,9 +160,11 @@ install:
   # Editing OmniOrb config
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - IF %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc8 call "C:\Program Files (x86)\Microsoft Visual Studio 8.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+  - IF %ARCH%==x64-msvc8 call "C:\Program Files (x86)\Microsoft Visual Studio 8.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
@@ -183,9 +185,11 @@ install:
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: set
   - IF %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
+  - IF %ARCH%==win32-msvc8 call "C:\Program Files (x86)\Microsoft Visual Studio 8.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - IF %ARCH%==win32-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+  - IF %ARCH%==x64-msvc8 call "C:\Program Files (x86)\Microsoft Visual Studio 8.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - IF %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
