@@ -151,7 +151,7 @@ install:
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
-  - cmd: set Framework35Version=v3.5
+  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
