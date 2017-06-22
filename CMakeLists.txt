@@ -92,7 +92,7 @@ IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic
-        FILES  ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
+        PUBLIC_HEADER  ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
