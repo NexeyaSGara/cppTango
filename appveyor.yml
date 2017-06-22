@@ -17,7 +17,7 @@ environment:
       VC_VER: 14.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
