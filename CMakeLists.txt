@@ -91,7 +91,6 @@ set_target_properties(tango PROPERTIES
 IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
-        LIBRARY DESTINATION lib 
         RUNTIME DESTINATION bin COMPONENT dynamic
         PUBLIC_HEADER DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
@@ -144,14 +143,21 @@ set(CPACK_COMPONENT_STATIC_DISPLAY_NAME "Development")
 set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME "Runtime")
 set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME "Headers")
 
-set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
-   "All of the tools you'll ever need to develop software")
-
 # Define NSIS installation types
-set(CPACK_ALL_INSTALL_TYPES Developer Runtime)
-set(CPACK_COMPONENT_STATIC_DISPLAY_NAME Developer)
-set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME Developer Runtime)
-set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME Developer )
+set(CPACK_ALL_INSTALL_TYPES Development Runtime)
+set(CPACK_COMPONENT_STATIC_DISPLAY_NAME Development)
+set(CPACK_COMPONENT_DYNAMIC_DISPLAY_NAME Development Runtime)
+set(CPACK_COMPONENT_HEADERS_DISPLAY_NAME Development )
+set(CPACK_COMPONENT_STATIC_GROUP "Runtime")
+set(CPACK_COMPONENT_DYNAMIC_GROUP "Development")
+set(CPACK_COMPONENT_HEADERS_GROUP "Development")
+set(CPACK_COMPONENT_GROUP_DEVELOPMENT_DESCRIPTION
+   "All of the tools you'll ever need to develop Tango software")
+set(CPACK_COMPONENT_GROUP_RUNTIME_DESCRIPTION
+   "All of the required libraries to launch Tango software")
+
+set(CPACK_RESOURCE_FILE_LICENSE LICENSE)
+
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
