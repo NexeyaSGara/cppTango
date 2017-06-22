@@ -17,6 +17,7 @@ environment:
       VC_VER: 14.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python35-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
@@ -33,6 +34,7 @@ environment:
       VC_VER: 9.0
       WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python27\
       PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
@@ -49,6 +51,7 @@ environment:
       VC_VER: 9.0
       WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python27-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
@@ -65,6 +68,7 @@ environment:
       VC_VER: 13.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python33-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
@@ -81,6 +85,7 @@ environment:
       VC_VER: 10.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python33\
       PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
@@ -97,6 +102,7 @@ environment:
       VC_VER: 10.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python33-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
