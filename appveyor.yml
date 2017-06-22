@@ -7,6 +7,38 @@ image: Visual Studio 2015
 
 environment:
   matrix:
+    - platform: win32
+      ARCH: win32-msvc8
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 8 2005"
+      MSVCVERSION: "v80"
+      MSVCYEAR: "vs2005"
+      MSVCABR: "8"
+      VC_VER: 8.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      ARCH: win32-msvc10
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: x64
       ARCH: x64-msvc12
       configuration: Release
@@ -15,6 +47,22 @@ environment:
       MSVCYEAR: "vs2013"
       MSVCABR: "13"
       VC_VER: 13.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: x64
+      ARCH: x64-msvc10
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
       PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
@@ -57,7 +105,8 @@ environment:
       OMNI_BASE: C:\projects\omniORB-4.2.1
 
 init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #RDP from start
+  #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   # Tango IDL
   - cmd: set TANGOIDLDIR=C:\projects\tangoidl
   - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
@@ -157,7 +206,8 @@ build:
 after_build:
 
 on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #RDP for finish
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
