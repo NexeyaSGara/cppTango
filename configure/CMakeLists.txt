@@ -77,9 +77,15 @@ endif()
 
 #assuming build platform == target
 set(PLATFORM 32)
+IF(WIN32)
+    IF(CMAKE_CL_64)
+        set(PLATFORM 64)
+    ENDIF()
+ELSE()
 if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
     set(PLATFORM 64)
 endif()
+ENDIF()
 
 IF (NOT (WIN32))
 add_compile_options(-std=c++11)
