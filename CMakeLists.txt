@@ -21,9 +21,10 @@ add_definitions(-D__x86__)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DOMNI_UNLOADABLE_STUBS)
 add_definitions(-D_TANGO_LIB)
-add_definitions(-DJPG_USE_ASM)
 IF(CMAKE_CL_64)
-
+add_definitions(-D_64BITS)
+ELSE()
+add_definitions(-DJPG_USE_ASM)
 ENDIF()
 ENDIF()
 
