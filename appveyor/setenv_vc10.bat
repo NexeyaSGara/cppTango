@@ -40,16 +40,6 @@ set PATH=
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin;"
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\ide;"
 
-goto test_bin_locations
-
-:test_bin_locations
-@echo on
-where nmake
-where cl.exe
-where link.exe
-@echo off
-goto:eof
-
 :error
 @echo Usage: setenv.bat [x86^|x64]
 
