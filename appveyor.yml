@@ -190,7 +190,7 @@ install:
   - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
   - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
   - cmd: if %ARCH%==x64-msvc10 set Framework35Version=v3.5
-  - cmd: if %WITH_SODIUM%==ON msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
+  - cmd: if %WITH_SODIUM%==ON msbuild /v:detailed /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
   - cmd: if %WITH_SODIUM%==ON set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: if %WITH_SODIUM%==ON set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
   - cmd: if %WITH_SODIUM%==ON move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
