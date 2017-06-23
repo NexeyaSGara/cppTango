@@ -135,6 +135,10 @@ init:
   - cmd: cd "C:\projects\"
   - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
+  - cmd: cd "C:\projects\"
+  - cmd: md vs2008_h
+  - cmd: cd "C:\projects\vs2008_h"
+  - appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
@@ -142,7 +146,7 @@ install:
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call setenv /%configuration% /x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc9 appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
@@ -172,11 +176,11 @@ install:
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd "%LIBZMQ_BUILDDIR%"
   - cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_INCLUDE_PATH="C:\projects\vs2008_h" CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call setenv /%configuration% /x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
@@ -200,7 +204,7 @@ install:
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call setenv /%configuration% /x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: set MSVCABR  = %MSVCABR%
@@ -222,7 +226,7 @@ install:
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call setenv /%configuration% /x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
