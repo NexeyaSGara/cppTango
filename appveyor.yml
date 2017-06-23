@@ -119,7 +119,7 @@ init:
   #RDP from start
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   # Tango IDL
-  - %CMD_IN_ENV% set TANGOIDLDIR=C:\projects\tangoidl
+  - cmd: set TANGOIDLDIR=C:\projects\tangoidl
   - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
   # LibSodium
   - cmd: set LIBSODIUMDIR=C:\projects\libsodium
@@ -159,7 +159,7 @@ install:
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - %CMD_IN_ENV% /E:ON /V:ON /K  if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
+  - cmd: /E:ON /V:ON /K  if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
   #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
@@ -280,7 +280,7 @@ after_build:
 
 on_finish:
   #RDP for finish
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
