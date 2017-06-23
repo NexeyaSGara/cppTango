@@ -232,6 +232,7 @@ install:
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_${env:MSVCABR}.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = ${env:PYTHONPATHOMNI}"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_$env:MSVCABR.mk
   - cmd: type "c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk"
   - cmd: set path=%path%;c:\cygwin64\bin
+  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: make export
   # Tango API
   - cmd: cd "C:\projects\cppTango"
