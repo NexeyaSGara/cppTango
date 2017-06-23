@@ -136,9 +136,11 @@ init:
   - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\"
-  - cmd: md vs2008_h
-  - cmd: cd "C:\projects\vs2008_h"
-  - appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
+  #stdint for vc9
+  - cmd: if %MSVCVERSION%=="v90" md vs2008_h
+  - cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
+  - if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
+  - cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
