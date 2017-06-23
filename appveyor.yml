@@ -142,6 +142,7 @@ init:
   - if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
   - cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
   - cmd: cd "C:\projects\cppTango"
+  - cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64" 
 install: 
   - cmd: if "%PLATFORM%"=="x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
   - cmd: cd "C:\projects\"
