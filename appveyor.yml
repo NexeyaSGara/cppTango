@@ -187,6 +187,9 @@ install:
   #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
   - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
+  - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
+  - cmd: if %ARCH%==x64-msvc10 set Framework35Version=v3.5
   - cmd: if %WITH_SODIUM%==ON msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
   - cmd: if %WITH_SODIUM%==ON set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: if %WITH_SODIUM%==ON set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
@@ -206,6 +209,7 @@ install:
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
   - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
+  - cmd: if %ARCH%==x64-msvc10 set Framework35Version=v3.5
   - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
   - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
   - cmd: if %ARCH%==x64-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
