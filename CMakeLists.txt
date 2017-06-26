@@ -95,6 +95,130 @@ message(${INCLUDE_OBJECT_MS})
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic)
+
+set(LOG4TANGO_HEADERS
+        include/log4tango/Appender.hh
+        include/log4tango/AppenderAttachable.hh
+        include/log4tango/LayoutAppender.hh
+        include/log4tango/FileAppender.hh
+        include/log4tango/RollingFileAppender.hh
+        include/log4tango/OstreamAppender.hh
+        include/log4tango/Layout.hh
+        include/log4tango/PatternLayout.hh
+        include/log4tango/XmlLayout.hh
+        include/log4tango/Logger.hh
+        include/log4tango/LogSeparator.hh
+        include/log4tango/LoggerStream.hh
+        include/log4tango/LogStream.hh
+        include/log4tango/LogStreambuf.hh
+        include/log4tango/LoggingEvent.hh
+        include/log4tango/Level.hh
+        include/log4tango/NDC.hh
+        include/log4tango/TimeStamp.hh
+        include/log4tango/Filter.hh
+        include/log4tango/Export.hh
+        include/log4tango/Portability.hh)
+
+set(LOG4TANGO_THREADING
+        include/log4tango/threading/DummyThreads.hh
+        include/log4tango/threading/PThreads.hh
+        include/log4tango/threading/MSThreads.hh
+        include/log4tango/threading/Threading.hh)
+
+set(CLIENT_HEADERS
+        include/tango/client/accessproxy.h
+        include/tango/client/apiexcept.h
+        include/tango/client/cbthread.h
+        include/tango/client/dbapi.h
+        include/tango/client/devapi.h
+        include/tango/client/devasyn.h
+        include/tango/client/event.h
+        include/tango/client/eventconsumer.h
+        include/tango/client/filedatabase.h
+        include/tango/client/group.h
+        include/tango/client/lockthread.h
+        include/tango/client/Database.h
+        include/tango/client/DbDevice.h
+        include/tango/client/ApiUtil.h
+        include/tango/client/DeviceData.h
+        include/tango/client/DeviceAttribute.h
+        include/tango/client/DevicePipe.h
+        include/tango/client/Connection.h
+        include/tango/client/DeviceProxy.h
+        include/tango/client/AttributeProxy.h)
+
+set(CLIENT_HELPERS
+        tango/client/helpers/DeviceProxyHelper.h
+        tango/client/helpers/PogoHelper.h
+        tango/client/helpers/TangoExceptionsHelper.h
+        tango/client/helpers/Xstring.h)
+
+set(SERVER_HEADERS 
+        include/tango/server/attrdesc.h
+        include/tango/server/attrprop.h
+        include/tango/server/attrmanip.h
+        include/tango/server/attribute.h
+        include/tango/server/auto_tango_monitor.h
+        include/tango/server/basiccommand.h
+        include/tango/server/blackbox.h
+        include/tango/server/classattribute.h
+        include/tango/server/classpipe.h
+        include/tango/server/command.h
+        include/tango/server/coutappender.h
+        include/tango/server/coutbuf.h
+        include/tango/server/device.h
+        include/tango/server/device_2.h
+        include/tango/server/device_3.h
+        include/tango/server/device_4.h
+        include/tango/server/device_5.h
+        include/tango/server/deviceclass.h
+        include/tango/server/devintr.h
+        include/tango/server/dintrthread.h
+        include/tango/server/dserver.h
+        include/tango/server/dserverclass.h
+        include/tango/server/dserversignal.h
+        include/tango/server/encoded_attribute.h
+        include/tango/server/encoded_format.h
+        include/tango/server/eventsupplier.h
+        include/tango/server/except.h
+        include/tango/server/fwdattrdesc.h
+        include/tango/server/fwdattribute.h
+        include/tango/server/log4tango.h
+        include/tango/server/logcmds.h
+        include/tango/server/logging.h
+        include/tango/server/logstream.h
+        include/tango/server/multiattribute.h
+        include/tango/server/ntservice.h
+        include/tango/server/pipe.h
+        include/tango/server/pipedesc.h
+        include/tango/server/pollcmds.h
+        include/tango/server/pollext.h
+        include/tango/server/pollobj.h
+        include/tango/server/pollring.h
+        include/tango/server/pollthread.h
+        include/tango/server/readers_writers_lock.h
+        include/tango/server/rootattreg.h
+        include/tango/server/seqvec.h
+        include/tango/server/tango_config.h
+        include/tango/server/tango_const.h
+        include/tango/server/tango_monitor.h
+        include/tango/server/tangoappender.h
+        include/tango/server/tangorollingfileappender.h
+        include/tango/server/utils.h
+        include/tango/server/w32win.h
+        include/tango/server/w_attribute.h
+        include/tango/server/w_pipe.h
+        include/tango/server/subdev_diag.h)     
+        
+
+set(INCLUDE_OBJECT_MS
+        include/tango.h
+        ${SERVER_HEADERS}
+        ${CLIENT_HEADERS}
+        ${CLIENT_HELPERS} 
+        ${LOG4TANGO_HEADERS} 
+        ${LOG4TANGO_THREADING})
+        
 install(FILES ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
