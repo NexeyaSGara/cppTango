@@ -62,6 +62,8 @@ init:
   #- cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: cd "C:\projects\"
+  # Tango IDL
+  - cmd: cd "C:\projects\tangoidl"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
