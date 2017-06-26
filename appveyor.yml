@@ -96,7 +96,7 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=C:/projects/build_libzmq
+  - cmd: set ZMQ_BASE=%LIBZMQ_SOURCEDIR%\zeromq-4.0.5
   - cmd: set IDL_BASE=%IDL_BIN%
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
@@ -120,7 +120,7 @@ after_build:
 
 on_finish:
   #RDP for finish
-  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
