@@ -50,7 +50,6 @@ add_subdirectory(src)
 #add_subdirectory(test)
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
-MESSAGE( STATUS "INLUDEMS:         " ${INCLUDE_OBJECT_MS} )
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
 set(PTHREAD_WIN32_LIBS "pthreadVC2.lib;")
 IF(CMAKE_CL_64)
@@ -90,14 +89,11 @@ set_target_properties(tango PROPERTIES
 
 #install code
 IF (WIN32)
-
-MESSAGE( STATUS "INLUDEMS:         " ${INCLUDE_OBJECT_MS} )
-
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
-        RUNTIME DESTINATION bin COMPONENT dynamic)
+        RUNTIME DESTINATION bin COMPONENT dynamic
+        PUBLIC_HEADER DESTINATION include COMPONENT headers)
         
-install(FILES ${INCLUDE_OBJECT_MS} DESTINATION include COMPONENT headers)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
