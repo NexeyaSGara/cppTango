@@ -89,6 +89,15 @@ set_target_properties(tango PROPERTIES
 
 #install code
 IF (WIN32)
+
+set(INCLUDE_OBJECT_MS
+        include/tango.h
+        ${SERVER_HEADERS}
+        ${CLIENT_HEADERS}
+        ${CLIENT_HELPERS} 
+        ${LOG4TANGO_HEADERS} 
+        ${LOG4TANGO_THREADING})
+
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic)
