@@ -6,46 +6,7 @@ branches:
 image: Visual Studio 2015
 
 environment:
-  global:
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C "
   matrix:
-    - platform: x64
-      ARCH: x64-msvc10
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
-      ARCH: x64-msvc9
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 9 2008 Win64"
-      MSVCVERSION: "v90"
-      MSVCYEAR: "vs2008"
-      MSVCABR: "9"
-      VC_VER: 9.0
-      WITH_SODIUM: OFF
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python27-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
       ARCH: win32-msvc9
       configuration: Release
@@ -63,57 +24,6 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
-      ARCH: x64-msvc14
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
-      MSVCVERSION: "v140"
-      MSVCYEAR: "vs2015"
-      MSVCABR: "14"
-      VC_VER: 14.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python35-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
-      ARCH: x64-msvc12
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
-      MSVCVERSION: "v120"
-      MSVCYEAR: "vs2013"
-      MSVCABR: "13"
-      VC_VER: 13.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: win32
-      ARCH: win32-msvc10
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
 
 init:
   #RDP from start
@@ -121,14 +31,10 @@ init:
   # Tango IDL
   - cmd: set TANGOIDLDIR=C:\projects\tangoidl
   - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
-  # LibSodium
-  - cmd: set LIBSODIUMDIR=C:\projects\libsodium
-  - cmd: git clone --branch stable --depth 1 --quiet "https://github.com/jedisct1/libsodium.git" %LIBSODIUMDIR%
   # ZMQ
   - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
-  - cmd: set ZMQHPPDIR=C:\projects\zmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
+  - appveyor DownloadFile https://archive.org/download/zeromq_4.0.5/zeromq-4.0.5.zip
+  - cmd: 7z -y x zeromq-4.0.5.zip -o%LIBZMQ_SOURCEDIR%
   # OmniOrb
   - cmd: cd "C:\projects\"
   - appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2
@@ -142,102 +48,36 @@ init:
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\"
   #stdint for vc9
-  - cmd: if %MSVCVERSION%=="v90" md vs2008_h
-  - cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
-  - if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
-  - cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
-  - cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64" 
-  - cmd: cd "C:\projects\"
-  - cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
-  - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
-  - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
-  - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
-  - cmd: cd "C:\projects\cppTango"
+  #- cmd: if %MSVCVERSION%=="v90" md vs2008_h
+  #- cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
+  #- if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
+  #- cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
+  #- cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64" 
+  #- cmd: cd "C:\projects\"
+  #- cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
+  #- cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
+  #- cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
+  #- cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
+  #- cmd: cd "C:\projects\cppTango"
 install: 
-  - cmd: if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
   - cmd: cd "C:\projects\"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: /E:ON /V:ON /K  if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
-  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
-  # Tango IDL
-  - cmd: cd "C:\projects\tangoidl"
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install
   - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install
-  - cmd: if %ARCH%==x64-msvc10 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
-  - cmd: if %ARCH%==win32-msvc10 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
-  - cmd: if %ARCH%==x64-msvc12 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
-  - cmd: if %ARCH%==win32-msvc12 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
-  - cmd: if %ARCH%==x64-msvc14 cmake --build ./ --target install -- /p:Configuration=%configuration% /verbosity:quiet
-  # LibSodium
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
-  - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
-  - cmd: if %ARCH%==x64-msvc10 set Framework35Version=v3.5
-  - cmd: if %WITH_SODIUM%==ON msbuild /v:detailed /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration%DLL %LIBSODIUMDIR%\builds\msvc\%MSVCYEAR%\libsodium\libsodium.vcxproj
-  - cmd: if %WITH_SODIUM%==ON set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\bin\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
-  - cmd: if %WITH_SODIUM%==ON set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\src\libsodium\include"
-  - cmd: if %WITH_SODIUM%==ON move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
-  # Zmq
-  - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
-  - cmd: md "%LIBZMQ_BUILDDIR%"
-  - cmd: cd "%LIBZMQ_BUILDDIR%"
-  - cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_INCLUDE_PATH="C:\projects\vs2008_h" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
-  - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
-  - cmd: if %ARCH%==x64-msvc10 set Framework35Version=v3.5
-  - cmd: if %ARCH%==win32-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
-  - cmd: if %ARCH%==x64-msvc9 msbuild /v:minimal /p:Configuration=%Configuration% ZeroMQ.sln
-  - cmd: if %ARCH%==x64-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
-  - cmd: if %ARCH%==win32-msvc10 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
-  - cmd: if %ARCH%==x64-msvc12 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
-  - cmd: if %ARCH%==x64-msvc14 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
-  - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
-  - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
-  - cmd: xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
-  - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\zmq.lib"
-  - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
-  - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  # zmq
+  - cmd: cd %LIBZMQ_SOURCEDIR%
+  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\builds\msvc\msvc.sln
   # OmniOrb
   - cmd: cd "C:\projects\omniORB-4.2.1"
   # Editing OmniOrb config
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: set MSVCABR  = %MSVCABR%
   - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
   - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
@@ -256,13 +96,7 @@ install:
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: set
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  #- cmd: if %ARCH%==x64-msvc10 "c:\projects\cppTango\appveyor\setenv_vc10.bat" x64
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   - cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   # Generating installer
