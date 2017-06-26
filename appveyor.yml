@@ -72,6 +72,7 @@ install:
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%"
+  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install --config %configuration%
   - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install --config %configuration%
   # zmq
@@ -118,6 +119,7 @@ install:
   - cmd: cpack -G NSIS
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G ZIP
+  - cmd: set
 
 clone_folder: C:\projects\cppTango
 
@@ -135,3 +137,6 @@ on_finish:
 artifacts:
   - path: ./*.exe
   - path: ./*.zip
+  
+cache:
+  c:\projects\c:\projects\omniORB-4.2.1\
