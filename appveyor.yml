@@ -113,7 +113,9 @@ install:
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: msbuild /v:minimal /p:Configuration=%Configuration% tango.sln
   # Generating installer
+  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G NSIS
+  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G ZIP
 
 clone_folder: C:\projects\cppTango
