@@ -161,13 +161,6 @@ install(FILES ${LOG4TANGO_HEADERS}
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/log4tango/config.h DESTINATION include/log4tango)
 install(FILES ${LOG4TANGO_THREADING}
         DESTINATION include/log4tango/threading)
-set(INCLUDE_OBJECT_MS
-        tango.h
-        ${SERVER_HEADERS}
-        ${CLIENT_HEADERS}
-        ${CLIENT_HELPERS} 
-        ${LOG4TANGO_HEADERS} 
-        ${LOG4TANGO_THREADING} PARENT_SCOPE)
 ELSE()
 add_library(include_objects OBJECT tango.h ${SERVER_HEADERS} ${CLIENT_HEADERS} ${CLIENT_HELPERS} ${LOG4TANGO_HEADERS} ${LOG4TANGO_THREADING})
 
