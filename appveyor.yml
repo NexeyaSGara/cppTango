@@ -72,8 +72,8 @@ install:
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%"
-  - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install
-  - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install
+  - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install --config %configiration%
+  - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install --config %configiration%
   # zmq
   - cmd: cd %LIBZMQ_SOURCEDIR%
   #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v4.0
@@ -112,7 +112,7 @@ install:
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   #- cmd: msbuild /v:minimal /p:Configuration=%Configuration% tango.sln
-  - cmd: cmake --build ./ --target install
+  - cmd: cmake --build ./ --target install  --config %configiration%
   # Generating installer
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G NSIS
