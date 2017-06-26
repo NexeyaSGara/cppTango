@@ -111,7 +111,8 @@ install:
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% tango.sln
+  #- cmd: msbuild /v:minimal /p:Configuration=%Configuration% tango.sln
+  - cmd: cmake --build ./ --target install
   # Generating installer
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G NSIS
