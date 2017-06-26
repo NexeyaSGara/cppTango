@@ -148,10 +148,10 @@ set(CLIENT_HEADERS
         include/tango/client/AttributeProxy.h)
 
 set(CLIENT_HELPERS
-        tango/client/helpers/DeviceProxyHelper.h
-        tango/client/helpers/PogoHelper.h
-        tango/client/helpers/TangoExceptionsHelper.h
-        tango/client/helpers/Xstring.h)
+        include/tango/client/helpers/DeviceProxyHelper.h
+        include/tango/client/helpers/PogoHelper.h
+        include/tango/client/helpers/TangoExceptionsHelper.h
+        include/tango/client/helpers/Xstring.h)
 
 set(SERVER_HEADERS 
         include/tango/server/attrdesc.h
