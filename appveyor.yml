@@ -33,6 +33,7 @@ init:
   - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
   # ZMQ
   - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
+  - cmd: cd C:\projects\
   - appveyor DownloadFile https://archive.org/download/zeromq_4.0.5/zeromq-4.0.5.zip
   - cmd: 7z -y x zeromq-4.0.5.zip -o%LIBZMQ_SOURCEDIR%
   # OmniOrb
