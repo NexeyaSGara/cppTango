@@ -74,7 +74,9 @@ install:
   - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install
   # zmq
   - cmd: cd %LIBZMQ_SOURCEDIR%
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\builds\msvc\msvc.sln
+  - cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
+  - cmd: if %ARCH%==x64-msvc9 set Framework35Version=v3.5
+  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.0.5\builds\msvc\msvc.sln
   # OmniOrb
   - cmd: cd "C:\projects\omniORB-4.2.1"
   # Editing OmniOrb config
