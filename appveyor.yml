@@ -83,6 +83,7 @@ install:
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%'
+  - cmd: cd "C:\projects"
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   #- cmd: msbuild /v:minimal /p:Configuration=Dyn%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
   #- cmd: msbuild /v:minimal /p:Configuration=Ltcg%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
