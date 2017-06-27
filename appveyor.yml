@@ -42,8 +42,8 @@ init:
   # ZMQ
   - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
   - cmd: cd C:\projects\
-  - appveyor DownloadFile https://archive.org/download/zeromq_4.0.5/zeromq-4.0.5.zip
-  - cmd: 7z -y x zeromq-4.0.5.zip -o%LIBZMQ_SOURCEDIR%
+  - appveyor DownloadFile https://archive.org/download/zeromq_4.1.4/zeromq-4.1.4.zip
+  - cmd: 7z -y x zeromq-4.1.4.zip -o%LIBZMQ_SOURCEDIR%
   - cmd: set ZMQHPPDIR=C:\projects\zmq
   - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
   # OmniOrb
@@ -90,7 +90,7 @@ install:
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.0.5\builds\msvc\msvc.sln /property:Platform=%platform%
+  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\msvc.sln /property:Platform=%platform%
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   # OmniOrb
@@ -112,7 +112,7 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=%LIBZMQ_SOURCEDIR%\zeromq-4.0.5
+  - cmd: set ZMQ_BASE=%LIBZMQ_SOURCEDIR%\zeromq-4.1.4
   - cmd: set IDL_BASE=%IDL_BIN%
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
