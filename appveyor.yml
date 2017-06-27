@@ -7,8 +7,8 @@ image: Visual Studio 2015
 
 environment:
   matrix:
-    - platform: win32
-      ARCH: win32-msvc9
+    - platform: x64
+      ARCH: x64-msvc9
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 9 2008"
       MSVCVERSION: "v90"
@@ -122,7 +122,6 @@ install:
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: cpack -G ZIP
   - cmd: set
-  - cmd: rm ALL_BUILD.vcproj
 
 clone_folder: C:\projects\cppTango
 
