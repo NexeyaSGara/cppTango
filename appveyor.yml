@@ -76,7 +76,7 @@ install:
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%'
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\vs2008\libzmq.sln
+  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   # OmniOrb
