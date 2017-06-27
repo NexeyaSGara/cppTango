@@ -28,7 +28,7 @@ environment:
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PYTHON_VERSION: "3.3.x" # currently 2.7.9
       PYTHON_ARCH: "64"
@@ -115,7 +115,7 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=%LIBZMQ_SOURCEDIR%\zeromq-4.1.4
+  - cmd: set ZMQ_BASE=%LIBZMQ_BUILDDIR%
   - cmd: set IDL_BASE=%IDL_BIN%
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
