@@ -73,7 +73,7 @@ install:
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: if %ARCH%==x64-msvc10 cmake --build ./ --target install --config %configuration%
   # libsodium
-  - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\%Platform%\%Configuration%\%MSVCVERSION%\dynamic"
+  - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
   - cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
   # zmq
