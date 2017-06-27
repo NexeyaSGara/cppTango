@@ -14,13 +14,13 @@ environment:
 
   matrix:
     - platform: x64
-      ARCH: x64-msvc9
+      ARCH: x64-msvc10
       configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 9 2008 Win64"
-      MSVCVERSION: "v90"
-      MSVCYEAR: "vs2008"
-      MSVCABR: "9"
-      VC_VER: 9.0
+      CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
       WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
       PYTHONPATH: c:\Python27\
@@ -30,7 +30,7 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
-      PYTHON_VERSION: "2.7.x" # currently 2.7.9
+      PYTHON_VERSION: "3.3.x" # currently 2.7.9
       PYTHON_ARCH: "64"
 
 init:
@@ -57,38 +57,23 @@ init:
   - cmd: cd "C:\projects\"
   - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
-  #stdint for vc9
-  #- cmd: if %MSVCVERSION%=="v90" md vs2008_h
-  #- cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
-  #- if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
-  #- cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
-  
-  - cmd: cd "C:\projects\"
-  - cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
-  - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
-  - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
-  - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
-  #- cmd: if %ARCH%==x64-msvc9 copy C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\amd64\vcvarsamd64.bat
-  #- cmd: if %ARCH%==x64-msvc9 copy C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: cd "C:\projects\"
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: if %ARCH%==win32-msvc9 cmake --build ./ --target install --config %configuration%
-  - cmd: if %ARCH%==x64-msvc9 cmake --build ./ --target install --config %configuration%
+  - cmd: if %ARCH%==x64-msvc10 cmake --build ./ --target install --config %configuration%
   # zmq
   - cmd: cd %LIBZMQ_SOURCEDIR%
   #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v4.0
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%'
   - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\vs2008\libzmq.sln
@@ -98,8 +83,7 @@ install:
   - cmd: cd "C:\projects\omniORB-4.2.1"
   # Editing OmniOrb config
   - cmd: cd "C:\projects\omniORB-4.2.1\src"
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64
   - cmd: set MSVCABR  = %MSVCABR%
   - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
   #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
@@ -118,8 +102,7 @@ install:
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: set
-  - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
+  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" _amd64
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
