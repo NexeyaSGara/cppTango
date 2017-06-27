@@ -62,13 +62,14 @@ init:
   #- cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
   #- if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
   #- cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
-  #- cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64" 
+  
   - cmd: cd "C:\projects\"
   - cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
   - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
   - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
   - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
   - cmd: if %ARCH%==x64-msvc9 copy C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvars64.bat C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\amd64\vcvarsamd64.bat
+  - cmd: if %ARCH%==x64-msvc9 copy C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: cd "C:\projects\"
