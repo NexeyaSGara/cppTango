@@ -30,6 +30,8 @@ environment:
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
+      PYTHON_VERSION: "2.7.x" # currently 2.7.9
+      PYTHON_ARCH: "64"
 
 init:
   #RDP from start
@@ -86,7 +88,7 @@ install:
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.0.5\builds\msvc\msvc.sln /property:Platform=%platform%
+  - cmd: "%CMD_IN_ENV% msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.0.5\builds\msvc\msvc.sln /property:Platform=%platform%"
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   # OmniOrb
