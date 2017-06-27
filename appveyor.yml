@@ -23,8 +23,8 @@ environment:
       VC_VER: 10.0
       WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python27\
-      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
+      PYTHONPATH: c:\Python33-x64\
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
