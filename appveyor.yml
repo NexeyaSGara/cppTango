@@ -13,22 +13,22 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
 
   matrix:
-    - platform: win32
-      ARCH: win32-msvc10
+    - platform: x64
+      ARCH: x64-msvc12
       configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
+      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      VC_VER: 13.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
+      PYTHONPATH: c:\Python33-x64\
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
 init:
   #RDP from start
@@ -62,13 +62,13 @@ install:
   - cmd: cd "C:\projects\"
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+  - cmd: if %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: if %ARCH%==win32-msvc10 cmake --build ./ --target install --config %configuration%
+  - cmd: if %ARCH%==win32-msvc12 cmake --build ./ --target install --config %configuration%
   # libsodium
   - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
@@ -80,7 +80,7 @@ install:
   - cmd: cd "%LIBZMQ_BUILDDIR%"
   #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v4.0
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
-  - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+  - cmd: if %ARCH%==win32-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86 /%configuration%'
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
@@ -116,20 +116,11 @@ install:
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: set
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
+  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  #- cmd: msbuild /v:minimal /p:Configuration=%Configuration% tango.sln
-  - cmd: cmake --build ./ --target install  --config %configuration%
-  - cmd: cmake --build ./ --target ALL_BUILD  --config %configuration%
-  # Generating installer
-  - cmd: cmake -G "%CMAKE_GENERATOR%"
-  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: cpack -G NSIS
-  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: cpack -G ZIP
-  - cmd: set
+  
 
 clone_folder: C:\projects\cppTango
 
@@ -139,6 +130,13 @@ build:
   verbosity: minimal
 
 after_build:
+  # Generating installer
+  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
+  - cmd: cpack -G NSIS
+  - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
+  - cmd: cpack -G ZIP
+  - cmd: set
+
 
 on_finish:
   #RDP for finish
