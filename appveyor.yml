@@ -6,12 +6,6 @@ branches:
 image: Visual Studio 2015
 
 environment:
-  global:
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
-
   matrix:
     - platform: x64
       ARCH: x64-msvc14
@@ -79,13 +73,8 @@ install:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
   - cmd: cd "%LIBZMQ_BUILDDIR%"
-  #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v4.0
-  #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  #- cmd: msbuild /v:minimal /p:Configuration=Dyn%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
-  #- cmd: msbuild /v:minimal /p:Configuration=Ltcg%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
-  #- cmd: msbuild /v:minimal /p:Configuration=Static%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
@@ -95,16 +84,15 @@ install:
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
   # OmniOrb
   - cmd: cd "C:\projects\omniORB-4.2.1"
-  # Editing OmniOrb config
-  - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - cmd: set MSVCABR  = %MSVCABR%
   - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
-  #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v3.5
+  # Editing OmniOrb config
+  - cmd: cd "C:\projects\omniORB-4.2.1\src"
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_${env:MSVCABR}", "platform = x86_win32_vs_${env:MSVCABR}"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_${env:MSVCABR}.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = ${env:PYTHONPATHOMNI}"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_$env:MSVCABR.mk
   - cmd: type "c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk"
-  - cmd: set path=c:\cygwin64\bin;%path%
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+  - cmd: set path=c:\cygwin64\bin;%path%/
   - cmd: make export
   # Tango API
   - cmd: cd "C:\projects\cppTango"
@@ -114,9 +102,7 @@ install:
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-  - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
-  #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
-  
+  - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE  
 
 clone_folder: C:\projects\cppTango
 
