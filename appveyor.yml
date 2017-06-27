@@ -90,7 +90,7 @@ install:
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86_amd64
   - cmd: set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
-  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\msvc.sln /property:Platform=%platform%
+  - cmd: msbuild /v:minimal /p:Configuration=%Configuration% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\vs2008\libzmq.sln /property:Platform=%platform%
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_SOURCEDIR%\zeromq-4.0.5\include\"
   # OmniOrb
