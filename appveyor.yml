@@ -14,17 +14,17 @@ environment:
 
   matrix:
     - platform: x64
-      ARCH: x64-msvc12
+      ARCH: x64-msvc14
       configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
-      MSVCVERSION: "v120"
-      MSVCYEAR: "vs2013"
-      MSVCABR: "13"
-      VC_VER: 13.0
+      CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
+      MSVCVERSION: "v140"
+      MSVCYEAR: "vs2015"
+      MSVCABR: "14"
+      VC_VER: 14.0
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      PYTHONPATH: c:\Python35-x64\
+      PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
@@ -62,12 +62,12 @@ install:
   - cmd: cd "C:\projects\"
   # Tango IDL
   - cmd: cd "C:\projects\tangoidl"
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%"
-  - cmd: if %ARCH%==x64-msvc12 cmake --build ./ --target install --config %configuration%
+  - cmd: if %ARCH%==x64-msvc14 cmake --build ./ --target install --config %configuration%
   # libsodium
   - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
@@ -79,7 +79,7 @@ install:
   - cmd: cd "%LIBZMQ_BUILDDIR%"
   #- cmd: if %ARCH%==win32-msvc9 set Framework35Version=v4.0
   #- cmd: if %ARCH%==x64-msvc9 set Framework35Version=v4.0
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   #- cmd: msbuild /v:minimal /p:Configuration=Dyn%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
   #- cmd: msbuild /v:minimal /p:Configuration=Ltcg%Configuration%;Platform=%platform% %LIBZMQ_SOURCEDIR%\zeromq-4.1.4\builds\msvc\%MSVCYEAR%\libzmq.sln
@@ -112,7 +112,7 @@ install:
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: set
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+  - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE 
   #- cmd: cmake --build ./ --target install -- /p:Configuration=Release 
   
