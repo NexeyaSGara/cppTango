@@ -202,8 +202,8 @@ install:
   - cmd: if %ARCH%==x64-msvc14 set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: if %ARCH%==x64-msvc14 xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: if %ARCH%==x64-msvc14 "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%ZEROMQ_LIBRARY_DIR%\include\"
-  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%ZEROMQ_LIBRARY_DIR%\include\"
+  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%ZEROMQ_INCLUDE_DIR%\"
+  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%ZEROMQ_INCLUDE_DIR%\"
   - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
   # OmniOrb
