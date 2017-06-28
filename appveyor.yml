@@ -190,6 +190,8 @@ install:
   
   - cmd: if %platform%==win32 set ZEROMQ_INCLUDE_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\include
   - cmd: if %platform%==x64 set ZEROMQ_INCLUDE_DIR=c:\Program Files\ZeroMQ 4.0.4\include
+  - cmd: if %platform%==win32 set ZEROMQ_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4
+  - cmd: if %platform%==x64 set ZEROMQ_DIR=c:\Program Files\ZeroMQ 4.0.4
   - cmd: if %platform%==win32 set ZEROMQ_LIBRARY_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\lib
   - cmd: if %platform%==x64 set ZEROMQ_LIBRARY_DIR=c:\Program Files\ZeroMQ 4.0.4\lib
   - cmd: if %ARCH%==win32-msvc9 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v90-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
@@ -222,7 +224,7 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=%ZEROMQ_LIBRARY_DIR%
+  - cmd: set ZMQ_BASE=%ZEROMQ_DIR%
   - cmd: if %ARCH%==x64-msvc14 set ZMQ_BASE=%LIBZMQ_BUILDDIR%
   - cmd: set IDL_BASE=%IDL_BIN%
   - cmd: set OMNI_BASE=%OMNI_BASE%
