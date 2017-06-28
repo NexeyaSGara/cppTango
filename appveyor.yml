@@ -188,6 +188,13 @@ install:
   - cmd: if NOT %ARCH%==x64-msvc14 set path=%path%;c:\cygwin64\bin
   - cmd: if %ARCH%==x64-msvc10 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: make export
+
+clone_folder: C:\projects\cppTango
+
+build:
+  parallel: true
+  project: C:\projects\cppTango\tango.sln
+  verbosity: minimal
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
@@ -196,13 +203,6 @@ install:
   - cmd: set OMNI_BASE=%OMNI_BASE%
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE
-
-clone_folder: C:\projects\cppTango
-
-build:
-  parallel: true
-  project: C:\projects\cppTango\tango.sln
-  verbosity: minimal
 
 after_build:
   # Generating installer
