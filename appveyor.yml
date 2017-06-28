@@ -32,7 +32,7 @@ environment:
       MSVCYEAR: "vs2008"
       MSVCABR: "9"
       VC_VER: 9.0
-      WITH_SODIUM: ON
+      WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
       PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
@@ -55,6 +55,23 @@ environment:
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: x64
+      ARCH: x64-msvc14
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
+      MSVCVERSION: "v140"
+      MSVCYEAR: "vs2015"
+      MSVCABR: "14"
+      VC_VER: 14.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python35-x64\
+      PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: x64
       ARCH: x64-msvc12
@@ -88,23 +105,6 @@ environment:
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files (x86)\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
-      ARCH: x64-msvc14
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
-      MSVCVERSION: "v140"
-      MSVCYEAR: "vs2015"
-      MSVCABR: "14"
-      VC_VER: 14.0
-      WITH_SODIUM: OFF
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python35-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
 init:
   # go to hell Xamarin (see http://help.appveyor.com/discussions/problems/4569)
@@ -158,7 +158,7 @@ install:
   # libsodium
   - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
   - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
-  - cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
+  - if %WITH_SODIUM%==ON cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
   # zmq
   - cmd: cd "C:\projects\"
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
@@ -184,6 +184,7 @@ install:
   - cmd: type "c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk"
   - cmd: if %ARCH%==x64-msvc14 set path=%path%;c:\cygwin64\bin;%PYTHONPATH%
   - cmd: if NOT %ARCH%==x64-msvc14 set path=%path%;c:\cygwin64\bin
+  - cmd: if %ARCH%==x64-msvc10 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path% 
   - cmd: make export
   # Tango API
   - cmd: cd "C:\projects\cppTango"
