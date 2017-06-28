@@ -65,17 +65,6 @@ namespace Tango {
 	#else
 		#include <winsock.h>
 	#endif
-	#ifndef HAVE_STRUCT_TIMESPEC
-    		#define HAVE_STRUCT_TIMESPEC 1
-        		#if _MSC_VER < 1900
-       		 		struct timespec {
-            				long tv_sec; /*TODO: should be time_t but must fix in pthreads too*/
-            				long tv_nsec;
-       					 };
-
-       			#endif
-		#endif
-	#endif /* HAVE_STRUCT_TIMESPEC */
 #endif
 
 //
