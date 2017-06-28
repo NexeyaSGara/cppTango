@@ -8,22 +8,6 @@ image: Visual Studio 2015
 environment:
   matrix:
     - platform: x64
-      ARCH: x64-msvc12
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
-      MSVCVERSION: "v120"
-      MSVCYEAR: "vs2013"
-      MSVCABR: "13"
-      VC_VER: 13.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
       ARCH: x64-msvc10
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
@@ -39,23 +23,6 @@ environment:
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: win32
-      ARCH: win32-msvc10
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
       ARCH: win32-msvc9
@@ -81,9 +48,42 @@ environment:
       MSVCYEAR: "vs2008"
       MSVCABR: "9"
       VC_VER: 9.0
-      WITH_SODIUM: ON
+      WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
       PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: x64
+      ARCH: x64-msvc12
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 12 2013 Win64"
+      MSVCVERSION: "v120"
+      MSVCYEAR: "vs2013"
+      MSVCABR: "13"
+      VC_VER: 13.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      ARCH: win32-msvc10
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python33\
+      PYTHONPATHOMNI: "/cygdrive/c/Python33/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
@@ -97,7 +97,7 @@ environment:
       MSVCYEAR: "vs2015"
       MSVCABR: "14"
       VC_VER: 14.0
-      WITH_SODIUM: ON
+      WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
       PYTHONPATH: c:\Python35-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
@@ -136,18 +136,6 @@ init:
   - appveyor DownloadFile "http://www.mirrorservice.org/sites/sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.zip"
   - cmd: 7z -y x pthreads-w32-2-9-1-release.zip -oC:\projects\pthreads-win32\
   - cmd: cd "C:\projects\cppTango"
-  #stdint for vc9
-  - cmd: if %MSVCVERSION%=="v90" md vs2008_h
-  - cmd: if %MSVCVERSION%=="v90" cd "C:\projects\vs2008_h"
-  - if %MSVCVERSION%=="v90" appveyor DownloadFile https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h
-  - cmd: if %MSVCVERSION%=="v90" move stdint.h "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include"
-  - cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvarsx86_amd64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\x86_amd64" 
-  - cmd: cd "C:\projects\"
-  - cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
-  - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
-  - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
-  - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
-  - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: cd "C:\projects\"
   # Tango IDL
@@ -175,8 +163,9 @@ install:
   - cmd: cd "C:\projects\"
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
   - cmd: md "%LIBZMQ_BUILDDIR%"
-  - cmd: cd "%LIBZMQ_BUILDDIR%"
-  - cmd: cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: cd "%LIBZMQ_BUILDDIR%"  
+  - cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   - cmd: msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
@@ -193,7 +182,8 @@ install:
   - ps: (get-content c:\projects\omniORB-4.2.1\config\config.mk) | foreach-object {$_ -replace "\#platform = x86_win32_vs_${env:MSVCABR}", "platform = x86_win32_vs_${env:MSVCABR}"} | set-content c:\projects\omniORB-4.2.1\config\config.mk
   - ps: (get-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_${env:MSVCABR}.mk) | foreach-object {$_ -replace "\#PYTHON = /cygdrive/c/Python26/python", "PYTHON = ${env:PYTHONPATHOMNI}"} | set-content c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_$env:MSVCABR.mk
   - cmd: type "c:\projects\omniORB-4.2.1\mk\platforms\x86_win32_vs_%MSVCABR%.mk"
-  - cmd: set path=%path%;c:\cygwin64\bin;%PYTHONPATH%
+  - cmd: if %ARCH%==x64-msvc14 set path=%path%;c:\cygwin64\bin;%PYTHONPATH%
+  - cmd: if NOT %ARCH%==x64-msvc14 set path=%path%;c:\cygwin64\bin
   - cmd: make export
   # Tango API
   - cmd: cd "C:\projects\cppTango"
