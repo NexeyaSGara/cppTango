@@ -217,7 +217,7 @@ install:
   - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
   # OmniOrb
-  - cmd: cd "C:\projects\omniORB-4.2.1"
+  #- cmd: cd "C:\projects\omniORB-4.2.1"
   - cmd: set MSVCABR  = %MSVCABR%
   - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
   # Editing OmniOrb config
