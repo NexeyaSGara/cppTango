@@ -7,22 +7,6 @@ image: Visual Studio 2015
 
 environment:
   matrix:
-    - platform: win32
-      ARCH: win32-msvc9
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 9 2008"
-      MSVCVERSION: "v90"
-      MSVCYEAR: "vs2008"
-      MSVCABR: "9"
-      VC_VER: 9.0
-      WITH_SODIUM: OFF
-      WITH_TWEETNACL: ON
-      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files (x86)\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: x64
       ARCH: x64-msvc9
       configuration: Release
@@ -40,23 +24,6 @@ environment:
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: x64
-      ARCH: x64-msvc10
-      configuration: Release
-      CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
-      MSVCVERSION: "v100"
-      MSVCYEAR: "vs2010"
-      MSVCABR: "10"
-      VC_VER: 10.0
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
-      PYTHONPATH: c:\Python33-x64\
-      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
-      BOOST_ROOT: C:\Libraries\boost_1_63_0
-      ZMQ_BASE: C:\projects\libzmq
-      IDL_BASE: C:\projects\tangoidl
-      IDL_BIN: C:\Program Files\tangoidl
-      OMNI_BASE: C:\projects\omniORB-4.2.1
-    - platform: x64
       ARCH: x64-msvc14
       configuration: Release
       CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
@@ -68,6 +35,23 @@ environment:
       WITH_TWEETNACL: ON
       PYTHONPATH: c:\Python35-x64\
       PYTHONPATHOMNI: "/cygdrive/c/Python35-x64/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: x64
+      ARCH: x64-msvc10
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 10 2010 Win64"
+      MSVCVERSION: "v100"
+      MSVCYEAR: "vs2010"
+      MSVCABR: "10"
+      VC_VER: 10.0
+      WITH_SODIUM: ON
+      WITH_TWEETNACL: ON
+      PYTHONPATH: c:\Python33-x64\
+      PYTHONPATHOMNI: "/cygdrive/c/Python33-x64/python"
       BOOST_ROOT: C:\Libraries\boost_1_63_0
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
@@ -88,6 +72,22 @@ environment:
       ZMQ_BASE: C:\projects\libzmq
       IDL_BASE: C:\projects\tangoidl
       IDL_BIN: C:\Program Files\tangoidl
+      OMNI_BASE: C:\projects\omniORB-4.2.1
+    - platform: win32
+      ARCH: win32-msvc9
+      configuration: Release
+      CMAKE_GENERATOR: "Visual Studio 9 2008"
+      MSVCVERSION: "v90"
+      MSVCYEAR: "vs2008"
+      MSVCABR: "9"
+      VC_VER: 9.0
+      WITH_SODIUM: OFF
+      WITH_TWEETNACL: ON
+      PYTHONPATHOMNI: "/cygdrive/c/Python27/python"
+      BOOST_ROOT: C:\Libraries\boost_1_63_0
+      ZMQ_BASE: C:\projects\libzmq
+      IDL_BASE: C:\projects\tangoidl
+      IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
     - platform: win32
       ARCH: win32-msvc10
@@ -157,6 +157,7 @@ init:
   - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
   #- cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
   - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
+  - cmd: copy "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvars64.bat" "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\amd64\vcvarsamd64.bat"
   
   - cmd: cd "C:\projects\cppTango"
 install: 
@@ -208,6 +209,7 @@ install:
   - cmd: if %ARCH%==x64-msvc10 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v100-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
   - cmd: if %ARCH%==x64-msvc12 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v120-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
   - cmd: if %ARCH%==x64-msvc14 cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  - cmd: if %ARCH%==x64-msvc14 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
   - cmd: if %ARCH%==x64-msvc14 set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
   - cmd: if %ARCH%==x64-msvc14 set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   - cmd: if %ARCH%==x64-msvc14 xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
