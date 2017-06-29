@@ -138,7 +138,12 @@ init:
   - cmd: cd "C:\projects\"
   - cmd: md omniorb
   - cmd: cd "C:\projects\"
-  - appveyor DownloadFile https://ci.appveyor.com/api/projects/NexeyaSGara/omniorb-windows-ci/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==win32-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/q4q7ai5h4sx0ey4n/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==x64-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/lx97jsanp9gcdewv/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==win32-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/rrmrblr2p3x62cp2/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==x64-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/negb5jiua4dloou4/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/m0hlnoyx0ctdur86/artifacts/omniorb-4.2.1_%ARCH%.zip
+  - if %ARCH%==x64-msvc14 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/cfnmhdpyulhfdtg3/artifacts/omniorb-4.2.1_%ARCH%.zip
   - cmd: 7z -y x omniorb-4.2.1_%ARCH%.zip -oC:\projects\omniorb\
   #Pthread-Win32
   - cmd: cd "C:\projects\"
@@ -150,7 +155,7 @@ init:
   - cmd: cd "C:\projects\"
   - cmd: appveyor DownloadFile https://github.com/menpo/condaci/raw/master/vs2008_patch.zip
   - cmd: 7z -y x vs2008_patch.zip -oC:\projects\vs2008_patch\
-  - cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
+  #- cmd: if %ARCH%==x64-msvc9 call C:\projects\vs2008_patch\setup_x64.bat
   - cmd: if %ARCH%==x32-msvc9 call C:\projects\vs2008_patch\setup_x86.bat
   
   - cmd: cd "C:\projects\cppTango"
@@ -160,14 +165,11 @@ install:
   - cmd: cd "C:\projects\tangoidl"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc9 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
-  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x64
-  - cmd: if %ARCH%==x64-msvc9 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
+  - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvars64.bat"
   - cmd: if %ARCH%==win32-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc10 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
-  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x64
-  - cmd: if %ARCH%==x64-msvc10 "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
-  - cmd: if %ARCH%==x64-msvc10 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
-  - cmd: if %ARCH%==x64-msvc12 call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x64
+  - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 /%configuration%
+  - cmd: if %ARCH%==win32-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==x64-msvc14 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
