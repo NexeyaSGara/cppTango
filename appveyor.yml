@@ -205,12 +205,12 @@ install:
   #- cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   #- cmd: xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
   #- cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
-  - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
   - cmd: set ZEROMQ_INCLUDE_DIR=c:\projects\zeromq\include
   - cmd: set ZEROMQ_LIBRARY_DIR=c:\projects\zeromq\lib\Release
   - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-%MSVCVERSION%-mt-4_1_7.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
   - cmd: xcopy %ZEROMQ_LIBRARY_DIR% c:\projects\zeromq\lib
+  - cmd: move "%ZMQHPPDIR%\zmq.hpp" c:\projects\zeromq\include\
+  - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" c:\projects\zeromq\include\
   
   #- cmd: if %platform%==win32 set ZEROMQ_INCLUDE_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\include
   #- cmd: if %platform%==x64 set ZEROMQ_INCLUDE_DIR=c:\Program Files\ZeroMQ 4.0.4\include
