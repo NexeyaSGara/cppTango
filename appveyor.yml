@@ -207,7 +207,7 @@ install:
   #- cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
   - cmd: set ZEROMQ_INCLUDE_DIR=c:\projects\zeromq\include
   - cmd: set ZEROMQ_LIBRARY_DIR=c:\projects\zeromq\lib\Release
-  - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq*mt*.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq*mt-4*.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
   - cmd: xcopy %ZEROMQ_LIBRARY_DIR% c:\projects\zeromq\lib
   - cmd: move "%ZMQHPPDIR%\zmq.hpp" c:\projects\zeromq\include\
   - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" c:\projects\zeromq\include\
