@@ -120,15 +120,27 @@ init:
   - appveyor DownloadFile https://download.libsodium.org/libsodium/releases/libsodium-1.0.12-msvc.zip
   - cmd: 7z -y x libsodium-1.0.12-msvc.zip -o%LIBSODIUMDIR%
   # ZMQ
-  - cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
-  - cmd: set ZMQHPPDIR=C:\projects\zmq
-  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
+  #- cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
+  #- cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
+  #- cmd: set ZMQHPPDIR=C:\projects\zmq
+  #- cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
+  #- cmd: cd "C:\projects\"
+  #- cmd: if %platform%==win32 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x86.exe
+  #- cmd: if %platform%==x64 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x64.exe
+  #- cmd: if %platform%==win32 ZeroMQ-4.0.4~miru1.0-x86.exe /S
+  #- cmd: if %platform%==x64 ZeroMQ-4.0.4~miru1.0-x64.exe /S
+  
+  # Zmq
   - cmd: cd "C:\projects\"
-  - cmd: if %platform%==win32 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x86.exe
-  - cmd: if %platform%==x64 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x64.exe
-  - cmd: if %platform%==win32 ZeroMQ-4.0.4~miru1.0-x86.exe /S
-  - cmd: if %platform%==x64 ZeroMQ-4.0.4~miru1.0-x64.exe /S
+  - cmd: md zeromq
+  - cmd: cd "C:\projects\"
+  - if %ARCH%==win32-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/j26v1c24e88889vg/artifacts/zmq_%ARCH%.zip
+  - if %ARCH%==x64-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/v8eyv13chlh7g82v/artifacts/zmq_%ARCH%.zip
+  - if %ARCH%==win32-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/1l0c21ynvt75wfq9/artifacts/zmq_%ARCH%.zip
+  - if %ARCH%==x64-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/rj65u4wb9wqm42b5/artifacts/zmq_%ARCH%.zip
+  - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/k5h13inh3kd86itl/artifacts/zmq_%ARCH%.zip
+  - if %ARCH%==x64-msvc14 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/57ptjrm61a1tq1dk/artifacts/zmq_%ARCH%.zip
+  - cmd: 7z -y x zmq_%ARCH%.zip -oC:\projects\zeromq\
   # OmniOrb
   #- cmd: cd "C:\projects\"
   #- appveyor DownloadFile https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.1/omniORB-4.2.1-2.tar.bz2
@@ -183,8 +195,7 @@ install:
   - if %WITH_SODIUM%==ON cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
   # zmq
   - cmd: cd "C:\projects\"
-  - cmd: set LIBZMQ_BUILDDIR=C:\projects\build_libzmq
-  - cmd: md "%LIBZMQ_BUILDDIR%"
+  - cmd: set LIBZMQ_BUILDDIR=C:\projects\zeromq
   - cmd: cd "%LIBZMQ_BUILDDIR%"  
   #- cmd: if %WITH_SODIUM%==ON cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
   #- cmd: if %WITH_SODIUM%==OFF cmake -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
@@ -194,30 +205,34 @@ install:
   #- cmd: set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
   #- cmd: xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
   #- cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  #- cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
-  #- cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  - cmd: move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  - cmd: set ZEROMQ_INCLUDE_DIR=c:\projects\zeromq\include
+  - cmd: set ZEROMQ_LIBRARY_DIR=c:\projects\zeromq\lib\Release
+  - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq-%MSVCVERSION%-mt-4_1_7.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  - cmd: xcopy %ZEROMQ_LIBRARY_DIR% c:\projects\zeromq\lib
   
-  - cmd: if %platform%==win32 set ZEROMQ_INCLUDE_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\include
-  - cmd: if %platform%==x64 set ZEROMQ_INCLUDE_DIR=c:\Program Files\ZeroMQ 4.0.4\include
-  - cmd: if %platform%==win32 set ZEROMQ_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4
-  - cmd: if %platform%==x64 set ZEROMQ_DIR=c:\Program Files\ZeroMQ 4.0.4
-  - cmd: if %platform%==win32 set ZEROMQ_LIBRARY_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\lib
-  - cmd: if %platform%==x64 set ZEROMQ_LIBRARY_DIR=c:\Program Files\ZeroMQ 4.0.4\lib
-  - cmd: if %ARCH%==win32-msvc9 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v90-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if %ARCH%==x64-msvc9 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v90-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if %ARCH%==win32-msvc10 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v100-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if %ARCH%==x64-msvc10 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v100-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if %ARCH%==x64-msvc12 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v120-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if %ARCH%==x64-msvc14 cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
-  - cmd: if %ARCH%==x64-msvc14 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
-  - cmd: if %ARCH%==x64-msvc14 set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
-  - cmd: if %ARCH%==x64-msvc14 set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
-  - cmd: if %ARCH%==x64-msvc14 xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
-  - cmd: if %ARCH%==x64-msvc14 move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%ZEROMQ_INCLUDE_DIR%\"
-  - cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%ZEROMQ_INCLUDE_DIR%\"
-  - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
-  - cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  #- cmd: if %platform%==win32 set ZEROMQ_INCLUDE_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\include
+  #- cmd: if %platform%==x64 set ZEROMQ_INCLUDE_DIR=c:\Program Files\ZeroMQ 4.0.4\include
+  #- cmd: if %platform%==win32 set ZEROMQ_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4
+  #- cmd: if %platform%==x64 set ZEROMQ_DIR=c:\Program Files\ZeroMQ 4.0.4
+  #- cmd: if %platform%==win32 set ZEROMQ_LIBRARY_DIR=c:\Program Files (x86)\ZeroMQ 4.0.4\lib
+  #- cmd: if %platform%==x64 set ZEROMQ_LIBRARY_DIR=c:\Program Files\ZeroMQ 4.0.4\lib
+  #- cmd: if %ARCH%==win32-msvc9 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v90-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if %ARCH%==x64-msvc9 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v90-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if %ARCH%==win32-msvc10 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v100-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if %ARCH%==x64-msvc10 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v100-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if %ARCH%==x64-msvc12 move "%ZEROMQ_LIBRARY_DIR%\libzmq-v120-mt-4_0_4.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if %ARCH%==x64-msvc14 cmake -D CMAKE_INCLUDE_PATH="%SODIUM_INCLUDE_DIR%" -D CMAKE_LIBRARY_PATH="%SODIUM_LIBRARY_DIR%" -D CMAKE_CXX_FLAGS_RELEASE="/MT" -D CMAKE_CXX_FLAGS_DEBUG="/MTd" -G "%CMAKE_GENERATOR%" %LIBZMQ_SOURCEDIR%
+  #- cmd: if %ARCH%==x64-msvc14 msbuild /v:minimal /maxcpucount:%NUMBER_OF_PROCESSORS% /p:Configuration=%Configuration% libzmq.vcxproj
+  #- cmd: if %ARCH%==x64-msvc14 set ZEROMQ_INCLUDE_DIR="%LIBZMQ_SOURCEDIR%\include"
+  #- cmd: if %ARCH%==x64-msvc14 set ZEROMQ_LIBRARY_DIR="%LIBZMQ_BUILDDIR%\lib\%Configuration%"
+  #- cmd: if %ARCH%==x64-msvc14 xcopy "%LIBZMQ_SOURCEDIR%\include" "%LIBZMQ_BUILDDIR%\include\"
+  #- cmd: if %ARCH%==x64-msvc14 move "%ZEROMQ_LIBRARY_DIR%\libzmq-*lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
+  #- cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%ZEROMQ_INCLUDE_DIR%\"
+  #- cmd: if NOT %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%ZEROMQ_INCLUDE_DIR%\"
+  #- cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq.hpp" "%LIBZMQ_BUILDDIR%\include\"
+  #- cmd: if %ARCH%==x64-msvc14 move "%ZMQHPPDIR%\zmq_addon.hpp" "%LIBZMQ_BUILDDIR%\include\"
   # OmniOrb
   #- cmd: cd "C:\projects\omniORB-4.2.1"
   - cmd: set MSVCABR  = %MSVCABR%
@@ -235,8 +250,9 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=%ZEROMQ_DIR%
-  - cmd: if %ARCH%==x64-msvc14 set ZMQ_BASE=%LIBZMQ_BUILDDIR%
+  #- cmd: set ZMQ_BASE=%ZEROMQ_DIR%
+  - cmd: set ZMQ_BASE=C:\projects\zeromq\
+  #- cmd: if %ARCH%==x64-msvc14 set ZMQ_BASE=%LIBZMQ_BUILDDIR%
   - cmd: set IDL_BASE=%IDL_BIN%
   - cmd: set OMNI_BASE=C:\projects\omniorb\
   - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
