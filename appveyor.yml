@@ -116,15 +116,15 @@ init:
   - cmd: git clone --depth 1 --quiet https://github.com/tango-controls/tango-idl %TANGOIDLDIR%
   # LibSodium
   - cmd: cd "C:\projects\"
-  - cmd: set LIBSODIUMDIR=C:\projects\libsodium
-  - appveyor DownloadFile https://download.libsodium.org/libsodium/releases/libsodium-1.0.12-msvc.zip
-  - cmd: 7z -y x libsodium-1.0.12-msvc.zip -o%LIBSODIUMDIR%
+  #- cmd: set LIBSODIUMDIR=C:\projects\libsodium
+  #- appveyor DownloadFile https://download.libsodium.org/libsodium/releases/libsodium-1.0.12-msvc.zip
+  #- cmd: 7z -y x libsodium-1.0.12-msvc.zip -o%LIBSODIUMDIR%
   # ZMQ
   #- cmd: set LIBZMQ_SOURCEDIR=C:\projects\libzmq
   #- cmd: git clone --depth 1 --quiet https://github.com/zeromq/libzmq.git "%LIBZMQ_SOURCEDIR%"
-  #- cmd: set ZMQHPPDIR=C:\projects\zmq
-  #- cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
-  #- cmd: cd "C:\projects\"
+  - cmd: set ZMQHPPDIR=C:\projects\zmq
+  - cmd: git clone --depth 1 --quiet https://github.com/zeromq/cppzmq.git %ZMQHPPDIR%
+  - cmd: cd "C:\projects\"
   #- cmd: if %platform%==win32 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x86.exe
   #- cmd: if %platform%==x64 appveyor DownloadFile https://s3-us-west-2.amazonaws.com/ai.bonsai.chocolatey-hosting/ZeroMQ-4.0.4~miru1.0-x64.exe
   #- cmd: if %platform%==win32 ZeroMQ-4.0.4~miru1.0-x86.exe /S
@@ -190,9 +190,9 @@ install:
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install --config %configuration%
   # libsodium
-  - cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
-  - cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
-  - if %WITH_SODIUM%==ON cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
+  #- cmd: set SODIUM_LIBRARY_DIR="%LIBSODIUMDIR%\Win32\%Configuration%\%MSVCVERSION%\dynamic"
+  #- cmd: set SODIUM_INCLUDE_DIR="%LIBSODIUMDIR%\include"
+  #- if %WITH_SODIUM%==ON cmd: move "%SODIUM_LIBRARY_DIR%\libsodium.lib" "%SODIUM_LIBRARY_DIR%\sodium.lib"
   # zmq
   - cmd: cd "C:\projects\"
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\zeromq
