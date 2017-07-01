@@ -102,6 +102,8 @@ configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
         DESTINATION include/pkgconfig COMPONENT headers)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/"
+        DESTINATION include COMPONENT headers)
 ELSE()
 install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 configure_file(tango.pc.cmake tango.pc @ONLY)
@@ -130,7 +132,7 @@ set (CPACK_PACKAGE_VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
 set (CPACK_PACKAGE_VERSION_MAJOR ${MAJOR_VERSION})
 set (CPACK_PACKAGE_VERSION_MINOR ${MINOR_VERSION})
 set (CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
-set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
+
 # Define components and their display names
 set (CPACK_COMPONENTS_ALL static dynamic headers)
 
