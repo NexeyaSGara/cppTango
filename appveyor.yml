@@ -114,7 +114,7 @@ init:
   - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/q3bbyic37yd67e45/artifacts/zmq_%ARCH%.zip
   - if %ARCH%==x64-msvc14 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/78ari85qlgf8qeu2/artifacts/zmq_%ARCH%.zip
   - cmd: 7z -y x zmq_%ARCH%.zip -oC:\projects\zeromq\
-  - cmd: copy C:\projects\zeromq\lib\Release\libzmq*mt-4*.lib" C:\projects\zeromq\lib\Release\libzmq.lib"
+  - cmd: copy C:\projects\zeromq\lib\Release\libzmq*mt-4*.lib C:\projects\zeromq\lib\Release\libzmq.lib
   # OmniOrb
   - cmd: cd "C:\projects\"
   - cmd: md omniorb
