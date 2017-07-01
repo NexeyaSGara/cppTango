@@ -142,8 +142,6 @@ init:
   - cmd: cd "C:\projects\cppTango"
 install: 
   - cmd: cd "C:\projects\"
-  # Tango IDL
-  - cmd: cd "C:\projects\tangoidl"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
   - cmd: if %ARCH%==win32-msvc9 set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
   - cmd: if %ARCH%==x64-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\vcvars64.bat"
@@ -155,20 +153,10 @@ install:
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
   - cmd: set PYTHONPATH=%PYTHONPATH%
+  # Tango IDL
+  - cmd: cd "C:\projects\tangoidl"
   - cmd: cmake -G "%CMAKE_GENERATOR%"
   - cmd: cmake --build ./ --target install --config %configuration%
-  # zmq
-  - cmd: cd "C:\projects\"
-  - cmd: set LIBZMQ_BUILDDIR=C:\projects\zeromq
-  - cmd: cd "%LIBZMQ_BUILDDIR%"  
-  - cmd: set ZEROMQ_INCLUDE_DIR=c:\projects\zeromq\include
-  - cmd: set ZEROMQ_LIBRARY_DIR=c:\projects\zeromq\lib\Release
-  - cmd: move "%ZEROMQ_LIBRARY_DIR%\libzmq*mt-4*.lib" "%ZEROMQ_LIBRARY_DIR%\libzmq.lib"
-  - cmd: xcopy %ZEROMQ_LIBRARY_DIR% c:\projects\zeromq\lib
-  - cmd: move "%ZMQHPPDIR%\zmq.hpp" c:\projects\zeromq\include\
-  - cmd: move "%ZMQHPPDIR%\zmq_addon.hpp" c:\projects\zeromq\include\
-  - cmd: set MSVCABR  = %MSVCABR%
-  - cmd: set PYTHONPATHOMNI = %PYTHONPATHOMNI%
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
