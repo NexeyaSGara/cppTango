@@ -175,7 +175,7 @@ set(CPACK_NSIS_MENU_LINKS
     "http://tango-controls.readthedocs.io/en/latest/" "Tango Doc")
 set(CPACK_NSIS_MUI_ICON ${PROJECT_BINARY_DIR}/appveyor/tango.ico)
 set(CPACK_NSIS_MUI_UNIICON ${PROJECT_BINARY_DIR}/appveyor/tango.ico)
-set(CPACK_PACKAGE_ICON ${PROJECT_BINARY_DIR}/appveyor/TANGO_controls_logo.bmp)
+set(CPACK_PACKAGE_ICON c:/projects/cppTango/appveyor/TANGO_controls_logo.bmp)
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
