@@ -96,7 +96,11 @@ IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic)
-install(DIRECTORY include/ DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN "${CMAKE_CURRENT_BINARY_DIR}/include/CMakeFiles" EXCLUDE PATTERN "*.stamp" EXCLUDE PATTERN "*.rule" EXCLUDE PATTERN "*.depend" EXCLUDE)
+install(DIRECTORY include/log4tango DESTINATION include/log4tango COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN)
+install(DIRECTORY include/tango DESTINATION include/tango COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN)
+install(FILES include/resource.h DESTINATION include COMPONENT headers)
+install(FILES include/tango.h DESTINATION include COMPONENT headers)
+
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
@@ -171,6 +175,7 @@ set(CPACK_NSIS_MENU_LINKS
     "http://tango-controls.readthedocs.io/en/latest/" "Tango Doc")
 set(CPACK_NSIS_MUI_ICON ${PROJECT_BINARY_DIR}/appveyor/tango.ico)
 set(CPACK_NSIS_MUI_UNIICON ${PROJECT_BINARY_DIR}/appveyor/tango.ico)
+set(CPACK_PACKAGE_ICON ${PROJECT_BINARY_DIR}/appveyor/TANGO_controls_logo.bmp)
 ELSE()
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_NAME libtango-dev)
