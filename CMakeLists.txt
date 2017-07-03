@@ -95,7 +95,7 @@ set_target_properties(tango PROPERTIES
 IF (WIN32)
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
-        RUNTIME DESTINATION bin COMPONENT dynamic
+        RUNTIME DESTINATION bin COMPONENT dynamic)
 install(DIRECTORY include/ DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN "${CMAKE_CURRENT_BINARY_DIR}/include/CMakeFiles/" EXCLUDE PATTERN "*.stamp" EXCLUDE PATTERN "*.rule" EXCLUDE PATTERN "*.depend" EXCLUDE)
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
