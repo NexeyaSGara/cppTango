@@ -170,6 +170,10 @@ install:
   - cmd: set PTHREAD_WIN=C:/projects/pthreads-win32/
   - cmd: if %ARCH%==x64-msvc14 set path=%path%;%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE
+  - cmd: cd c:/projects/
+  - cmd: md debug_build
+  - cmd: cd debug_build
+  - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE -DCMAKE_BUILD_TYPE=Debug
 
 clone_folder: C:\projects\cppTango
 
@@ -179,6 +183,7 @@ build:
   verbosity: minimal
   
 build_script:
+  - cmd: cd C:/projects/cppTango 
   - cmake --build ./ --target install  --config Release
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: cd c:/projects/
@@ -196,6 +201,8 @@ after_build:
   # Generating installer
   - cmd: cpack -G NSIS
   - cmd: cpack -G ZIP
+  - cmd: move c:/projects/debug_build/*.exe C:/projects/cppTango
+  - cmd: move c:/projects/debug_build/*.zip C:/projects/cppTango
 
 
 on_finish:
@@ -205,6 +212,3 @@ on_finish:
 artifacts:
   - path: ./*.exe
   - path: ./*.zip
-  - path: ../debug_build/*.exe
-  - path: ../debug_build/*.zip
-  
