@@ -96,7 +96,9 @@ environment:
       OMNI_BASE: C:\projects\omniORB-4.2.1
 init:
   # go to hell Xamarin (see http://help.appveyor.com/discussions/problems/4569)
+  - del "C:\Program Files (x86)\MSBuild\4.0\Microsoft.Common.Targets\ImportAfter\Xamarin.Common.targets"
   - del "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets"
+  - del "C:\Program Files (x86)\MSBuild\12.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets"
   #RDP from start
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   # Tango IDL
@@ -145,7 +147,7 @@ install:
   #copy tree for debug build
   - cmd: cd c:/projects/
   - cmd: md debug_build
-  - cmd: xcopy /s C:\projects\cppTango\*.* c:/projects/debug_build /y
+  - cmd: xcopy /s C:\projects\cppTango\*.* c:/projects/debug_build
   # Setting Visual Compiler
   - cmd: cd "C:\projects\"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
