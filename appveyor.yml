@@ -184,7 +184,7 @@ build_script:
   - cmd: cd c:/projects/
   - cmd: md debug_build
   - cmd: cd debug_build
-  - cmake --build ./cppTango --target install  --config Debug
+  - cmake --build c:/projects/cppTango --target install  --config Debug
 
 
 after_build:
