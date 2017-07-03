@@ -97,13 +97,14 @@ install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic
         PUBLIC_HEADER DESTINATION include COMPONENT headers)
-        
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT headers)       
 configure_file(tango.pc.cmake tango.pc @ONLY)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tango.pc"
         DESTINATION include/pkgconfig COMPONENT headers)
-install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/"
-        DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN "${CMAKE_CURRENT_BINARY_DIR}/include/CMakeFiles/")
+        
+#install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/"
+        #DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN "${CMAKE_CURRENT_BINARY_DIR}/include/CMakeFiles/" EXCLUDE)
 ELSE()
 install(TARGETS tango LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 configure_file(tango.pc.cmake tango.pc @ONLY)
