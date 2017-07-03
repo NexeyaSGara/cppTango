@@ -147,7 +147,7 @@ install:
   #copy tree for debug build
   - cmd: cd c:/projects/
   - cmd: md debug_build
-  - cmd: xcopy /s C:\projects\cppTango\*.* c:/projects/debug_build
+  - cmd: xcopy "C:/projects/cppTango"" c:/projects/debug_build" /c /g /d /i /e /r /h /y
   # Setting Visual Compiler
   - cmd: cd "C:\projects\"
   - cmd: if %ARCH%==win32-msvc9 call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
