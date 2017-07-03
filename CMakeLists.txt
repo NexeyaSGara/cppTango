@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
+if(WIN32)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+project(tangod)
+else()
 project(tango)
+endif()
+endif()
 include(CTest)
 
 enable_testing()
