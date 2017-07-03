@@ -162,10 +162,10 @@ install:
   # Tango API
   - cmd: cd "C:\projects\cppTango"
   - cmd: set BOOST_ROOT=%BOOST_ROOT%
-  - cmd: set ZMQ_BASE=C:\projects\zeromq\
+  - cmd: set ZMQ_BASE=C:/projects/zeromq/
   - cmd: set IDL_BASE=%IDL_BIN%
-  - cmd: set OMNI_BASE=C:\projects\omniorb\
-  - cmd: set PTHREAD_WIN=C:\projects\pthreads-win32\
+  - cmd: set OMNI_BASE=C:/projects/omniorb/
+  - cmd: set PTHREAD_WIN=C:/projects/pthreads-win32/
   - cmd: if %ARCH%==x64-msvc14 set path=%path%;%PYTHONPATH%
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE
 
