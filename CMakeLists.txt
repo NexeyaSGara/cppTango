@@ -147,6 +147,12 @@ install(FILES $ENV{OMNI_BASE}/bin/x86_win32/COS421_vc14_rt.dll DESTINATION bin C
 install(FILES $ENV{ZMQ_BASE}/lib/Release/libzmq-v140-mt-4_1_7.lib DESTINATION lib COMPONENT static)
 install(FILES $ENV{ZMQ_BASE}/bin/Release/libzmq-v140-mt-4_1_7.dll DESTINATION bin COMPONENT dynamic)
 ENDIF()
+#pthreads
+IF(CMAKE_CL_64)
+install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/pthreadVC2.lib DESTINATION lib COMPONENT static)
+ELSE()
+install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/pthreadVC2.lib DESTINATION lib COMPONENT static)
+ENDIF()
 
 
 configure_file(tango.pc.cmake tango.pc @ONLY)
@@ -165,7 +171,7 @@ IF (WIN32)
 IF(CMAKE_CL_64)
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_${CMAKE_VS_PLATFORM_TOOLSET}_x64)
 ELSE()
-IF(MSVC9)
+IF(MSVC90)
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_v90_x86)
 ELSE()
 set(CPACK_PACKAGE_FILE_NAME libtango_${LIBRARY_VERSION}_${CMAKE_VS_PLATFORM_TOOLSET}_x86)
