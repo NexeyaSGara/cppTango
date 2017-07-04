@@ -196,16 +196,16 @@ build_script:
 
 
 after_build:
-  #- cmd: cd C:/projects/cppTango 
+  - cmd: cd C:/projects/cppTango 
   # Generating installer
-  #- cmd: cpack -G NSIS
-  #- cmd: cpack -G ZIP
+  - cmd: cpack -G NSIS
+  - cmd: cpack -G ZIP
   - cmd: cd c:/projects/debug_build
   # Generating installer
   - cmd: cpack -G NSIS
   - cmd: cpack -G ZIP
-  - cmd: move c:/projects/debug_build/*.exe C:/projects/cppTango
-  - cmd: move c:/projects/debug_build/*.zip C:/projects/cppTango
+  - cmd: move c:/projects/debug_build/libtango_9.2.5_%MSVCVERSION%_%platform%_debug.exe C:/projects/cppTango
+  - cmd: move c:/projects/debug_build/libtango_9.2.5_%MSVCVERSION%_%platform%_debug.zip C:/projects/cppTango
 
 
 on_finish:
