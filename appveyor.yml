@@ -188,17 +188,17 @@ build:
   
 build_script:
   - cmd: cd C:/projects/cppTango 
-  - cmake --build ./ --target install  --config Release
+  #- cmake --build ./ --target install  --config Release
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: cd c:/projects/debug_build
   - cmake --build ./ --target install  --config Debug
 
 
 after_build:
-  - cmd: cd C:/projects/cppTango 
+  #- cmd: cd C:/projects/cppTango 
   # Generating installer
-  - cmd: cpack -G NSIS
-  - cmd: cpack -G ZIP
+  #- cmd: cpack -G NSIS
+  #- cmd: cpack -G ZIP
   - cmd: cd c:/projects/debug_build
   # Generating installer
   - cmd: cpack -G NSIS
@@ -209,7 +209,7 @@ after_build:
 
 on_finish:
   #RDP for finish
-  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
