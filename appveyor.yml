@@ -205,23 +205,22 @@ after_build:
   - cmd: cpack -G NSIS
   - cmd: cpack -G ZIP
   - cmd: if %ARCH%==win32-msvc9 move libtango_9.2.5_v90_x86_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==win32-msvc9 move C:/projects/debug_build/libtango_9.2.5_v90_x86_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==win32-msvc9 move C:/projects/debug_build/libtango_9.2.5_v90_x86_debug.zip C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc9 move C:/projects/debug_build/libtango_9.2.5_v90_x64_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc9 move C:/projects/debug_build/libtango_9.2.5_v90_x64_debug.zip C:/projects/cppTango
-  - cmd: if %ARCH%==win32-msvc10 move C:/projects/debug_build/libtango_9.2.5_v100_x86_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==win32-msvc10 move C:/projects/debug_build/libtango_9.2.5_v100_x86_debug.zip C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc10 move C:/projects/debug_build/libtango_9.2.5_v100_x64_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc10 move C:/projects/debug_build/libtango_9.2.5_v100_x64_debug.zip C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc12 move C:/projects/debug_build/libtango_9.2.5_v120_x64_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc12 move C:/projects/debug_build/libtango_9.2.5_v120_x64_debug.zip C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc14 move C:/projects/debug_build/libtango_9.2.5_v140_x64_debug.exe C:/projects/cppTango
-  - cmd: if %ARCH%==x64-msvc14 move C:/projects/debug_build/libtango_9.2.5_v140_x64_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==win32-msvc9 move libtango_9.2.5_v90_x86_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc9 move libtango_9.2.5_v90_x64_debug.exe C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc9 move libtango_9.2.5_v90_x64_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==win32-msvc10 move libtango_9.2.5_v100_x86_debug.exe C:/projects/cppTango
+  - cmd: if %ARCH%==win32-msvc10 move libtango_9.2.5_v100_x86_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc10 move libtango_9.2.5_v100_x64_debug.exe C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc10 move libtango_9.2.5_v100_x64_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc12 move libtango_9.2.5_v120_x64_debug.exe C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc12 move libtango_9.2.5_v120_x64_debug.zip C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc14 move libtango_9.2.5_v140_x64_debug.exe C:/projects/cppTango
+  - cmd: if %ARCH%==x64-msvc14 move libtango_9.2.5_v140_x64_debug.zip C:/projects/cppTango
 
 
 on_finish:
   #RDP for finish
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   - path: ./*.exe
