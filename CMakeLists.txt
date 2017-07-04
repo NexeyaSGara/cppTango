@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 if(WIN32)
+set(CMAKE_PLATFORM_HAS_INSTALLNAME 1)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 project(tangod)
 else()
