@@ -66,7 +66,6 @@ link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/)
 ELSE()
 link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
 ENDIF()
-SET(CMAKE_DEBUG_POSTFIX d)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
