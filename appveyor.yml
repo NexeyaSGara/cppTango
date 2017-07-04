@@ -175,7 +175,7 @@ install:
   - cmd: set OMNI_BASE=C:/projects/omniorb/
   - cmd: set PTHREAD_WIN=C:/projects/pthreads-win32/
   - cmd: if %ARCH%==x64-msvc14 set path=%path%;%PYTHONPATH%
-  #- cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE
+  - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE
   - cmd: cd c:/projects/debug_build
   - cmd: cmake -G "%CMAKE_GENERATOR%" -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE -DCMAKE_BUILD_TYPE=Debug
 
@@ -187,8 +187,8 @@ build:
   verbosity: minimal
   
 build_script:
-  #- cmd: cd C:/projects/cppTango 
-  #- cmake --build ./ --config Release
+  - cmd: cd C:/projects/cppTango 
+  - cmake --build ./ --config Release
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: cd c:/projects/debug_build
   - cmake --build ./ --config Debug
@@ -196,14 +196,15 @@ build_script:
 
 
 after_build:
-  #- cmd: cd C:/projects/cppTango 
+  - cmd: cd C:/projects/cppTango 
   # Generating installer
-  #- cmd: cpack -G NSIS
-  #- cmd: cpack -G ZIP
+  - cmd: cpack -G NSIS
+  - cmd: cpack -G ZIP
   - cmd: cd c:/projects/debug_build
   # Generating installer
   - cmd: cpack -G NSIS
   - cmd: cpack -G ZIP
+  # copying debug versions for upload
   - cmd: if %ARCH%==win32-msvc9 move libtango_9.2.5_v90_x86_debug.exe C:/projects/cppTango
   - cmd: if %ARCH%==win32-msvc9 move libtango_9.2.5_v90_x86_debug.zip C:/projects/cppTango
   - cmd: if %ARCH%==x64-msvc9 move libtango_9.2.5_v90_x64_debug.exe C:/projects/cppTango
