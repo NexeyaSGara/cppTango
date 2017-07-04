@@ -66,6 +66,7 @@ link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/)
 ELSE()
 link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
 ENDIF()
+SET(CMAKE_DEBUG_POSTFIX d)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
@@ -151,6 +152,10 @@ install(FILES include/tango.h DESTINATION include COMPONENT headers)
 
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+#adding tango since tere seems to be a bug
+install(FILES Debug/tangod.dll DESTINATION lib COMPONENT dynamic)
+install(FILES Debug/tangod.lib DESTINATION lib COMPONENT static)
+install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic4d.lib DESTINATION lib COMPONENT static)
 #omniorb static lib
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB4d.lib DESTINATION lib COMPONENT static)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic4d.lib DESTINATION lib COMPONENT static)
