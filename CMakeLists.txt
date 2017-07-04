@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 if(WIN32)
-set(CMAKE_PLATFORM_HAS_INSTALLNAME 1)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 project(tangod)
 else()
@@ -138,7 +137,8 @@ IF (WIN32)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 install(TARGETS tangod
         ARCHIVE DESTINATION lib COMPONENT static
-        RUNTIME DESTINATION bin COMPONENT dynamic)
+        RUNTIME DESTINATION bin COMPONENT dynamic
+        CONFIGURATIONS Debug)
 else()
 install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
