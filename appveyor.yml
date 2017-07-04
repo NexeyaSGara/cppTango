@@ -188,10 +188,11 @@ build:
   
 build_script:
   - cmd: cd C:/projects/cppTango 
-  #- cmake --build ./ --target install  --config Release
+  - cmake --build ./ --config Release
   - cmd: if %ARCH%==x64-msvc10 call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - cmd: cd c:/projects/debug_build
-  - cmake --build ./ --target install  --config Debug
+  - cmake --build ./ --config Debug
+  #- cmake --build ./ --target install  --config Debug
 
 
 after_build:
