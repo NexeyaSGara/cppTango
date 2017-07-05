@@ -148,7 +148,7 @@ install(DIRECTORY include/log4tango DESTINATION include COMPONENT headers PATTER
 install(DIRECTORY include/tango DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN)
 install(FILES include/resource.h DESTINATION include COMPONENT headers)
 install(FILES include/tango.h DESTINATION include COMPONENT headers)
-
+install(FILES generated/idl/tango.h DESTINATION include COMPONENT headers)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 #adding tango since tere seems to be a bug
