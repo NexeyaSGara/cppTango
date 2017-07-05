@@ -144,11 +144,13 @@ install(TARGETS tango
         ARCHIVE DESTINATION lib COMPONENT static
         RUNTIME DESTINATION bin COMPONENT dynamic)
 endif()
-install(DIRECTORY include/log4tango DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN)
-install(DIRECTORY include/tango DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE PATTERN)
+install(DIRECTORY include/log4tango DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE)
+install(DIRECTORY include/tango DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.txt" EXCLUDE PATTERN "*.vcproj" EXCLUDE PATTERN "*.cmake" EXCLUDE)
 install(FILES include/resource.h DESTINATION include COMPONENT headers)
 install(FILES include/tango.h DESTINATION include COMPONENT headers)
 install(FILES generated/idl/tango.h DESTINATION include COMPONENT headers)
+install(DIRECTORY $ENV{OMNI_BASE}/include DESTINATION include COMPONENT headers)
+install(DIRECTORY $ENV{ZMQ_BASE}/include DESTINATION include COMPONENT headers)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 #adding tango since tere seems to be a bug
