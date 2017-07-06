@@ -267,8 +267,10 @@ ENDIF()
 #pthreads
 IF(CMAKE_CL_64)
 install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/pthreadVC2.lib DESTINATION lib COMPONENT static)
+install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/dll/x64/pthreadVC2.dll DESTINATION bin COMPONENT dynamic)
 ELSE()
 install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/pthreadVC2.lib DESTINATION lib COMPONENT static)
+install(FILES $ENV{PTHREAD_WIN}/Pre-built.2/dll/x86/pthreadVC2.dll DESTINATION bin COMPONENT dynamic)
 ENDIF()
 
 
