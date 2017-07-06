@@ -149,8 +149,16 @@ install(DIRECTORY include/tango DESTINATION include COMPONENT headers PATTERN "*
 install(FILES include/resource.h DESTINATION include COMPONENT headers)
 install(FILES include/tango.h DESTINATION include COMPONENT headers)
 install(FILES generated/idl/tango.h DESTINATION include COMPONENT headers)
-install(DIRECTORY $ENV{OMNI_BASE}/include DESTINATION include COMPONENT headers)
-install(DIRECTORY $ENV{ZMQ_BASE}/include DESTINATION include COMPONENT headers)
+install(DIRECTORY $ENV{OMNI_BASE}/include/COS DESTINATION include COMPONENT)
+install(DIRECTORY $ENV{OMNI_BASE}/include/omniORB4 DESTINATION include COMPONENT headers)
+install(DIRECTORY $ENV{OMNI_BASE}/include/omnithread DESTINATION include COMPONENT headers PATTERN "*.h" PATTERN "*.in" EXCLUDE)
+install(DIRECTORY $ENV{OMNI_BASE}/include/omniVms DESTINATION include COMPONENT headers)
+install(FILES $ENV{OMNI_BASE}/include/omniconfig.h DESTINATION include COMPONENT headers)
+install(FILES $ENV{OMNI_BASE}/include/omnithread.h DESTINATION include COMPONENT headers)
+install(FILES $ENV{ZMQ_BASE}/include/zmq.h DESTINATION include COMPONENT headers)
+install(FILES $ENV{ZMQ_BASE}/include/zmq.hpp DESTINATION include COMPONENT headers)
+install(FILES $ENV{ZMQ_BASE}/include/zmq_addon.hpp DESTINATION include COMPONENT headers)
+install(FILES $ENV{ZMQ_BASE}/include/zmq_utils.h DESTINATION include COMPONENT headers)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 #adding tango since tere seems to be a bug
@@ -170,6 +178,7 @@ install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB421_rtd.lib DESTINATION bin C
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic421_rtd.lib DESTINATION bin COMPONENT dynamic)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omnithread40_rtd.lib DESTINATION bin COMPONENT dynamic)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/COS421_rtd.lib DESTINATION bin COMPONENT dynamic)
+install(FILES $ENV{OMNI_BASE}/lib/x86_win32/msvcstubd.lib DESTINATION bin COMPONENT dynamic)
 else()
 #omniorb static lib
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB4.lib DESTINATION lib COMPONENT static)
@@ -184,6 +193,7 @@ install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB421_rt.lib DESTINATION bin CO
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic421_rt.lib DESTINATION bin COMPONENT dynamic)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omnithread40_rt.lib DESTINATION bin COMPONENT dynamic)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/COS421_rt.lib DESTINATION bin COMPONENT dynamic)
+install(FILES $ENV{OMNI_BASE}/lib/x86_win32/msvcstub.lib DESTINATION bin COMPONENT dynamic)
 #omniorb dynamic + zmq
 endif()
 IF(MSVC90)
