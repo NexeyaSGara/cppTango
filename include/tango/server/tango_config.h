@@ -61,7 +61,9 @@
 
 #ifdef _WIN32
 	#define		__WIN32__
-	#define		__x86__
+	#ifndef __x86__
+		#define		__x86__
+	#endif
 	#ifndef _WIN32_WINNT
 		#define		_WIN32_WINNT 0x0500
 	#endif
