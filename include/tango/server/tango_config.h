@@ -232,6 +232,8 @@
 	#pragma warning(disable : 4355)
 	#pragma warning(disable : 4715)
     	#pragma warning(disable : 4786)
+	#pragma warning(disable : 4244)
+    	#pragma warning(disable : 4800)
 	#if (_MSC_VER >= 1400)       // VC8+
 		#pragma warning(disable : 4996)    // disable all deprecation warnings
 	#endif   // VC8+
