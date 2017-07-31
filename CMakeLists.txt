@@ -22,7 +22,6 @@ add_definitions(-D__x86__)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DOMNI_UNLOADABLE_STUBS)
 add_definitions(-DTANGO_HAS_DLL)
-add_definitions(-D_TANGO_LIB)
 add_definitions(-DLOG4TANGO_HAS_DLL)
 add_definitions(-DLOG4TANGO_BUILD_DLL)
 add_definitions(-DHAVE_STRUCT_TIMESPEC)
@@ -78,6 +77,7 @@ IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+TARGET_COMPILE_DEFINITIONS(TARGET tangod PUBLIC -D_TANGO_LIB)
 add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:client_objects>
@@ -102,6 +102,7 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Debug)
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Debug)
 SET(CMAKE_INSTALL_CONFIG_NAME Debug)
 else()
+TARGET_COMPILE_DEFINITIONS(TARGET tango PUBLIC -D_TANGO_LIB)
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
                             $<TARGET_OBJECTS:client_objects>
