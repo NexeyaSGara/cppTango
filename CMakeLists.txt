@@ -56,16 +56,21 @@ add_subdirectory(doxygen)
 add_subdirectory(generated/idl)
 include_directories(include)
 add_subdirectory(src)
+
+if(WIN32)
+set(PTHREAD_WIN32_LIBS "pthreadVC2.lib;")
+if(CMAKE_CL_64)
+link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/)
+else()
+link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
+endif()
+endif()
+
 add_subdirectory(test)
+
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
-set(PTHREAD_WIN32_LIBS "pthreadVC2.lib;")
-IF(CMAKE_CL_64)
-link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x64/)
-ELSE()
-link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
-ENDIF()
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:idl_objects>
