@@ -20,7 +20,6 @@ add_definitions(-D__OSVERSION__=4)
 add_definitions(-D__POSIX_NT__)
 add_definitions(-D__x86__)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-add_definitions(-DOMNI_UNLOADABLE_STUBS)
 add_definitions(-DTANGO_HAS_DLL)
 add_definitions(-DLOG4TANGO_HAS_DLL)
 add_definitions(-DLOG4TANGO_BUILD_DLL)
@@ -86,11 +85,10 @@ add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
 target_link_libraries(tangod PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set_property(TARGET tangod PROPERTY LINK_FLAGS "/force:multiple")
 set_property(TARGET tangod PROPERTY PUBLIC_HEADER ${INCLUDE_OBJECT_MS})
-TARGET_COMPILE_DEFINITIONS(tangod PRIVATE -D_TANGO_LIB)
 target_include_directories(tangod PUBLIC ${ZMQ_PKG_INCLUDE_DIRS} ${OMNIORB_PKG_INCLUDE_DIRS} ${OMNIDYN_PKG_INCLUDE_DIRS})
 
 target_compile_options(tangod PUBLIC ${ZMQ_PKG_CFLAGS_OTHER} ${OMNIORB_PKG_CFLAGS_OTHER} ${OMNICOS_PKG_CFLAGS_OTHER} ${OMNIDYN_PKG_CFLAGS_OTHER})
-target_compile_definitions(tangod PRIVATE OMNI_UNLOADABLE_STUBS _TANGO_LIB)
+target_compile_definitions(tangod PRIVATE _TANGO_LIB OMNI_UNLOADABLE_STUBS)
 
 set_target_properties(tangod PROPERTIES
         VERSION ${LIBRARY_VERSION}
@@ -111,14 +109,13 @@ add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
 target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set_property(TARGET tango PROPERTY LINK_FLAGS "/force:multiple")
 set_property(TARGET tango PROPERTY PUBLIC_HEADER ${INCLUDE_OBJECT_MS})
-TARGET_COMPILE_DEFINITIONS(tango PRIVATE -D_TANGO_LIB)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Release)
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Release)
 
 target_include_directories(tango PUBLIC ${ZMQ_PKG_INCLUDE_DIRS} ${OMNIORB_PKG_INCLUDE_DIRS} ${OMNIDYN_PKG_INCLUDE_DIRS})
 
 target_compile_options(tango PUBLIC ${ZMQ_PKG_CFLAGS_OTHER} ${OMNIORB_PKG_CFLAGS_OTHER} ${OMNICOS_PKG_CFLAGS_OTHER} ${OMNIDYN_PKG_CFLAGS_OTHER})
-target_compile_definitions(tango PRIVATE OMNI_UNLOADABLE_STUBS _TANGO_LIB)
+target_compile_definitions(tango PRIVATE _TANGO_LIB OMNI_UNLOADABLE_STUBS)
 
 set_target_properties(tango PROPERTIES
         VERSION ${LIBRARY_VERSION}
