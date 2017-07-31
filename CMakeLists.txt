@@ -29,7 +29,7 @@ add_definitions(-DSTRUCT_TIMESPEC_HAS_TV_NSEC)
 add_definitions(-DWIN32)
 add_definitions(-D_WINDOWS)
 add_definitions(-D_USRDLL)
-add_definitions(-D_CRT_SECURE_NO_DEPRECATE
+add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
 IF(CMAKE_CL_64)
 add_definitions(-D_64BITS)
 IF (MSVC14)
