@@ -29,8 +29,8 @@ protected:
 public:
     SUITE_NAME():
     #ifdef _WIN32
-            device1_instance_name = "test",
-            device2_instance_name = "test2"
+            device1_instance_name("test"),
+            device2_instance_name("test2")
     #else
             device1_instance_name{"test"},//TODO pass via cl
             device2_instance_name{"test2"}
