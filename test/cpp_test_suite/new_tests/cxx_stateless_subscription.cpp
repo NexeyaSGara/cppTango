@@ -52,7 +52,11 @@ protected:
 
 public:
     SUITE_NAME() :
+    #idef _WIN32
+            device2_instance_name = "test2",
+    #else
             device2_instance_name{"test2"},
+    #endif
             eventCallback{} {
 
 //
