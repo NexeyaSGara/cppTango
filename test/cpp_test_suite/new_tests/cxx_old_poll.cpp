@@ -5,8 +5,10 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
-#include <pthread>
+#ifndef _WIN32
+#include <thread>
 #include <chrono>
+#endif
 
 using namespace Tango;
 using namespace std;
@@ -1070,7 +1072,11 @@ public:
         TS_ASSERT_THROWS_NOTHING(dev2->poll_attribute("PollLong_attr", 1000));
         CxxTest::TangoPrinter::restore_set("dev2_poll_PollLong_attr_1000");
 
+#ifdef WIN32
+        Sleep(2000);
+#else
         this_thread::sleep_for(chrono::seconds{2});
+#endif
 
         vector <string> polled_devs;
         split_string(ref_polling_pool_conf[0], ',', polled_devs);
@@ -1102,7 +1108,11 @@ public:
         auto admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
+#ifdef WIN32
+        Sleep(5000);
+#else
         this_thread::sleep_for(chrono::seconds{5});
+#endif
 
 // Read polling threads pool conf once more
 
@@ -1159,7 +1169,11 @@ public:
         auto admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
+#ifdef WIN32
+        Sleep(5000);
+#else
         this_thread::sleep_for(chrono::seconds{5});
+#endif
 
 // Check new pool conf
 
@@ -1217,7 +1231,11 @@ public:
         auto admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
+#ifdef WIN32
+        Sleep(5000);
+#else
         this_thread::sleep_for(chrono::seconds{5});
+#endif
 
 // Check new pool conf
 
@@ -1248,7 +1266,11 @@ public:
         auto admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
+#ifdef WIN32
+        Sleep(5000);
+#else
         this_thread::sleep_for(chrono::seconds{5});
+#endif
 
 // Check pool conf
 
@@ -1298,7 +1320,11 @@ public:
         auto admin_dev = new DeviceProxy(admin_dev_name);
         admin_dev->command_inout("RestartServer");
 
+#ifdef WIN32
+        Sleep(5000);
+#else
         this_thread::sleep_for(chrono::seconds{5});
+#endif
     }
 };
 
