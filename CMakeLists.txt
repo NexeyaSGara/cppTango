@@ -142,7 +142,10 @@ set_target_properties(tango PROPERTIES
         VERSION ${LIBRARY_VERSION}
         SOVERSION ${SO_VERSION})
 ENDIF()
-
+if(WIN32)
+remove_definitions(-D_TANGO_LIB)
+remove_definitions(-DLOG4TANGO_BUILD_DLL)
+endif(WIN32)
 add_subdirectory(test)
 
 #install code
