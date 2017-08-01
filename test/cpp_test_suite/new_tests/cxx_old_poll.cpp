@@ -5,7 +5,7 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
-#include <thread>
+#include <pthread>
 #include <chrono>
 
 using namespace Tango;
@@ -111,7 +111,11 @@ public:
         }
 
         cout << "Wait for 7 seconds to fill in polling buffer..." << endl;
+        #ifdef _WIN32
+        Sleep(7000);
+        #else
         this_thread::sleep_for(chrono::seconds{7});
+        #endif
         cout << "Done." << endl;
     }
 
