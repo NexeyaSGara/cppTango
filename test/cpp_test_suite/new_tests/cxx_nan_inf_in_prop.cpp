@@ -150,10 +150,10 @@ public:
         TS_ASSERT_EQUALS(read_array_val[index], T(3.4));
         index++;
         if (std::numeric_limits<T>::has_infinity) {
-            TS_ASSERT(std::isinf(read_array_val[index]));
+            TS_ASSERT(isinf(read_array_val[index]));
             TS_ASSERT_LESS_THAN(0, read_array_val[index]);
             index++;
-            TS_ASSERT(std::isinf(read_array_val[index]));
+            TS_ASSERT(isinf(read_array_val[index]));
             TS_ASSERT_LESS_THAN(read_array_val[index], 0);
             index++;
         }
