@@ -5,6 +5,14 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
+#ifdef _WIN32
+#ifndef isinf
+#define isinf(x) ((x)!=(x))
+#endif
+#ifndef isnan 
+#define isnan(x) ((x)!=(x)) 
+#endif
+#endif
 
 using namespace Tango;
 using namespace std;
