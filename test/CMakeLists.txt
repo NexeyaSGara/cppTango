@@ -1,2 +1,6 @@
+if(WIN32)
+remove_definitions(-D_TANGO_LIB)
+remove_definitions(-DLOG4TANGO_BUILD_DLL)
+endif(WIN32)
 add_subdirectory(log4tango)
 add_subdirectory(cpp_test_suite)
