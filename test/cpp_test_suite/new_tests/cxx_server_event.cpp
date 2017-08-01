@@ -28,8 +28,13 @@ protected:
 
 public:
     SUITE_NAME():
+    #ifdef _WIN32
+            device1_instance_name = "test",
+            device2_instance_name = "test2"
+    #else
             device1_instance_name{"test"},//TODO pass via cl
             device2_instance_name{"test2"}
+    #endif
             {
 
 //
@@ -92,7 +97,11 @@ public:
         coutv << endl << "new DeviceProxy(" << device1->name() << ") returned" << endl << endl;
 
 
+        #ifdef _WIN32
+        vector<string> vs = {device2_name, "Short_attr", "periodic"};
+        #else
         vector<string> vs{device2_name, "Short_attr", "periodic"};
+        #endif
 
         DeviceData dd_in, dd_out;
         dd_in << vs;
