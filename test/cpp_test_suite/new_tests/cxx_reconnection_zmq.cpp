@@ -9,7 +9,7 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
-#include <thread>
+#include <pthread>
 
 using namespace Tango;
 using namespace std;
@@ -79,13 +79,13 @@ public:
             CxxTest::TangoPrinter::restore_set("test2/debian8/20 started.");
 
             //sleep 18 &&  start_server "@INST_NAME@" &
-            thread([this]() {
+            pthread([this]() {
                 Tango_sleep(18);
                 CxxTest::TangoPrinter::start_server(device1_instance_name);
             }).detach();
 
             //sleep 62 &&  start_server "@INST_NAME@" &
-            thread([this]() {
+            pthread([this]() {
                 Tango_sleep(62);
                 CxxTest::TangoPrinter::start_server(device1_instance_name);
             }).detach();
