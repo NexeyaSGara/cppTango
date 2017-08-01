@@ -146,7 +146,11 @@ int main(int argc, char **argv)
 		filters.push_back("$delta_change_abs >= 2 or $delta_change_abs <= -2");		
 		eve_id = device->subscribe_event(att_name,Tango::CHANGE_EVENT,&cb,filters);
 
+		#ifdef _WIN32
+		Sleep(sleeping_time);
+		#else
 		sleep(sleeping_time);
+		#endif
 		
 		device->unsubscribe_event(eve_id);							
 	}
