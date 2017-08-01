@@ -7,7 +7,7 @@
 #include <iostream>
 #include <signal.h>
 #include "compare_test.h"
-#ifdef_WIN32
+#ifdef _WIN32
 #include <windows.h>
 #endif
 
