@@ -9,7 +9,9 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
+#ifndef _WIN32
 #include <thread>
+#endif
 
 using namespace Tango;
 using namespace std;
