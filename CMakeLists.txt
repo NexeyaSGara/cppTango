@@ -21,6 +21,7 @@ add_definitions(-D__POSIX_NT__)
 add_definitions(-D__x86__)
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DTANGO_HAS_DLL)
+add_definitions(-D_TANGO_LIB)
 add_definitions(-DLOG4TANGO_HAS_DLL)
 add_definitions(-DLOG4TANGO_BUILD_DLL)
 add_definitions(-DHAVE_STRUCT_TIMESPEC)
@@ -128,6 +129,8 @@ set_target_properties(tango PROPERTIES
         VERSION ${LIBRARY_VERSION}
         SOVERSION ${SO_VERSION})
 endif()
+remove_definitions(-D_TANGO_LIB)
+remove_definitions(-DDLOG4TANGO_BUILD_DLL)
 ELSE()
 add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:client_objects>
