@@ -7,6 +7,9 @@
 #include <iostream>
 #include <signal.h>
 #include "compare_test.h"
+#ifdef_WIN32
+#include <windows.h>
+#endif
 
 using namespace Tango;
 using namespace std;
