@@ -6,6 +6,7 @@
 #include <tango.h>
 #include <iostream>
 #ifdef _WIN32
+#include <limits>
 #ifndef isinf
 #define isinf(x) ((x)!=(x))
 #endif
