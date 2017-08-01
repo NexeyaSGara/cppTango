@@ -72,7 +72,6 @@ link_directories($ENV{PTHREAD_WIN}/Pre-built.2/lib/x86/)
 endif()
 endif()
 
-add_subdirectory(test)
 
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
@@ -150,6 +149,8 @@ set_target_properties(tango PROPERTIES
         VERSION ${LIBRARY_VERSION}
         SOVERSION ${SO_VERSION})
 ENDIF()
+
+add_subdirectory(test)
 
 #install code
 IF (WIN32)
