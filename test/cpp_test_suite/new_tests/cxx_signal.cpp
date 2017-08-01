@@ -259,9 +259,7 @@ public:
 		 DWORD dwDesiredAccess = PROCESS_TERMINATE;
 		 BOOL  bInheritHandle  = FALSE;
 		 HANDLE hProcess = OpenProcess(dwDesiredAccess, bInheritHandle, pid);
-		 if (hProcess == NULL)
-		 	return FALSE;
-		 BOOL result = TerminateProcess(hProcess, uExitCode);
+		 TerminateProcess(hProcess, uExitCode);
 		 CloseHandle(hProcess);
 		#else
 			kill(pid, sig_num_int);
