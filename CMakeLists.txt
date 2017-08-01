@@ -81,7 +81,7 @@ add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:jpeg_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>)
-target_compile_definitions(tangod PRIVATE $<$<CONFIG:Debug>:_TANGO_LIB;LOG4TANGO_BUILD_DLL>)
+target_compile_definitions(tangod PRIVATE "_TANGO_LIB;LOG4TANGO_BUILD_DLL")
 target_link_libraries(tangod PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set_property(TARGET tangod PROPERTY LINK_FLAGS "/force:multiple")
 set_property(TARGET tangod PROPERTY PUBLIC_HEADER ${INCLUDE_OBJECT_MS})
@@ -107,7 +107,7 @@ add_library(tango SHARED    $<TARGET_OBJECTS:log4tango_objects>
                             $<TARGET_OBJECTS:jpeg_objects>
                             $<TARGET_OBJECTS:jpeg_mmx_objects>
                             $<TARGET_OBJECTS:server_objects>)
-target_compile_definitions(tango PRIVATE $<$<CONFIG:Release>:_TANGO_LIB;LOG4TANGO_BUILD_DLL>)
+target_compile_definitions(tango PRIVATE "_TANGO_LIB;LOG4TANGO_BUILD_DLL")
 target_link_libraries(tango PUBLIC ${WIN32_LIBS} ${OMNIORB_PKG_LIBRARIES} ${ZMQ_PKG_LIBRARIES} ${PTHREAD_WIN32_LIBS} ${CMAKE_DL_LIBS})
 set_property(TARGET tango PROPERTY LINK_FLAGS "/force:multiple")
 set_property(TARGET tango PROPERTY PUBLIC_HEADER ${INCLUDE_OBJECT_MS})
