@@ -879,7 +879,7 @@ public:
 
     void test_get_command_poll_period(void) {
 
-        #idef _WIN32
+        #ifdef _WIN32
         string cmd = "IOExcept";
         #else
         string cmd("IOExcept");
