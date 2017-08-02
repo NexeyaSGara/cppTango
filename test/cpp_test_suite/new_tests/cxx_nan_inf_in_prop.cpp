@@ -144,7 +144,7 @@ public:
         TS_ASSERT_EQUALS(read_array_val[index], T(1.2));
         index++;
         if (std::numeric_limits<T>::has_quiet_NaN) {
-            TS_ASSERT(std::isnan(read_array_val[index]));
+            TS_ASSERT(isnan(read_array_val[index]));
             index++;
         }
         TS_ASSERT_EQUALS(read_array_val[index], T(3.4));
