@@ -99,9 +99,9 @@ public:
 
         #ifdef _WIN32
         vector<string> vs;
-        vs.insert(device2_name);
-        vs.insert("Short_attr");
-        vs.insert("periodic");
+        vs.push_back(device2_name);
+        vs.push_back("Short_attr");
+        vs.push_back("periodic");
         #else
         vector<string> vs{device2_name, "Short_attr", "periodic"};
         #endif
