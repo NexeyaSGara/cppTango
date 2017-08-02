@@ -255,8 +255,8 @@ public:
 		pid = atoi((*result).svalue[0].in());
 		if(pid > 0)
 		#ifdef _WIN32
-		 int dwDesiredAccess = PROCESS_TERMINATE;
-		 bool  bInheritHandle  = FALSE;
+		 int dwDesiredAccess = 0x0001;
+		 bool  bInheritHandle  = False;
 		 HANDLE hProcess = OpenProcess(dwDesiredAccess, bInheritHandle, pid);
 		 unsigned __int8 uExitCode=0;
 		 TerminateProcess(hProcess, uExitCode);
