@@ -58,7 +58,13 @@ int main(int argc, char **argv) {
     db_dev_info_3.name = device3_name;
     db_dev_info_3._class = CLASS_NAME;
 
+    #ifdef _WIN32
+    db_dev_infos.push_back(db_dev_info_1);
+    db_dev_infos.push_back(db_dev_info_2);
+    db_dev_infos.push_back(db_dev_info_3);
+    #else
     db_dev_infos = {db_dev_info_1, db_dev_info_2, db_dev_info_3};
+    #endif
 
     try {
         db->add_server(str, db_dev_infos);
