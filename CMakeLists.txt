@@ -75,6 +75,7 @@ endif()
 
 IF(WIN32)
 include_directories(${INCLUDE_OBJECT_MS})
+include_directories($ENV{PTHREAD_WIN}/pthreads.2/)
 set(WIN32_LIBS "ws2_32.lib;mswsock.lib;advapi32.lib;comctl32.lib;odbc32.lib;")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 add_library(tangod SHARED    $<TARGET_OBJECTS:log4tango_objects>
