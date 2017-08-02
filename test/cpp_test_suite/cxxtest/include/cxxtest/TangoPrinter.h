@@ -767,13 +767,13 @@ namespace CxxTest
         }
 
         static void start_server(const std::string& instance){
-            std::string command = Tango::kStartServerCmd;
+            std::string command = kStartServerCmd;
             command += instance;
             system(command.c_str());
         }
 
         static void kill_server() {
-            system(Tango::kKillServerCmd.c_str());
+            system(kKillServerCmd.c_str());
         }
 
     private:
