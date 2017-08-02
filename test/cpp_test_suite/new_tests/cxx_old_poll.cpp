@@ -975,10 +975,15 @@ public:
 //  WARNING, this test works only if device property min_poll_period set to 200
 //  and cmd_min_poll_period set to IOExcept,500
 //
+#ifdef _WIN32
+        TS_ASSERT_THROWS(device->poll_command("IOExcept", 300), const Tango::DevFailed&);
 
+        TS_ASSERT_THROWS(device->poll_command("IOExcept", 100), const Tango::DevFailed&);
+#else
         TS_ASSERT_THROWS(device->poll_command("IOExcept", 300), Tango::DevFailed);
 
         TS_ASSERT_THROWS(device->poll_command("IOExcept", 100), Tango::DevFailed);
+#endif
 
         TS_ASSERT_THROWS_NOTHING(device->poll_command("IOExcept", 500));
 
