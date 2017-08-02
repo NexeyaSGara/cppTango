@@ -53,11 +53,12 @@ protected:
 public:
     SUITE_NAME() :
     #ifdef _WIN32
-            device2_instance_name = "test2",
+            device2_instance_name("test2"),
+            eventCallback() {
     #else
             device2_instance_name{"test2"},
-    #endif
             eventCallback{} {
+    #endif
 
 //
 // Arguments check -------------------------------------------------
