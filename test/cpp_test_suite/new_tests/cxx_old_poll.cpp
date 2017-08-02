@@ -1223,7 +1223,7 @@ public:
 
         TS_ASSERT(new_nb_polled_devs == nb_polled_devs + 1);
 
-        auto iter = find(polled_devs.begin(), polled_devs.end(), new_dev);
+        vector<string>::const_iterator iter = find(polled_devs.begin(), polled_devs.end(), new_dev);
         TS_ASSERT(iter != polled_devs.end());
     }
 
@@ -1388,7 +1388,7 @@ public:
         unsigned int new_nb_polled_devs = polled_devs.size();
         TS_ASSERT(new_nb_polled_devs == 1);
 
-        auto iter = find(polled_devs.begin(), polled_devs.end(), new_dev1_th3);
+        vector<string>::const_iterator iter = find(polled_devs.begin(), polled_devs.end(), new_dev1_th3);
         TS_ASSERT(iter != polled_devs.end());
     }
 
