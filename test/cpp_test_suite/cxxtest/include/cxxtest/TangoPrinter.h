@@ -773,7 +773,7 @@ namespace CxxTest
         }
 
         static void kill_server() {
-            system(kKillServerCmd.c_str());
+            system(Tango::kKillServerCmd.c_str());
         }
 
     private:
