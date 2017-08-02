@@ -11,6 +11,8 @@
 #include <iostream>
 #ifndef _WIN32
 #include <thread>
+#else
+#include <pthread.h>
 #endif
 
 using namespace Tango;
