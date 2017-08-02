@@ -299,7 +299,11 @@ int main(int argc, char **argv)
 	string cmd_line("export MYSQL_USER=root;export MYSQL_PASSWORD=root;export SUPER_TANGO=true;/home/taurel/tango/cppserver/TangoAccessControl/bin/ubuntu810/TangoAccessControl 1 2>/dev/null 1>/dev/null &");
 	system(cmd_line.c_str());
 
-	sleep(2);
+	#ifdef _WIN32
+		Sleep(2000);
+		#else
+		sleep(2);
+		#endif
 	ApiUtil::cleanup();
 
 	try 
@@ -422,7 +426,11 @@ int main(int argc, char **argv)
 	{
 		system(cmd_stream.str().c_str());
 
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 		ds_pid = start_ds("/home/taurel/tango/cppapi_tst_ds/bin/ubuntu904/devTest","devTest","api");
 		coutv << "DS pid = " << ds_pid << endl;
@@ -973,8 +981,11 @@ void call_devices_ds_off(DeviceProxy *dev_dp,DeviceProxy *another_dev_dp,bool ki
 
 pid_t start_ds(const char* path,const char *name,const char *inst)
 {
-
+#ifdef _WIN32
+	pid_t pi = CreateThread();
+#else
 	pid_t pi = fork();
+#endif
 	if (pi == 0)
 	{
 		if (close(1) ==  -1)
