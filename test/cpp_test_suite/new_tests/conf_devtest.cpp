@@ -68,10 +68,17 @@ int main(int argc, char **argv) {
 
     try {
         db->add_server(str, db_dev_infos);
+        #ifdef _WIN32
+        for(unsigned int = 0 ; i < 3 ; ++i){
+            cout << "Added test server : " << str << " -> " << db_dev_infos.at(i).name << ", class : " <<
+                 db_dev_infos.at(i)._class << endl;
+        }
+        #else
         for(auto info : db_dev_infos){
             cout << "Added test server : " << str << " -> " << info.name << ", class : " <<
                  info._class << endl;
         }
+        #endif
         cout << endl;
     }
     catch (...) {
@@ -86,7 +93,11 @@ int main(int argc, char **argv) {
     device20Info.name = device20_name;
     device20Info._class = CLASS_NAME;
 
+    #ifdef _WIN32
+    db_dev_infos.push_back(device20Info);
+    #else
     db_dev_infos = {device20Info};
+    #endif
 
     try {
         db->add_server(str, db_dev_infos);
@@ -107,7 +118,11 @@ int main(int argc, char **argv) {
     DbDevInfo fwdTestInfo;
     fwdTestInfo.name = fwd_dev_name;
     fwdTestInfo._class = "FwdTest";
+    #ifdef _WIN32
+    db_dev_infos.push_back(fwdTestInfo);
+    #else
     db_dev_infos= {fwdTestInfo};
+    #endif
     try {
         db->add_server(str, db_dev_infos);
         for(auto info : db_dev_infos){
