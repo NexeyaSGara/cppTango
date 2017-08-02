@@ -191,7 +191,11 @@ public:
 //
 
     void test_read_command_history_string(void) {
+        #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("IOPollStr1", hist_depth);
+        #else
         auto d_hist = device->command_history("IOPollStr1", hist_depth);
+        #endif
 
         TSM_ASSERT_LESS_THAN("Not enough data in the polling buffer, restart later", 4, d_hist->size());
 
@@ -286,7 +290,11 @@ public:
     }
 
     void test_command_history_array(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("IOPollArray2", hist_depth);
+        #else
         auto d_hist = device->command_history("IOPollArray2", hist_depth);
+        #endif
 
         TSM_ASSERT_LESS_THAN("Not enough data in the polling buffer, restart later", 4, d_hist->size());
 
@@ -333,7 +341,11 @@ public:
     }
 
     void test_command_history_with_exception(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("IOExcept", hist_depth);
+        #else
         auto d_hist = device->command_history("IOExcept", hist_depth);
+        #endif
 
         for (size_t i = 0; i < d_hist->size(); i++) {
             if (verbose) {
@@ -353,7 +365,11 @@ public:
 
 
     void test_command_history_for_state(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("State", hist_depth);
+        #else
         auto d_hist = device->command_history("State", hist_depth);
+        #endif
 
         for (size_t i = 0; i < d_hist->size(); i++) {
             if (verbose) {
@@ -370,7 +386,11 @@ public:
     }
 
     void test_command_history_for_status(void) {
+        #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("Status", hist_depth);
+        #else
         auto d_hist = device->command_history("Status", hist_depth);
+        #endif
 
         for (size_t i = 0; i < d_hist->size(); i++) {
             if (verbose) {
@@ -387,7 +407,11 @@ public:
     }
 
     void test_command_history_DevEncoded(void) {
+        #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("OEncoded", hist_depth);
+        #else
         auto d_hist = device->command_history("OEncoded", hist_depth);
+        #endif
 
         TSM_ASSERT_LESS_THAN("Not enough data in the polling buffer, restart later", 4, d_hist->size());
 
@@ -445,7 +469,11 @@ public:
     }
 
     void test_attribute_history_for_long(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("PollLong_attr", hist_depth);
+        #else
         auto a_hist = device->attribute_history("PollLong_attr", hist_depth);
+        #endif
 
         DevLong first_val;
         for (size_t i = 0; i < a_hist->size(); i++) {
@@ -488,7 +516,11 @@ public:
     }
 
     void test_attribute_history_for_strings_spectrum(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("PollString_spec_attr", hist_depth);
+        #else
         auto a_hist = device->attribute_history("PollString_spec_attr", hist_depth);
+        #endif
 
         string first_string;
         AttrResult ar;
@@ -617,7 +649,11 @@ public:
     }
 
     void test_attribute_history_for_dev_encoded(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("Encoded_attr", hist_depth);
+        #else
         auto enc_hist = device->attribute_history("Encoded_attr", hist_depth);
+        #endif
 
         for (size_t i = 0; i < enc_hist->size(); i++) {
 
@@ -645,7 +681,11 @@ public:
     }
 
     void test_attribute_history_with_exception(void) {
+         #ifdef _TG_WINDOWS
+        vector<DeviceDataHistory> d_hist = device->command_history("attr_wrong_type", hist_depth);
+        #else
         auto a_hist = device->attribute_history("attr_wrong_type", hist_depth);
+        #endif
 
         for (size_t i = 0; i < a_hist->size(); i++) {
             if (verbose) {
