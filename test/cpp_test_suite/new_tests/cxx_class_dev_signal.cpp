@@ -10,6 +10,8 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <process.h>
+#include <direct.h>
+#include <io.h>
 #endif
 
 using namespace Tango;
