@@ -470,7 +470,7 @@ public:
 
     void test_attribute_history_for_long(void) {
         #ifdef _WIN32
-        vector<DeviceDataHistory> *d_hist = device->command_history("PollLong_attr", hist_depth);
+        vector<DeviceDataHistory> *a_hist = device->command_history("PollLong_attr", hist_depth);
         #else
         auto a_hist = device->attribute_history("PollLong_attr", hist_depth);
         #endif
@@ -517,7 +517,7 @@ public:
 
     void test_attribute_history_for_strings_spectrum(void) {
         #ifdef _WIN32
-        vector<DeviceDataHistory> *d_hist = device->command_history("PollString_spec_attr", hist_depth);
+        vector<DeviceDataHistory> *a_hist = device->command_history("PollString_spec_attr", hist_depth);
         #else
         auto a_hist = device->attribute_history("PollString_spec_attr", hist_depth);
         #endif
@@ -650,7 +650,7 @@ public:
 
     void test_attribute_history_for_dev_encoded(void) {
         #ifdef _WIN32
-        vector<DeviceDataHistory> *d_hist = device->command_history("Encoded_attr", hist_depth);
+        vector<DeviceDataHistory> *enc_hist = device->command_history("Encoded_attr", hist_depth);
         #else
         auto enc_hist = device->attribute_history("Encoded_attr", hist_depth);
         #endif
@@ -682,7 +682,7 @@ public:
 
     void test_attribute_history_with_exception(void) {
         #ifdef _WIN32
-        vector<DeviceDataHistory> *d_hist = device->command_history("attr_wrong_type", hist_depth);
+        vector<DeviceDataHistory> *a_hist = device->command_history("attr_wrong_type", hist_depth);
         #else
         auto a_hist = device->attribute_history("attr_wrong_type", hist_depth);
         #endif
