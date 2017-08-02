@@ -255,7 +255,8 @@ public:
 		pid = atoi((*result).svalue[0].in());
 		if(pid > 0)
 		#ifdef _WIN32
-		 void * hProcess = OpenProcess(0x0001, false, pid);
+		 HANDLE hProcess;
+		 hProcess = OpenProcess(0x0001, false, pid);
 		 unsigned __int8 uExitCode=0;
 		 TerminateProcess(hProcess, uExitCode);
 		 CloseHandle(hProcess);
