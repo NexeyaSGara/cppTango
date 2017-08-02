@@ -52,7 +52,7 @@ protected:
 
 public:
     SUITE_NAME() :
-    #idef _WIN32
+    #ifdef _WIN32
             device2_instance_name = "test2",
     #else
             device2_instance_name{"test2"},
@@ -116,7 +116,11 @@ public:
 // Subscribe to event with stateless flag set
 //
     void test_unsubscribe_from_stateless_event(void) {
+        #ifdef _WIN32
+        string att_name = "event_change_tst";
+        #else
         string att_name("event_change_tst");
+        #endif
 
         int eventID = 0;
         const vector<string> filters;
@@ -135,7 +139,11 @@ public:
 // Re-subscribe
 //
     void test_re_subscribe_and_check(void) {
+        #ifdef _WIN32
+        string att_name = "event_change_tst";
+        #else
         string att_name("event_change_tst");
+        #endif
         int eventID;
         TS_ASSERT_THROWS_NOTHING(eventID = device2->subscribe_event(att_name, Tango::CHANGE_EVENT, &eventCallback, true));
 
