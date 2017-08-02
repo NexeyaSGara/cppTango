@@ -1166,7 +1166,7 @@ public:
 // Also add property to poll one of the device attribute
 
 #ifdef _WIN32
-        Database * db();
+        Database * db = new Database();
         DbDevInfo my_device_info;
         my_device_info.name = new_dev.c_str();
         my_device_info._class = TEST_CLASS;
@@ -1230,7 +1230,7 @@ public:
     void test_change_polling_thread_number_and_add_2_more_devices(void) {
         
 #ifdef _WIN32
-        Database * db();
+        Database * db = new Database();
         DbDevInfo my_device_info;
         my_device_info.name = new_dev.c_str();
         my_device_info._class = TEST_CLASS;
@@ -1318,7 +1318,7 @@ public:
     void test_change_polling_thread_number_to_3_and_add_1_more_device(void) {
            
 #ifdef _WIN32
-        Database * db();
+        Database * db = new Database();
         DbDevInfo my_device_info;
         my_device_info.name = new_dev.c_str();
         my_device_info._class = TEST_CLASS;
@@ -1395,7 +1395,7 @@ public:
     void test_delete_1_device_to_check_automatic_polling_pool_reconfiguration(void) {
          
 #ifdef _WIN32
-        Database * db();
+        Database * db = new Database();
         TS_ASSERT_THROWS_NOTHING(db->delete_device(new_dev1_th3));
 #else
         Database db{};
