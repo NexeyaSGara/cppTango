@@ -9,7 +9,9 @@
 #include <cxxtest/TangoPrinter.h>
 #include <tango.h>
 #include <iostream>
-#include <pthread>
+#ifndef _WIN32
+#include <thread>
+#endif
 
 using namespace Tango;
 using namespace std;
@@ -49,9 +51,15 @@ protected:
 
 public:
     SUITE_NAME() :
+    #ifdef _WIN32
+            device1_instance_name("test"),//TODO pass via cl
+            device2_instance_name("test2"),
+            eventCallback()
+    #else
             device1_instance_name{"test"},//TODO pass via cl
             device2_instance_name{"test2"},
             eventCallback{}
+    #endif
     {
 
 //
@@ -79,13 +87,13 @@ public:
             CxxTest::TangoPrinter::restore_set("test2/debian8/20 started.");
 
             //sleep 18 &&  start_server "@INST_NAME@" &
-            pthread([this]() {
+            thread([this]() {
                 Tango_sleep(18);
                 CxxTest::TangoPrinter::start_server(device1_instance_name);
             }).detach();
 
             //sleep 62 &&  start_server "@INST_NAME@" &
-            pthread([this]() {
+            thread([this]() {
                 Tango_sleep(62);
                 CxxTest::TangoPrinter::start_server(device1_instance_name);
             }).detach();
