@@ -755,7 +755,7 @@ public:
         DeviceAttribute da;
         TS_ASSERT_THROWS_NOTHING(da = device->read_attribute("ULong_spec_attr_rw"));
         vector <DevULong> v_lo;
-        auto ret = (da >> v_lo);
+        bool ret = (da >> v_lo);
 
         TS_ASSERT(ret == true);
         TS_ASSERT(v_lo[0] == 2222);
@@ -770,7 +770,7 @@ public:
         DeviceAttribute da;
         TS_ASSERT_THROWS_NOTHING(da = device->read_attribute("State_spec_attr_rw"));
         vector <DevState> v_sta;
-        auto ret = (da >> v_sta);
+        bool ret = (da >> v_sta);
 
         TS_ASSERT(ret == true);
         TS_ASSERT(v_sta[0] == Tango::ON);
@@ -785,7 +785,7 @@ public:
         TS_ASSERT_THROWS_NOTHING(da = device->read_attribute("Encoded_attr"));
         DevEncoded enc_lo;
         da >> enc_lo;
-        auto data_type = da.get_type();
+        int data_type = da.get_type();
         TS_ASSERT(::strcmp(enc_lo.encoded_format.in(), "Which format?") == 0);
         TS_ASSERT(data_type == Tango::DEV_ENCODED);
         TS_ASSERT(enc_lo.encoded_data.length() == 4);
@@ -826,7 +826,7 @@ public:
     }
 
     void test_polling_status_from_device_name_2(void) {
-        auto device2 = new DeviceProxy(device2_name);
+        DeviceProxy* device2 = new DeviceProxy(device2_name);
         vector <string> *poll_str;
         TS_ASSERT_THROWS_NOTHING(poll_str = device2->polling_status());
 
@@ -955,7 +955,7 @@ public:
             cout << endl;
         }
 
-        auto nb_polled = BASIC_NB_POLL + 1;
+        unsigned int nb_polled = BASIC_NB_POLL + 1;
         for (unsigned int i = 0; i < poll_str->size(); i++) {
             if ((*poll_str)[i].find("String_attr") != string::npos) {
                 nb_polled++;
@@ -1023,7 +1023,7 @@ public:
             cout << endl;
         }
 
-        auto nb_polled = BASIC_NB_POLL;
+        unsigned int nb_polled = BASIC_NB_POLL;
         for (unsigned int i = 0; i < poll_str->size(); i++) {
             if ((*poll_str)[i].find("String_attr") != string::npos) {
                 nb_polled++;
@@ -1088,7 +1088,7 @@ public:
             cout << endl;
         }
 
-        auto nb_polled = BASIC_NB_POLL + 1;
+        unsigned int nb_polled = BASIC_NB_POLL + 1;
         for (unsigned int i = 0; i < poll_str->size(); i++) {
             if ((*poll_str)[i].find("String_attr") != string::npos) {
                 nb_polled++;
@@ -1127,7 +1127,7 @@ public:
             cout << endl;
         }
 
-        auto nb_polled = BASIC_NB_POLL;
+        unsigned int nb_polled = BASIC_NB_POLL;
         for (unsigned int i = 0; i < poll_str->size(); i++) {
             if ((*poll_str)[i].find("String_attr") != string::npos) {
                 nb_polled++;
@@ -1143,7 +1143,7 @@ public:
     }
 
     void test_poll_device_2(void) {
-        auto dev2 = new DeviceProxy(device2_name);
+        DeviceProxy* dev2 = new DeviceProxy(device2_name);
         TS_ASSERT_THROWS_NOTHING(dev2->poll_attribute("PollLong_attr", 1000));
         CxxTest::TangoPrinter::restore_set("dev2_poll_PollLong_attr_1000");
 
@@ -1180,7 +1180,7 @@ public:
         TS_ASSERT_THROWS_NOTHING(db.put_device_property(new_dev.c_str(), db_poll));
         CxxTest::TangoPrinter::restore_set("reset_device_server");
 
-        auto admin_dev = new DeviceProxy(admin_dev_name);
+        DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
 #ifdef WIN32
@@ -1241,7 +1241,7 @@ public:
         TS_ASSERT_THROWS_NOTHING(db.put_device_property(new_dev2_th2.c_str(), db_poll));
         CxxTest::TangoPrinter::restore_set("reset_device_server");
 
-        auto admin_dev = new DeviceProxy(admin_dev_name);
+        DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
 #ifdef WIN32
@@ -1264,7 +1264,7 @@ public:
 
         vector <string> polled_devs{};
         split_string(new_polling_pool_conf[1], ',', polled_devs);
-        auto new_nb_polled_devs = polled_devs.size();
+        unsigned int new_nb_polled_devs = polled_devs.size();
 
         TS_ASSERT(new_nb_polled_devs == 2);
 
@@ -1303,7 +1303,7 @@ public:
         TS_ASSERT_THROWS_NOTHING(db.put_device_property(new_dev1_th3.c_str(), db_poll));
         CxxTest::TangoPrinter::restore_set("reset_device_server");
 
-        auto admin_dev = new DeviceProxy(admin_dev_name);
+        DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
 #ifdef WIN32
@@ -1327,7 +1327,7 @@ public:
         vector <string> polled_devs;
         split_string(new_polling_pool_conf[2], ',', polled_devs);
 
-        auto new_nb_polled_devs = polled_devs.size();
+        unsigned int new_nb_polled_devs = polled_devs.size();
         TS_ASSERT(new_nb_polled_devs == 1);
 
         auto iter = find(polled_devs.begin(), polled_devs.end(), new_dev1_th3);
@@ -1338,7 +1338,7 @@ public:
         Database db{};
         TS_ASSERT_THROWS_NOTHING(db.delete_device(new_dev1_th3));
 
-        auto admin_dev = new DeviceProxy(admin_dev_name);
+        DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
 
 #ifdef WIN32
@@ -1361,7 +1361,7 @@ public:
 
         vector <string> polled_devs;
         split_string(new_polling_pool_conf[1], ',', polled_devs);
-        auto new_nb_polled_devs = polled_devs.size();
+        unsigned int new_nb_polled_devs = polled_devs.size();
 
         TS_ASSERT(new_nb_polled_devs == 2);
 
@@ -1392,7 +1392,7 @@ public:
         db_data.push_back(del_prop);
         db.delete_device_property(admin_dev_name.c_str(), db_data);
 
-        auto admin_dev = new DeviceProxy(admin_dev_name);
+        DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         admin_dev->command_inout("RestartServer");
 
 #ifdef WIN32
