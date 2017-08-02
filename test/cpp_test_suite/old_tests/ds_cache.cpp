@@ -6,7 +6,7 @@
 #include <assert.h>
 
 #ifdef _WIN32
-const __int8	kBase	{74};//TODO was 75 on jenkis@esrf.fr
+const __int8	kBase	= 74;//TODO was 75 on jenkis@esrf.fr
 #else
 const int8_t	kBase	{74};//TODO was 75 on jenkis@esrf.fr
 #endif
