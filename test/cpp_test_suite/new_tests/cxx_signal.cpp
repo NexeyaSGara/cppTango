@@ -256,7 +256,7 @@ public:
 		if(pid > 0)
 		#ifdef _WIN32
 		 int dwDesiredAccess = 0x0001;
-		 bool  bInheritHandle  = False;
+		 bool  bInheritHandle  = false;
 		 HANDLE hProcess = OpenProcess(dwDesiredAccess, bInheritHandle, pid);
 		 unsigned __int8 uExitCode=0;
 		 TerminateProcess(hProcess, uExitCode);
