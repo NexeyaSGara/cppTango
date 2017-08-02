@@ -767,7 +767,7 @@ namespace CxxTest
         }
 
         static void start_server(const std::string& instance){
-            std::string command = kStartServerCmd;
+            std::string command = Tango::kStartServerCmd;
             command += instance;
             system(command.c_str());
         }
