@@ -101,11 +101,17 @@ int main(int argc, char **argv) {
 
     try {
         db->add_server(str, db_dev_infos);
+        #ifdef _WIN32
+        for(unsigned int i = 0 ; i < 1 ; ++i){
+            cout << "Added test server : " << str << " -> " << db_dev_infos.at(i).name << ", class : " <<
+                 db_dev_infos.at(i)._class << endl;
+        }
+        #else
         for(auto info : db_dev_infos){
             cout << "Added test server : " << str << " -> " << info.name << ", class : " <<
                  info._class << endl;
         }
-
+        #endif
         cout << endl;
     }
     catch (...) {
@@ -125,10 +131,17 @@ int main(int argc, char **argv) {
     #endif
     try {
         db->add_server(str, db_dev_infos);
+        #ifdef _WIN32
+        for(unsigned int i = 0 ; i < 1; ++i){
+            cout << "Added test server : " << str << " -> " << db_dev_infos.at(i).name << ", class : " <<
+                 db_dev_infos.at(i)._class << endl;
+        }
+        #else
         for(auto info : db_dev_infos){
             cout << "Added test server : " << str << " -> " << info.name << ", class : " <<
                  info._class << endl;
         }
+        #endif
         cout << endl;
     }
     catch (...) {
@@ -517,11 +530,22 @@ int main(int argc, char **argv) {
     pipeConf7DbClassDesc << "AnotherClassDefinedDesc";
 
 
+    #ifdef _WIN32
+    db_data.push_back(pipeConf4);
+    db_data.push_back(pipeConf4DbClassLabel);
+    db_data.push_back(pipeConf4DbClassDescription);
+    db_data.push_back(pipeConf5);
+    db_data.push_back(pipeConf5DbClassLabel);
+    db_data.push_back(pipeConf6);
+    db_data.push_back(pipeConf6DbClassDesc);
+    db_data.push_back(pipeConf7);
+    db_data.push_back(pipeConf7DbClassDesc};
+    #else
     db_data = {pipeConf4, pipeConf4DbClassLabel, pipeConf4DbClassDescription,
                pipeConf5, pipeConf5DbClassLabel,
                pipeConf6, pipeConf6DbClassDesc,
                pipeConf7, pipeConf7DbClassDesc};
-
+    #endif
     try{
         db->put_class_pipe_property(CLASS_NAME, db_data);
         print_changes("Set pipe properties at class level",CLASS_NAME, db_data);
@@ -541,8 +565,14 @@ int main(int argc, char **argv) {
     DbDatum pipeConf4_devDbClassDesc("description");
     pipeConf4_devDbClassDesc << "DB_device_def_desc";
 
+    #ifdef _WIN32           
+    db_data.push_back(pipeConf3);
+    db_data.push_back(pipeConf3DbClassLabel);
+    db_data.push_back(pipeConf4_dev);
+    db_data.push_back(pipeConf4_devDbClassDesc);
+    #else
     db_data = {pipeConf3, pipeConf3DbClassLabel, pipeConf4_dev, pipeConf4_devDbClassDesc};
-
+    #endif
     try{
         db->put_device_pipe_property(device1_name, db_data);
         print_changes("Set pipe properties at device level" , device1_name.c_str(), db_data);
@@ -560,8 +590,13 @@ int main(int argc, char **argv) {
     str = "1.0";
     short_attr_rw_std_unit << str;
 
+    #ifdef _WIN32
+    db_data.push_back(short_attr_rw);
+    db_data.push_back(short_attr_rw_unit);
+    db_data.push_back(short_attr_rw_std_unit);
+    #else
     db_data = {short_attr_rw,short_attr_rw_unit,short_attr_rw_std_unit};
-
+    #endif
     try {
         db->put_device_attribute_property(device1_name, db_data);
         print_changes("Device specific attribute properties", device1_name.c_str(), db_data);
@@ -573,10 +608,20 @@ int main(int argc, char **argv) {
 
     //Define polling for DevTest/test2
     DbDatum polled_attr("polled_attr");
+    #ifdef _WIN32
+    vector<string> attrs;
+    attrs.push_back("event_change_tst");
+    attrs.push_back("3000");
+    #else
     vector<string> attrs{"event_change_tst","3000"};
+    #endif
     polled_attr << attrs;
 
+    #ifdef _WIN32
+    db_data.push_back(polled_attr);
+    #else
     db_data = {polled_attr};
+    #endif
     try {
         db->put_device_property(device20_name, db_data);
         print_changes("Device specific attribute properties", device20_name.c_str(), db_data);
@@ -591,8 +636,13 @@ int main(int argc, char **argv) {
     eventPropertiesAbsCh << (short) 1;
     DbDatum eventPropertiesRelCh("rel_change");
     eventPropertiesRelCh << (short) 1;
-
+#ifdef _WIN32            
+    db_data.push_back(eventProperties);
+    db_data.push_back(eventPropertiesAbsCh);
+    db_data.push_back(eventPropertiesRelCh);
+#else
     db_data = {eventProperties, eventPropertiesAbsCh, eventPropertiesRelCh};
+#endif
     try {
         db->put_device_attribute_property(device20_name, db_data);
         print_changes("Device specific attribute properties", device20_name.c_str(), db_data);
