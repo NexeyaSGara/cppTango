@@ -6,6 +6,7 @@
 #include <assert.h>
 
 #ifdef _WIN32
+typedef int pid_t;
 #include <winsock2.h>
 #else
 #include <netdb.h>
@@ -272,7 +273,11 @@ int main(int argc, char **argv)
 
 	DeviceProxy *ca_admin = new DeviceProxy("dserver/tangoaccesscontrol/1");
 	ca_admin->command_inout("Kill");
+	#ifdef _WIN32
+	Sleep(1000);
+	#else
 	sleep(1);
+	#endif
 
 	delete ca_admin;
 	delete db;
@@ -334,12 +339,20 @@ int main(int argc, char **argv)
 		DeviceProxy *ds_admin = new DeviceProxy(admin_device);
 		ds_admin->command_inout("Kill");
 
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 		ds_pid = start_ds("/home/taurel/tango/cppapi_tst_ds/bin/ubuntu904/devTest","devTest","api");
 		coutv << "DS pid = " << ds_pid << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		coutv << "DS killed and re-started" << endl;
 
@@ -367,7 +380,11 @@ int main(int argc, char **argv)
 		DeviceProxy *ds_admin = new DeviceProxy(admin_device);
 		ds_admin->command_inout("Kill");
 
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 		coutv << "DS killed" << endl;
 
@@ -376,7 +393,11 @@ int main(int argc, char **argv)
 		ds_pid = start_ds("/home/taurel/tango/cppapi_tst_ds/bin/ubuntu904/devTest","devTest","api");
 		coutv << "DS pid = " << ds_pid << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		coutv << "DS re-started" << endl;
 
@@ -406,7 +427,11 @@ int main(int argc, char **argv)
 		ds_pid = start_ds("/home/taurel/tango/cppapi_tst_ds/bin/ubuntu904/devTest","devTest","api");
 		coutv << "DS pid = " << ds_pid << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		coutv << "DS awfully killed and re-started" << endl;
 
@@ -431,7 +456,11 @@ int main(int argc, char **argv)
 	{
 		system(cmd_stream.str().c_str());
 
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 		coutv << "DS killed" << endl;
 
@@ -440,7 +469,11 @@ int main(int argc, char **argv)
 		ds_pid = start_ds("/home/taurel/tango/cppapi_tst_ds/bin/ubuntu904/devTest","devTest","api");
 		coutv << "DS pid = " << ds_pid << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		coutv << "DS re-started" << endl;
 
@@ -469,7 +502,11 @@ int main(int argc, char **argv)
 
 		DeviceProxy *ca_admin = new DeviceProxy("dserver/tangoaccesscontrol/1");
 		ca_admin->command_inout("Kill");
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 		delete ca_admin;
 
@@ -485,7 +522,11 @@ int main(int argc, char **argv)
 		ca_pid = start_ds("/home/taurel/tango/cppserver/TangoAccessControl/bin/ubuntu810/TangoAccessControl","TangoAccessControl","1");
 		coutv << "CA re-started" << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		delete dev_dp;
 		dev_dp = new DeviceProxy(device);
@@ -508,7 +549,11 @@ int main(int argc, char **argv)
 		coutv << "Third kill cmd = " << cmd_stream.str() << endl;
 
 		system(cmd_stream.str().c_str());
+		#ifdef _WIN32
+		Sleep(1000);
+		#else
 		sleep(1);
+		#endif
 
 
 		check_device_access(dev_dp,true,false);
@@ -523,7 +568,11 @@ int main(int argc, char **argv)
 		ca_pid = start_ds("/home/taurel/tango/cppserver/TangoAccessControl/bin/ubuntu810/TangoAccessControl","TangoAccessControl","1");
 		coutv << "CA re-started" << endl;
 
+		#ifdef _WIN32
+		Sleep(2000);
+		#else
 		sleep(2);
+		#endif
 
 		delete dev_dp;
 		dev_dp = new DeviceProxy(device);
@@ -825,7 +874,11 @@ void call_devices_ds_off(DeviceProxy *dev_dp,DeviceProxy *another_dev_dp,bool ki
 		assert (not_exported_except == true);
 	coutv << "First State: OK" << endl;
 
+	#ifdef _WIN32
+	Sleep(1000);
+	#else
 	sleep(1);
+	#endif
 	
 	not_exported_except = false;
 	cant_connect_except = false;
@@ -853,7 +906,11 @@ void call_devices_ds_off(DeviceProxy *dev_dp,DeviceProxy *another_dev_dp,bool ki
 		assert (not_exported_except == true);
 	coutv << "First Status: OK" << endl;
 
+	#ifdef _WIN32
+	Sleep(1000);
+	#else
 	sleep(1);
+	#endif
 
 	not_exported_except = false;
 	cant_connect_except = false;
@@ -881,7 +938,11 @@ void call_devices_ds_off(DeviceProxy *dev_dp,DeviceProxy *another_dev_dp,bool ki
 		assert (not_exported_except == true);
 	coutv << "Second State: OK" << endl;
 
+	#ifdef _WIN32
+	Sleep(1000);
+	#else
 	sleep(1);
+	#endif
 
 	not_exported_except = false;
 	cant_connect_except = false;
