@@ -9,6 +9,7 @@
 #include "compare_test.h"
 #ifdef _WIN32
 #include <windows.h>
+#include <process.h>
 #endif
 
 using namespace Tango;
@@ -245,7 +246,7 @@ public:
 		pid = atoi((*result).svalue[0].in());
 		if(pid > 0)
 		#ifdef _WIN32
-		 void * hProcess = OpenProcess(0x0001, FALSE, pid);
+		 HANDLE hProcess = OpenProcess(0x0001, FALSE, pid);
 		 unsigned __int8 uExitCode = 0;
 		 TerminateProcess(hProcess, uExitCode);
 		 CloseHandle(hProcess);
