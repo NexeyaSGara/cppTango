@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
     try {
         db->add_server(str, db_dev_infos);
         #ifdef _WIN32
-        for(unsigned int = 0 ; i < 3 ; ++i){
+        for(unsigned int i = 0 ; i < 3 ; ++i){
             cout << "Added test server : " << str << " -> " << db_dev_infos.at(i).name << ", class : " <<
                  db_dev_infos.at(i)._class << endl;
         }
@@ -588,9 +588,9 @@ int main(int argc, char **argv) {
     DbDatum eventProperties("event_change_tst");
     eventProperties << (short) 2;
     DbDatum eventPropertiesAbsCh("abs_change");
-    eventPropertiesAbsCh << 1;
+    eventPropertiesAbsCh << (short) 1;
     DbDatum eventPropertiesRelCh("rel_change");
-    eventPropertiesRelCh << 1;
+    eventPropertiesRelCh << (short) 1;
 
     db_data = {eventProperties, eventPropertiesAbsCh, eventPropertiesRelCh};
     try {
