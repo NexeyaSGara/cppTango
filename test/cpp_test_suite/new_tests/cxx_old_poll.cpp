@@ -1360,12 +1360,12 @@ public:
 #else
         TS_ASSERT_THROWS_NOTHING(db.put_device_property(new_dev1_th3.c_str(), db_poll));
         DeviceProxy * dev = new DeviceProxy(device_name);
+        this_thread::sleep_for(chrono::seconds{5});
 #endif
         CxxTest::TangoPrinter::restore_set("reset_device_server");
 
         DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
-        this_thread::sleep_for(chrono::seconds{5});
         
 // Check new pool conf
 
