@@ -12,7 +12,7 @@
 #ifndef _WIN32
 #include <thread>
 #else
-#include <pthread.h>
+#include <boost/thread/thread.hpp>
 #endif
 
 using namespace Tango;
