@@ -1451,7 +1451,7 @@ public:
         del_device_no_error(db, new_dev1_th2);
         del_device_no_error(db, new_dev1_th3);
         del_device_no_error(db, new_dev2_th2);
-
+        
         DbDatum pool_conf("polling_threads_pool_conf");
         DbData db_data;
 
@@ -1518,14 +1518,15 @@ void stop_poll_cmd_no_except(DeviceProxy *dev, const char *cmd_name) {
         exit(-1);
     }
 }
-
+#ifdef
+void del_device_no_error(Database *db, string& d_name) {
+    try {
+        db->delete_device(d_name.c_str());
+#else
 void del_device_no_error(Database &db, string& d_name) {
     try {
-        #ifdef _WIN32
-        db->delete_device(d_name.c_str());
-        #else
         db.delete_device(d_name.c_str());
-        #endif
+#endif
     }
     catch (DevFailed &) {}
 }
