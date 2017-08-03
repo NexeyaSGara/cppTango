@@ -1302,7 +1302,7 @@ public:
 
         TS_ASSERT(new_polling_pool_conf.size() == ref_polling_pool_conf.size() + 1);
 
-        vector <string> polled_devs{};
+        vector <string> polled_devs();
         split_string(new_polling_pool_conf[1], ',', polled_devs);
         unsigned int new_nb_polled_devs = polled_devs.size();
 
