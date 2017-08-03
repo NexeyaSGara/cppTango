@@ -1356,26 +1356,29 @@ public:
         db_poll.push_back(poll_prop);
 #ifdef _WIN32
         TS_ASSERT_THROWS_NOTHING(db->put_device_property(new_dev1_th3.c_str(), db_poll));
+        Sleep(5000);
 #else
         TS_ASSERT_THROWS_NOTHING(db.put_device_property(new_dev1_th3.c_str(), db_poll));
+        DeviceProxy * dev = new DeviceProxy(device_name);
 #endif
         CxxTest::TangoPrinter::restore_set("reset_device_server");
 
         DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         TS_ASSERT_THROWS_NOTHING(admin_dev->command_inout("RestartServer"));
-
-#ifdef WIN32
-        Sleep(5000);
-#else
         this_thread::sleep_for(chrono::seconds{5});
-#endif
-
+        
 // Check new pool conf
 
         DeviceData dx;
-
+        #ifdef _WIN32
+        DeviceProxy *dev = new DeviceProxy(device_name);
+        TS_ASSERT_THROWS_NOTHING(dx = dev->command_inout("PollingPoolTst"));
+        #else
         DeviceProxy dev{device_name};
         TS_ASSERT_THROWS_NOTHING(dx = dev.command_inout("PollingPoolTst"));
+        #endif
+
+
 
         vector <string> new_polling_pool_conf;
         dx >> new_polling_pool_conf;
@@ -1407,7 +1410,7 @@ public:
         DeviceData dv;
 #ifdef WIN32
         Sleep(5000);
-        DeviceProxy * dev = DeviceProxy(device_name);
+        DeviceProxy * dev = new DeviceProxy(device_name);
         TS_ASSERT_THROWS_NOTHING(dv = dev->command_inout("PollingPoolTst"));
 #else
         this_thread::sleep_for(chrono::seconds{5});
