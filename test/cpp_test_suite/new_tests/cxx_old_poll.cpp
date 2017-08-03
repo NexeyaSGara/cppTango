@@ -38,8 +38,11 @@ void split_string(string &, char, vector <string> &);
 void stop_poll_att_no_except(DeviceProxy *, const char *);
 
 void stop_poll_cmd_no_except(DeviceProxy *, const char *);
-
+#ifdef _WIN32
+void del_device_no_error(Database *, string&);
+#else
 void del_device_no_error(Database &, string&);
+#endif
 
 class OldPollTestSuite__loop : public CxxTest::TestSuite {
 protected:
