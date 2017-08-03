@@ -1297,7 +1297,7 @@ public:
         DeviceProxy dev(device_name);
         TS_ASSERT_THROWS_NOTHING(dz = dev.command_inout("PollingPoolTst"));
 
-        vector <string> new_polling_pool_conf{};
+        vector <string> new_polling_pool_conf;
         dz >> new_polling_pool_conf;
 
         TS_ASSERT(new_polling_pool_conf.size() == ref_polling_pool_conf.size() + 1);
