@@ -44,9 +44,9 @@ int main(int argc, char **argv)
 	
 	check_size("Command",sizeof(Command),72, &isOK);
 	check_size("TemplCommand",sizeof(TemplCommand),112, &isOK);
-	check_size("TemplCommandIn",sizeof(TemplCommandIn<DevInt>),136, &isOK);
+	/*check_size("TemplCommandIn",sizeof(TemplCommandIn<DevInt>),136, &isOK);
 	check_size("TemplCommandOut",sizeof(TemplCommandOut<DevVoid>),136, &isOK);
-	check_size("TemplCommandInOut",sizeof(TemplCommandInOut<DevInt,DevInt>),136, &isOK);
+	check_size("TemplCommandInOut",sizeof(TemplCommandInOut<DevInt,DevInt>),136, &isOK);*/
 
 	check_size("DeviceProxy",sizeof(DeviceProxy),576, &isOK);	// Was 100 in V4
 	check_size("DeviceData",sizeof(DeviceData),32, &isOK);
