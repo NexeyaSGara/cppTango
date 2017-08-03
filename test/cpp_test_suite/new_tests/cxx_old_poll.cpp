@@ -1433,7 +1433,7 @@ public:
 
         TS_ASSERT(new_nb_polled_devs == 2);
 
-        auto iter = find(polled_devs.begin(), polled_devs.end(), new_dev1_th2);
+        vector<string>::const_iterator iter = find(polled_devs.begin(), polled_devs.end(), new_dev1_th2);
         TS_ASSERT(iter != polled_devs.end());
 
         iter = find(polled_devs.begin(), polled_devs.end(), new_dev2_th2);
