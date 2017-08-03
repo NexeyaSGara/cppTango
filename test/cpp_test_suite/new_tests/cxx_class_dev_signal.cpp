@@ -8,6 +8,7 @@
 #include <signal.h>
 #include "compare_test.h"
 #ifdef _WIN32
+#pragma comment(lib, "th32.lib")
 #include <windows.h>
 #include <process.h>
 #include <direct.h>
