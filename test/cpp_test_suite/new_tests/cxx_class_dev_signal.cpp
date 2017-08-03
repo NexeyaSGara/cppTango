@@ -13,6 +13,11 @@
 #include <process.h>
 #include <direct.h>
 #include <io.h>
+#include <stdio.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #endif
 
 using namespace Tango;
