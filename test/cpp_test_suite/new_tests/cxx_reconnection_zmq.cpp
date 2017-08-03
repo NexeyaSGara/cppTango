@@ -11,6 +11,8 @@
 #include <iostream>
 #ifndef _WIN32
 #include <thread>
+#else
+#include <boost/thread/thread.hpp>
 #endif
 
 using namespace Tango;
@@ -131,7 +133,11 @@ public:
 // Subscribe to a user event
 //
     void test_subscribe_to_user_event(void) {
+        #ifdef _WIN32
+        string att_name = "event_change_tst";
+        #else
         string att_name("event_change_tst");
+        #endif
 
         const vector<string> filters;
         eventCallback.cb_executed = 0;
