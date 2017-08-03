@@ -1521,7 +1521,7 @@ void stop_poll_cmd_no_except(DeviceProxy *dev, const char *cmd_name) {
         exit(-1);
     }
 }
-#ifdef
+#ifdef _WIN32
 void del_device_no_error(Database *db, string& d_name) {
     try {
         db->delete_device(d_name.c_str());
