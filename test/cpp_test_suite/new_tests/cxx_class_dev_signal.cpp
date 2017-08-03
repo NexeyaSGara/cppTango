@@ -248,11 +248,12 @@ public:
 		pid = atoi((*result).svalue[0].in());
 		if(pid > 0)
 		#ifdef _WIN32
-		 HANDLE hProcess;
-		 hProcess = OpenProcess(0x0001, FALSE, pid);
-		 unsigned __int8 uExitCode = 0;
-		 TerminateProcess(hProcess, uExitCode);
-		 CloseHandle(hProcess);
+		HANDLE	handle = NULL;				//- process addr (in the heap)
+		if( (handle=OpenProcess(PROCESS_TERMINATE, false, pid)) != NULL)
+		{
+			TerminateProcess(handle, 0);
+			CloseHandle(handle);
+		}
 		#else
 			kill(pid, sig_num_int);
 		#endif
