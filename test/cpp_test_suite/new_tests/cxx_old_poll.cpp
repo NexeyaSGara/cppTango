@@ -1466,7 +1466,7 @@ public:
         DbDatum del_prop("polling_threads_pool_size");
         db_data.clear();
         db_data.push_back(del_prop);
-        #ifdef_WIN32
+        #ifdef _WIN32
         db->delete_device_property(admin_dev_name.c_str(), db_data);
         #else
         db.delete_device_property(admin_dev_name.c_str(), db_data);
