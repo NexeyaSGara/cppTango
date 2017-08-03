@@ -1441,7 +1441,11 @@ public:
     }
 
     void reset_device_server() {
+        #ifdef _WIN32
+        Database * db = new Database();
+        #else
         Database db{};
+        #endif
 
         del_device_no_error(db, new_dev);
         del_device_no_error(db, new_dev1_th2);
@@ -1453,12 +1457,20 @@ public:
 
         pool_conf << ref_polling_pool_conf;
         db_data.push_back(pool_conf);
+        #ifdef _WIN32
+        db->put_device_property(admin_dev_name.c_str(), db_data);
+        #else
         db.put_device_property(admin_dev_name.c_str(), db_data);
+        #endif
 
         DbDatum del_prop("polling_threads_pool_size");
         db_data.clear();
         db_data.push_back(del_prop);
+        #ifdef_WIN32
+        db->delete_device_property(admin_dev_name.c_str(), db_data);
+        #else
         db.delete_device_property(admin_dev_name.c_str(), db_data);
+        #endif
 
         DeviceProxy* admin_dev = new DeviceProxy(admin_dev_name);
         admin_dev->command_inout("RestartServer");
@@ -1509,7 +1521,11 @@ void stop_poll_cmd_no_except(DeviceProxy *dev, const char *cmd_name) {
 
 void del_device_no_error(Database &db, string& d_name) {
     try {
+        #ifdef _WIN32
+        db->delete_device(d_name.c_str());
+        #else
         db.delete_device(d_name.c_str());
+        #endif
     }
     catch (DevFailed &) {}
 }
