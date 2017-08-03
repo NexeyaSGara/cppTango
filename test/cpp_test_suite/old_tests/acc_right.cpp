@@ -983,7 +983,8 @@ pid_t start_ds(const char* path,const char *name,const char *inst)
 {
 #ifdef _WIN32
 	pid_t pi = 0;
-		system(string(path) + "/" +  string(name) + " " + string(inst));
+	string l_cmd= string(path) + "/" +  string(name) + " " + string(inst);
+		system(l_cmd.c_str());
 #else
 	pid_t pi = fork();
 	if (pi == 0)
