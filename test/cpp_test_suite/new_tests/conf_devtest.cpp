@@ -539,7 +539,7 @@ int main(int argc, char **argv) {
     db_data.push_back(pipeConf6);
     db_data.push_back(pipeConf6DbClassDesc);
     db_data.push_back(pipeConf7);
-    db_data.push_back(pipeConf7DbClassDesc};
+    db_data.push_back(pipeConf7DbClassDesc);
     #else
     db_data = {pipeConf4, pipeConf4DbClassLabel, pipeConf4DbClassDescription,
                pipeConf5, pipeConf5DbClassLabel,
