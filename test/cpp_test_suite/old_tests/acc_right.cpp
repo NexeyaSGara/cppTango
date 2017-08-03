@@ -982,10 +982,9 @@ void call_devices_ds_off(DeviceProxy *dev_dp,DeviceProxy *another_dev_dp,bool ki
 pid_t start_ds(const char* path,const char *name,const char *inst)
 {
 #ifdef _WIN32
-	pid_t pi = CreateThread();
+		system(path +"/" +  name + " " + inst);
 #else
 	pid_t pi = fork();
-#endif
 	if (pi == 0)
 	{
 		if (close(1) ==  -1)
@@ -1020,5 +1019,6 @@ pid_t start_ds(const char* path,const char *name,const char *inst)
 	else if (pi < 0)
 		pi = -1;
 
+#endif
 	return pi;
 }
