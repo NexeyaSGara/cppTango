@@ -148,7 +148,7 @@ remove_definitions(-D_TANGO_LIB)
 remove_definitions(-DLOG4TANGO_BUILD_DLL)
 include_directories($ENV{BOOST_ROOT})
 endif(WIN32)
-add_subdirectory(test)
+#add_subdirectory(test)
 
 #install code
 IF (WIN32)
