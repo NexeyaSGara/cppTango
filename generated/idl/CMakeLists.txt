@@ -5,6 +5,8 @@ execute_process(COMMAND rm tango.h tangoSK.cpp tangoDynSK.cpp
 
 message("Generate tango.h, tangoSK.cpp and tangoDynSK.cpp from idl")
  if(WIN32)
+ set_source_files_properties(tangoDynSK.cpp PROPERTIES COMPILE_DEFINITIONS -D__x86__=1 -D__NT__=1 -D__OSVERSION__=4 -D_WIN32_WINNT=0x0400 )
+ set_source_files_properties(tangoSK.cpp PROPERTIES COMPILE_DEFINITIONS -D__x86__=1 -D__NT__=1 -D__OSVERSION__=4 -D_WIN32_WINNT=0x0400 )
         if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
 execute_process(COMMAND ${OMNIIDL_PATH}/omniidl.exe -I${IDL_PKG_INCLUDE_DIRS} -bcxx -Wbh=.h -Wbs=SK.cpp -Wbd=DynSK.cpp -Wba ${IDL_PKG_INCLUDE_DIRS}/tango.idl
                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
