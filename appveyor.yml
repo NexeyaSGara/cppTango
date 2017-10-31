@@ -115,7 +115,7 @@ init:
   - if %ARCH%==x64-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/dlf6f262niwu7a5p/artifacts/zmq-4.0.5_%ARCH%.zip
   - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/6b8b45sd1x1lpk0j/artifacts/zmq-4.0.5_%ARCH%.zip
   - if %ARCH%==x64-msvc14 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/grjkfwsosie7lbx7/artifacts/zmq-4.0.5_%ARCH%.zip
-  - cmd: 7z -y x zmq-4.1.7_%ARCH%.zip -oC:\projects\zeromq\
+  - cmd: 7z -y x zmq-4.0.5_%ARCH%.zip -oC:\projects\zeromq\
   #- cmd: move C:\projects\zeromq\lib\Release\libzmq*mt-4*.lib C:\projects\zeromq\lib\Release\libzmq.lib
   # OmniOrb
   - cmd: cd "C:\projects\"
