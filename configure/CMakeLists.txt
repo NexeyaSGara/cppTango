@@ -2,6 +2,7 @@ include(FindPkgConfig)
 include(FindDoxygen)
 include(GNUInstallDirs)
 
+
 if(NOT CMAKE_BUILD_TYPE)
     message("No build type specified - default is RELEASE")
     set(CMAKE_BUILD_TYPE RELEASE)
