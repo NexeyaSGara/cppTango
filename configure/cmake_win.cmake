@@ -170,7 +170,6 @@ install(FILES Debug/tangod.dll DESTINATION bin COMPONENT dynamic)
 install(FILES Debug/tangod.pdb DESTINATION bin COMPONENT dynamic)
 install(FILES Debug/tangod.lib DESTINATION lib COMPONENT static)
 install(FILES Debug/libtangod.lib DESTINATION lib COMPONENT static)
-install(FILES Debug/libtangod.pdb DESTINATION lib COMPONENT static)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic4d.lib DESTINATION lib COMPONENT static)
 #omniorb static lib
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB4d.lib DESTINATION lib COMPONENT static)
@@ -188,10 +187,6 @@ install(FILES $ENV{OMNI_BASE}/lib/x86_win32/COS421_rtd.lib DESTINATION bin COMPO
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/msvcstubd.lib DESTINATION bin COMPONENT dynamic)
 
 else(CMAKE_BUILD_TYPE STREQUAL "Debug")
-
-install(FILES Release/tangod.pdb DESTINATION bin COMPONENT dynamic)
-
-install(FILES Release/libtangod.pdb DESTINATION lib COMPONENT static)
 #omniorb static lib
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniORB4.lib DESTINATION lib COMPONENT static)
 install(FILES $ENV{OMNI_BASE}/lib/x86_win32/omniDynamic4.lib DESTINATION lib COMPONENT static)
