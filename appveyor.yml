@@ -23,6 +23,7 @@ environment:
       IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 36
+      ARCH_PY: x64-msvc14-py36
     - platform: win32
       ARCH: win32-msvc9
       configuration: Release
@@ -38,6 +39,7 @@ environment:
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 27
+      ARCH_PY: win32-msvc9-py27
     - platform: x64
       ARCH: x64-msvc9
       configuration: Release
@@ -53,6 +55,7 @@ environment:
       IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 27
+      ARCH_PY: x64-msvc9-py27
     - platform: win32
       ARCH: win32-msvc10
       configuration: Release
@@ -69,6 +72,7 @@ environment:
       IDL_BIN: C:\Program Files (x86)\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 33
+      ARCH_PY: win32-msvc10-py33
     - platform: x64
       ARCH: x64-msvc10
       configuration: Release
@@ -85,6 +89,7 @@ environment:
       IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 33
+      ARCH_PY: x64-msvc10-py33
     - platform: x64
       ARCH: x64-msvc12
       configuration: Release
@@ -100,6 +105,7 @@ environment:
       IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 33
+      ARCH_PY: x64-msvc12-py33
     - platform: x64
       ARCH: x64-msvc14
       configuration: Release
@@ -116,6 +122,7 @@ environment:
       IDL_BIN: C:\Program Files\tangoidl
       OMNI_BASE: C:\projects\omniORB-4.2.1
       PY_VER: 35
+      ARCH_PY: x64-msvc14-py35
       
 init:
   # go to hell Xamarin (see http://help.appveyor.com/discussions/problems/4569)
@@ -144,13 +151,13 @@ init:
   - cmd: cd "C:\projects\"
   - cmd: md omniorb
   - cmd: cd "C:\projects\"
-  - if %ARCH%==win32-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/qhtea1t5f8mjwvln/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %ARCH%==x64-msvc9 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/2iqqy6o0c5miw29i/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %ARCH%==win32-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/4k067tj1j4764q0f/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %ARCH%==x64-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/otarc2vlkd1mw31h/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/rsyyvj3frqtxmyl6/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %PYTHONPATH%==c:\Python36-x64\ appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/9568fv6so5dul85b/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - if %PYTHONPATH%==c:\Python35-x64\ appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/us91f11kc2dfcbpi/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==win32-msvc9-py27 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/qhtea1t5f8mjwvln/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==x64-msvc9-py27 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/2iqqy6o0c5miw29i/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==win32-msvc10-py33 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/4k067tj1j4764q0f/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==x64-msvc10-py33 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/otarc2vlkd1mw31h/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==x64-msvc12-py33 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/rsyyvj3frqtxmyl6/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - if %ARCH_PY%==x64-msvc14-py35 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/us91f11kc2dfcbpi/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip  
+  - if %ARCH_PY%==x64-msvc14-py36 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/9568fv6so5dul85b/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
   - cmd: 7z -y x omniorb-4.2.1_%ARCH%_py%PY_VER%.zip -oC:\projects\omniorb\
   #Pthread-Win32
   - cmd: cd "C:\projects\"
