@@ -149,8 +149,8 @@ init:
   - if %ARCH%==win32-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/4k067tj1j4764q0f/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
   - if %ARCH%==x64-msvc10 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/otarc2vlkd1mw31h/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
   - if %ARCH%==x64-msvc12 appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/rsyyvj3frqtxmyl6/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - (if %ARCH%==x64-msvc14) && (if %PY_VER%==36) appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/9568fv6so5dul85b/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
-  - (if %ARCH%==x64-msvc14) && (if %PY_VER%==35) appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/us91f11kc2dfcbpi/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - ((if %ARCH%==x64-msvc14) && (if %PY_VER%==36)) appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/9568fv6so5dul85b/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
+  - ((if %ARCH%==x64-msvc14) && (if %PY_VER%==35)) appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/us91f11kc2dfcbpi/artifacts/omniorb-4.2.1_%ARCH%_py%PY_VER%.zip
   - cmd: 7z -y x omniorb-4.2.1_%ARCH%_py%PY_VER%.zip -oC:\projects\omniorb\
   #Pthread-Win32
   - cmd: cd "C:\projects\"
